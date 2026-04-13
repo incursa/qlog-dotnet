@@ -53,7 +53,7 @@
     "VER-QLOG-SEQUENTIAL-0001"
   ],
   "summary": "Coordinate the qlog v1 implementation baseline and keep the contained JSON core, QUIC vocabulary slices, and sequential follow-on aligned to the requirement corpus.",
-  "planned_changes": "Stand up the contained core model and writer boundary, add the three QUIC event-family slices, and leave sequential JSON Text Sequences as a follow-on lane so the first release stays bounded.",
+  "planned_changes": "Stand up the `Incursa.Qlog` core types and `Incursa.Qlog.Serialization.Json` writer boundary, add the three `Incursa.Qlog.Quic` event-family slices, and leave sequential JSON Text Sequences as a follow-on lane so the first release stays bounded.",
   "out_of_scope": [
     "HTTP/3 adapters in the first baseline.",
     "Non-JSON sinks or transport layers that are not required by the draft source material.",

@@ -42,11 +42,13 @@
     "REQ-QLOG-QUIC-S7-0001"
   ],
   "purpose": "Describe how the qlog v1 implementation can satisfy the draft main-schema and QUIC requirements through a contained JSON core, QUIC vocabulary slices, and a deferred sequential follow-on.",
-  "design_summary": "The architecture keeps the qlog core model separate from QUIC-specific vocabulary, and it keeps sequential JSON Text Sequences as a later slice. V1 should stand up the contained JSON writer and the typed QUIC event contracts through small adapter layers so envelope state, event state, and transport state do not collapse into one object model.",
+  "design_summary": "Keep a single Incursa.Qlog assembly for v1, with layered namespaces rather than extra projects: `Incursa.Qlog` for the core file, trace, and event types; `Incursa.Qlog.Serialization.Json` for the contained JSON writer boundary; `Incursa.Qlog.Quic` for the typed QUIC vocabulary contracts; and `Incursa.Qlog.Adapters` for later producer-facing integration. The architecture keeps the qlog core model separate from QUIC-specific vocabulary, and it keeps sequential JSON Text Sequences as a later slice. V1 should stand up the contained JSON writer and the typed QUIC event contracts through small adapter layers so envelope state, event state, and transport state do not collapse into one object model.",
   "key_components": [
-    "qlog core model contracts",
+    "Incursa.Qlog core model contracts",
+    "Incursa.Qlog.Serialization.Json contained writer boundary",
+    "Incursa.Qlog.Quic vocabulary contracts",
+    "Incursa.Qlog.Adapters future producer-facing integration",
     "contained file and trace envelope handling",
-    "contained JSON writer boundary",
     "QUIC vocabulary foundation adapter",
     "QUIC transport activity adapter",
     "QUIC migration and recovery adapter",
@@ -63,6 +65,7 @@
   ],
   "alternatives_considered": [
     "One merged qlog writer versus a slice-first contained writer with a deferred sequential follow-on.",
+    "One assembly with layered namespaces versus multiple projects for core, serialization, and QUIC vocabulary.",
     "A generator-first workflow versus a first-pass hand-authored baseline backed by validation.",
     "Immediate multi-protocol coverage versus a bounded QUIC-only first slice.",
     "A single QUIC adapter versus family-based QUIC slices."
