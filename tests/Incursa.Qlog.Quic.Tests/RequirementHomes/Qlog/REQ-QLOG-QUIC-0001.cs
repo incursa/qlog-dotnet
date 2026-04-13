@@ -1,8 +1,9 @@
+using Incursa.Qlog;
 using Incursa.Qlog.Quic;
 using Incursa.Qlog.Serialization.Json;
 using Xunit;
 
-namespace Incursa.Qlog.Tests;
+namespace Incursa.Qlog.Quic.Tests;
 
 public sealed class REQ_QLOG_QUIC_0001
 {

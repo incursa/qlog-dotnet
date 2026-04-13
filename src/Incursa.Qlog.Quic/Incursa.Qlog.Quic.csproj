@@ -8,12 +8,16 @@
     <IsPackable>true</IsPackable>
     <IsTrimmable>true</IsTrimmable>
     <IsAotCompatible>true</IsAotCompatible>
-    <AssemblyName>Incursa.Qlog</AssemblyName>
-    <RootNamespace>Incursa.Qlog</RootNamespace>
-    <Description>Core qlog library for Incursa.</Description>
+    <AssemblyName>Incursa.Qlog.Quic</AssemblyName>
+    <RootNamespace>Incursa.Qlog.Quic</RootNamespace>
+    <Description>QUIC qlog vocabulary and mapping library for Incursa.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>qlog;diagnostics;telemetry;networking</PackageTags>
+    <PackageTags>qlog;quic;diagnostics;telemetry;networking</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Incursa.Qlog\Incursa.Qlog.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />

@@ -10,6 +10,7 @@ start implementation work without absorbing a QUIC-sized backlog.
 - trace metadata, common fields, timestamps, event identity, and schema URIs
 - serialization-neutral core qlog model contracts
 - a small writer/sink boundary that can support contained JSON and qlog-compatible output
+- the sibling `Incursa.Qlog.Quic` package for the recorded QUIC event vocabulary and mapping layer
 - QUIC event vocabulary registration and mapping for the recorded draft revision
 - extension handling that preserves unknown fields and draft-version drift
 

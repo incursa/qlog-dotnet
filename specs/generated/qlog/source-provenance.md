@@ -1,6 +1,6 @@
 # Qlog Source Provenance
 
-This note records the draft source material used to author the initial qlog baseline in `Incursa.Qlog`.
+This note records the draft source material used to author the initial qlog baseline in `Incursa.Qlog` and `Incursa.Qlog.Quic`.
 
 ## Source Documents
 
