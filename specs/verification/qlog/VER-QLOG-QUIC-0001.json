@@ -1,0 +1,34 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "artifact_id": "VER-QLOG-QUIC-0001",
+  "artifact_type": "verification",
+  "title": "Qlog QUIC Vocabulary Foundation Verification",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-QUIC",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-QUIC-0001"
+  ],
+  "verifies": [
+    "REQ-QLOG-QUIC-S2-0001",
+    "REQ-QLOG-QUIC-S4-0001",
+    "REQ-QLOG-QUIC-S5P1-0001"
+  ],
+  "scope": "Verify the QUIC namespace registration, connection and path lifecycle events, and version and transport-parameter negotiation events.",
+  "verification_method": "Contract tests and draft-shaped snapshot comparison.",
+  "preconditions": [
+    "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
+    "The core contained writer slice exists.",
+    "The recorded draft source revisions have not changed since the plan was authored."
+  ],
+  "procedure": [
+    "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
+    "Run namespace and schema-registration tests.",
+    "Run snapshot or contract tests for lifecycle and negotiation payloads.",
+    "Review any drift before expanding to transport or recovery families."
+  ],
+  "expected_result": "The qlog QUIC namespace and lifecycle/negotiation payloads match the draft requirements and remain separate from packet, stream, and recovery slices."
+}

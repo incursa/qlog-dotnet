@@ -1,0 +1,39 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "artifact_id": "VER-QLOG-CORE-0001",
+  "artifact_type": "verification",
+  "title": "Qlog Core Model Verification",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-QUIC",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-CORE-0001"
+  ],
+  "verifies": [
+    "REQ-QLOG-MAIN-S3-0001",
+    "REQ-QLOG-MAIN-S4-0001",
+    "REQ-QLOG-MAIN-S6-0001",
+    "REQ-QLOG-MAIN-S7-0001",
+    "REQ-QLOG-MAIN-S8P1-0001",
+    "REQ-QLOG-MAIN-S8P1-0002",
+    "REQ-QLOG-MAIN-S8P2-0001",
+    "REQ-QLOG-MAIN-S8P2-0002"
+  ],
+  "scope": "Verify the contained qlog core model, envelope, event naming, schema URI handling, common fields, and extension preservation. This slice deliberately does not include sequential JSON Text Sequences.",
+  "verification_method": "Specification conformance checks, focused unit tests, contract tests, and contained JSON snapshot comparison.",
+  "preconditions": [
+    "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
+    "The core work item exists for the contained qlog writer slice.",
+    "The recorded draft source versions in the provenance note have not changed since the plan was authored."
+  ],
+  "procedure": [
+    "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
+    "Run core model and contained writer tests.",
+    "Compare emitted snapshots for file, trace, common-field, and extension-preservation behavior.",
+    "Review any failures before widening to QUIC adapters."
+  ],
+  "expected_result": "The core model validates, the contained writer emits the expected draft-shaped JSON, and the slice stays draft-aware without claiming sequential output."
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "artifact_id": "WI-QLOG-QUIC-0002",
+  "artifact_type": "work_item",
+  "title": "Qlog QUIC Transport Activity Work Item",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-QUIC",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-BASELINE-0001",
+    "VER-QLOG-QUIC-0002"
+  ],
+  "addresses": [
+    "REQ-QLOG-QUIC-S5P2-0001",
+    "REQ-QLOG-QUIC-S5P3-0001"
+  ],
+  "design_links": [
+    "ARC-QLOG-BASELINE-0001"
+  ],
+  "verification_links": [
+    "VER-QLOG-QUIC-0002"
+  ],
+  "summary": "Implement the qlog QUIC packet, UDP datagram, stream, and datagram movement event contracts.",
+  "planned_changes": "Add typed event payload contracts for packet_sent, packet_received, packet_dropped, packet_buffered, packets_acked, udp_datagrams_sent, udp_datagrams_received, udp_datagram_dropped, stream_state_updated, stream_data_moved, and datagram_data_moved. Keep this slice independent of lifecycle, negotiation, migration, and recovery state.",
+  "out_of_scope": [
+    "Connection and path lifecycle events.",
+    "Version and transport-parameter negotiation.",
+    "Migration, key lifecycle, recovery, and congestion events.",
+    "Sequential JSON Text Sequences output."
+  ],
+  "verification_plan": "Run snapshot and contract tests over representative packet and data-movement events and confirm the core writer can serialize the payloads without special casing."
+}

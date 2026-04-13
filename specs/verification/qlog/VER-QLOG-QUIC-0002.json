@@ -1,0 +1,33 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "artifact_id": "VER-QLOG-QUIC-0002",
+  "artifact_type": "verification",
+  "title": "Qlog QUIC Transport Activity Verification",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-QUIC",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-QUIC-0002"
+  ],
+  "verifies": [
+    "REQ-QLOG-QUIC-S5P2-0001",
+    "REQ-QLOG-QUIC-S5P3-0001"
+  ],
+  "scope": "Verify the qlog QUIC packet, UDP datagram, stream, and datagram movement event contracts.",
+  "verification_method": "Contract tests and snapshot comparison for representative packet and data-path transitions.",
+  "preconditions": [
+    "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
+    "The core writer slice exists.",
+    "The recorded draft source revisions have not changed since the plan was authored."
+  ],
+  "procedure": [
+    "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
+    "Run packet, datagram, stream, and movement contract tests.",
+    "Compare emitted snapshots for the packet and data-path event families.",
+    "Review any serialization drift before widening to migration and recovery."
+  ],
+  "expected_result": "Packet, UDP datagram, stream, and datagram movement payloads match the recorded draft requirements and serialize through the core writer without special casing."
+}

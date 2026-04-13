@@ -1,0 +1,36 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "artifact_id": "WI-QLOG-QUIC-0001",
+  "artifact_type": "work_item",
+  "title": "Qlog QUIC Vocabulary Foundation Work Item",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-QUIC",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-BASELINE-0001",
+    "VER-QLOG-QUIC-0001"
+  ],
+  "addresses": [
+    "REQ-QLOG-QUIC-S2-0001",
+    "REQ-QLOG-QUIC-S4-0001",
+    "REQ-QLOG-QUIC-S5P1-0001"
+  ],
+  "design_links": [
+    "ARC-QLOG-BASELINE-0001"
+  ],
+  "verification_links": [
+    "VER-QLOG-QUIC-0001"
+  ],
+  "summary": "Implement the qlog QUIC namespace, connection and path lifecycle events, and version and transport-parameter negotiation events.",
+  "planned_changes": "Add qlog QUIC namespace constants, schema registration, and typed payload contracts for connection_started, connection_state_updated, connection_closed, tuple_assigned, version_information, alpn_information, parameters_set, and parameters_restored. Keep this slice isolated from packet, stream, migration, and recovery payloads.",
+  "out_of_scope": [
+    "Packet and UDP datagram activity.",
+    "Stream and datagram movement.",
+    "Migration, key lifecycle, recovery, and congestion events.",
+    "Sequential JSON Text Sequences output."
+  ],
+  "verification_plan": "Run contract tests for namespace and schema registration plus representative snapshots for lifecycle and negotiation payloads."
+}

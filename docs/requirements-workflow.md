@@ -11,11 +11,12 @@ This note captures the working order for draft-driven qlog work in `Incursa.Qlog
 2. Draft the smallest stable requirement slice.
    - Keep the split between `SPEC-QLOG-MAIN` and `SPEC-QLOG-QUIC`.
    - Keep normative statements separate from notes, examples, and rationale.
-3. Add architecture only after the requirement slice is stable enough to design against.
-4. Add work items after the requirement and design shape are clear.
-5. Add verification artifacts before implementation reaches review.
-6. Implement code, tests, serializers, and adapters in the same slice when they affect the same behavior.
-7. Revisit the provenance note whenever the source drafts update.
+3. Turn the requirement baseline into a bounded v1 plan in `specs/generated/qlog/implementation-slices.md`.
+4. Add architecture only after the requirement slice is stable enough to design against.
+5. Add work items after the requirement and design shape are clear.
+6. Add verification artifacts before implementation reaches review.
+7. Implement code, tests, serializers, and adapters in the same slice when they affect the same behavior.
+8. Revisit the provenance note whenever the source drafts update.
 
 ## Canonical Paths
 

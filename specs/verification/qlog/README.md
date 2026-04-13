@@ -9,14 +9,20 @@ workbench:
 
 # Qlog Verification
 
-This directory holds verification artifacts for the qlog baseline.
+This directory holds the qlog verification artifacts for the implementation plan.
 Each canonical artifact is authored in `.json`.
 
 ## Current Artifacts
 
-- [`VER-QLOG-BASELINE-0001.json`](VER-QLOG-BASELINE-0001.json): canonical qlog baseline verification source
+- [`VER-QLOG-BASELINE-0001.json`](VER-QLOG-BASELINE-0001.json): umbrella qlog v1 verification plan
+- [`VER-QLOG-CORE-0001.json`](VER-QLOG-CORE-0001.json): contained core model verification shell
+- [`VER-QLOG-QUIC-0001.json`](VER-QLOG-QUIC-0001.json): QUIC vocabulary foundation verification shell
+- [`VER-QLOG-QUIC-0002.json`](VER-QLOG-QUIC-0002.json): QUIC transport activity verification shell
+- [`VER-QLOG-QUIC-0003.json`](VER-QLOG-QUIC-0003.json): QUIC migration and recovery verification shell
+- [`VER-QLOG-SEQUENTIAL-0001.json`](VER-QLOG-SEQUENTIAL-0001.json): sequential JSON Text Sequences follow-on placeholder
 
 ## Notes
 
 - Keep verification artifacts homogeneous in status.
-- The first verification slice should cover the qlog core model and the QUIC event vocabulary together so the baseline stays aligned with the shared architecture and work item.
+- Split artifacts when the requirements they cover do not share the same outcome.
+- The sequential follow-on is a placeholder until the contained JSON slice is stable enough to schedule it.

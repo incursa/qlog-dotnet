@@ -12,7 +12,7 @@ This repository is still an early-stage scaffold. It currently provides the shar
 - `specs/architecture/qlog`: the qlog architecture baseline
 - `specs/work-items/qlog`: the qlog implementation planning slice
 - `specs/verification/qlog`: the qlog verification planning slice
-- `specs/generated/qlog`: provenance and scope notes for the draft source material
+- `specs/generated/qlog`: provenance, scope, and implementation-slice notes for the draft source material
 - `specs/generated/qlog/source-docs`: local text snapshots for the recorded draft revisions
 - `docs/requirements-workflow.md`: the repo-local SpecTrace workflow note
 - `scripts/Refresh-QlogDraftSources.ps1`: refresh the draft snapshots and source manifest
@@ -29,5 +29,5 @@ dotnet pack src/Incursa.Qlog/Incursa.Qlog.csproj -c Release
 ## Status
 
 - Repository naming is aligned to `Incursa.Qlog`.
-- The qlog baseline is split across `SPEC-QLOG-MAIN` and `SPEC-QLOG-QUIC`.
+- The qlog v1 planning baseline is split across the qlog requirements, architecture, work-item, verification, and implementation-slice artifacts.
 - No qlog implementation has been added yet.

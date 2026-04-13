@@ -1,25 +1,39 @@
-# Qlog Scope Boundary
+# Qlog V1 Scope Boundary
 
-This note records the first baseline boundary for `Incursa.Qlog`.
+This note records the v1 implementation boundary for `Incursa.Qlog`.
+It is intentionally narrower than the full draft surface so the repository can
+start implementation work without absorbing a QUIC-sized backlog.
 
-## In Scope
+## In Scope For V1
 
 - qlog file envelopes and trace/container structure
 - trace metadata, common fields, timestamps, event identity, and schema URIs
-- serialization-independent core qlog model support
-- JSON and JSON Text Sequences compatibility where the draft main-schema supports it
-- QUIC event vocabulary and qlog-to-QUIC mapping support
+- serialization-neutral core qlog model contracts
+- a small writer/sink boundary that can support contained JSON and qlog-compatible output
+- QUIC event vocabulary registration and mapping for the recorded draft revision
+- extension handling that preserves unknown fields and draft-version drift
 
-## Out Of Scope For The First Baseline
+## Out Of Scope For V1
 
 - HTTP/3 event mapping
-- generated coverage triage and chunk-manifest machinery
-- large work-item backlogs
-- non-JSON sinks and transport layers that are not required to represent the draft qlog model
+- advanced viewer, CLI, or UI tooling
+- broad runtime diagnostics integration or machine-wide tracing control
+- sequential `JSON Text Sequences` output in the first implementation pass
+- non-JSON sinks that are not needed to represent the draft qlog model
+- additional protocol vocabularies beyond the recorded QUIC draft
+- large backlog automation, chunk manifests, or proof-generation machinery
 - any behavior not covered by the two draft source documents listed in the provenance note
 
 ## Why The Boundary Exists
 
 - The source material is draft-state and still moving.
-- The repository needs a stable requirements corpus before implementation work begins.
-- Keeping the boundary small makes later implementation prompts easier to anchor to one requirement slice at a time.
+- The repository needs a stable implementation plan before code starts.
+- Keeping the first pass small enough to reason about makes later requirement-by-requirement work tractable.
+
+## Slice Order
+
+The current implementation plan is summarized in
+[`implementation-slices.md`](implementation-slices.md).
+The intended order is core model and envelope first, then QUIC vocabulary
+foundation, then transport activity, then migration/recovery state, and only
+after that the sequential `JSON Text Sequences` follow-on.

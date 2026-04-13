@@ -14,9 +14,14 @@ Each canonical artifact is authored in `.json`.
 
 ## Current Artifacts
 
-- [`WI-QLOG-BASELINE-0001.json`](WI-QLOG-BASELINE-0001.json): canonical qlog baseline work-item source
+- [`WI-QLOG-BASELINE-0001.json`](WI-QLOG-BASELINE-0001.json): umbrella qlog v1 implementation plan
+- [`WI-QLOG-CORE-0001.json`](WI-QLOG-CORE-0001.json): contained core model and JSON writer work item
+- [`WI-QLOG-QUIC-0001.json`](WI-QLOG-QUIC-0001.json): QUIC vocabulary foundation work item
+- [`WI-QLOG-QUIC-0002.json`](WI-QLOG-QUIC-0002.json): QUIC transport activity work item
+- [`WI-QLOG-QUIC-0003.json`](WI-QLOG-QUIC-0003.json): QUIC migration and recovery work item
+- [`WI-QLOG-SEQUENTIAL-0001.json`](WI-QLOG-SEQUENTIAL-0001.json): sequential JSON Text Sequences follow-on work item
 
 ## Notes
 
 - Keep work items descriptive of delivery work, not of the normative requirement text itself.
-- The initial work item should stay broad enough to cover the core qlog model and the QUIC event vocabulary without splitting into a large backlog too early.
+- The sequential qlog slice is intentionally separated so contained JSON can stabilize first.

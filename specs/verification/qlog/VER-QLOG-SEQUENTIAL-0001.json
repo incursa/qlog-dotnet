@@ -1,0 +1,29 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "artifact_id": "VER-QLOG-SEQUENTIAL-0001",
+  "artifact_type": "verification",
+  "title": "Qlog Sequential JSON Text Sequences Verification Placeholder",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-SEQUENTIAL-0001"
+  ],
+  "verifies": [
+    "REQ-QLOG-MAIN-S5-0001",
+    "REQ-QLOG-MAIN-S11P2-0001"
+  ],
+  "scope": "Placeholder for the sequential qlog and JSON Text Sequences follow-on slice. This artifact exists so the deferred work stays visible without claiming evidence before the contained JSON slice is stable.",
+  "verification_method": "Planned only.",
+  "preconditions": [
+    "The contained JSON core slice is stable.",
+    "The team has chosen to schedule sequential qlog and JSON Text Sequences work."
+  ],
+  "procedure": [
+    "Define the sequential envelope and field-casing checks.",
+    "Add snapshot coverage once the follow-on slice is scheduled."
+  ],
+  "expected_result": "Sequential qlog behavior is specified and ready for later implementation, but no evidence is claimed in the current v1 plan."
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "artifact_id": "VER-QLOG-QUIC-0003",
+  "artifact_type": "verification",
+  "title": "Qlog QUIC Migration And Recovery Verification",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-QUIC",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-QUIC-0003"
+  ],
+  "verifies": [
+    "REQ-QLOG-QUIC-S6-0001",
+    "REQ-QLOG-QUIC-S7-0001"
+  ],
+  "scope": "Verify the qlog QUIC migration, key lifecycle, recovery, and congestion state event contracts.",
+  "verification_method": "Contract tests and draft-shaped snapshot comparison.",
+  "preconditions": [
+    "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
+    "The core writer slice exists.",
+    "The recorded draft source revisions have not changed since the plan was authored."
+  ],
+  "procedure": [
+    "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
+    "Run migration, key lifecycle, and recovery contract tests.",
+    "Compare emitted snapshots for migration and congestion state events.",
+    "Review any failures before the sequential follow-on is considered."
+  ],
+  "expected_result": "Migration, key lifecycle, recovery, and congestion payloads match the draft requirements and remain separate from packet and stream slices."
+}

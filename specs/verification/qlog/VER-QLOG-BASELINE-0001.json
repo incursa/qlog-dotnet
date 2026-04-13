@@ -10,7 +10,17 @@
     "SPEC-QLOG-MAIN",
     "SPEC-QLOG-QUIC",
     "ARC-QLOG-BASELINE-0001",
-    "WI-QLOG-BASELINE-0001"
+    "WI-QLOG-BASELINE-0001",
+    "WI-QLOG-CORE-0001",
+    "WI-QLOG-QUIC-0001",
+    "WI-QLOG-QUIC-0002",
+    "WI-QLOG-QUIC-0003",
+    "WI-QLOG-SEQUENTIAL-0001",
+    "VER-QLOG-CORE-0001",
+    "VER-QLOG-QUIC-0001",
+    "VER-QLOG-QUIC-0002",
+    "VER-QLOG-QUIC-0003",
+    "VER-QLOG-SEQUENTIAL-0001"
   ],
   "verifies": [
     "REQ-QLOG-MAIN-S3-0001",
@@ -31,18 +41,20 @@
     "REQ-QLOG-QUIC-S6-0001",
     "REQ-QLOG-QUIC-S7-0001"
   ],
-  "scope": "Verify the qlog core model and QUIC vocabulary together, with attention to draft-specific envelope rules, event naming, and reciprocal trace links. The verification slice is intentionally bounded to the first baseline and does not imply HTTP/3 or additional protocol vocabularies.",
-  "verification_method": "Specification conformance checks, focused unit tests, and draft-shape snapshot comparison.",
+  "scope": "Verify the qlog v1 slices separately, then roll them up under the umbrella baseline. The core verification covers the contained JSON writer and model shape, the QUIC verifications cover the three vocabulary families, and the sequential JSON Text Sequences artifact stays a placeholder.",
+  "verification_method": "Specification conformance checks, focused unit tests, contract tests, and draft-shape snapshot comparison.",
   "preconditions": [
     "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
-    "The first implementation slice exists for the core qlog model and QUIC vocabulary adapter.",
+    "The core and QUIC slice work items exist.",
     "The draft source versions recorded in the provenance note have not changed since the baseline was authored."
   ],
   "procedure": [
     "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
-    "Run unit tests for the core qlog model and QUIC event mapping surface.",
-    "Run snapshot or contract tests against representative draft qlog outputs.",
-    "Review any failures for draft drift before widening the baseline."
+    "Run unit, contract, and snapshot tests for the contained core model slice.",
+    "Run unit, contract, and snapshot tests for the QUIC vocabulary foundation slice.",
+    "Run unit, contract, and snapshot tests for the QUIC transport activity slice.",
+    "Run unit, contract, and snapshot tests for the QUIC migration and recovery slice.",
+    "Review any failures for draft drift before widening into the sequential follow-on."
   ],
-  "expected_result": "The qlog canonical artifacts validate, the first implementation slice matches the draft envelope and QUIC vocabulary requirements, and the baseline stays explicitly draft-aware without claiming broader protocol or sink coverage."
+  "expected_result": "The qlog canonical artifacts validate, the v1 slices match the draft envelope and QUIC vocabulary requirements, and the baseline stays explicitly draft-aware without claiming the sequential follow-on as implemented."
 }

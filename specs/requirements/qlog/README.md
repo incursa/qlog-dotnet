@@ -22,4 +22,5 @@ Each canonical artifact is authored in `.json`.
 
 - The draft source material is currently split between the qlog main-schema draft and the QUIC event draft.
 - Provenance and the first-scope boundary live in [`../../generated/qlog/source-provenance.md`](../../generated/qlog/source-provenance.md) and [`../../generated/qlog/scope-boundary.md`](../../generated/qlog/scope-boundary.md).
+- The v1 implementation sequence is summarized in [`../../generated/qlog/implementation-slices.md`](../../generated/qlog/implementation-slices.md).
 - Keep future qlog work traceable to one of the `SPEC-...` files before implementation.

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "artifact_id": "WI-QLOG-QUIC-0003",
+  "artifact_type": "work_item",
+  "title": "Qlog QUIC Migration And Recovery Work Item",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-QUIC",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-BASELINE-0001",
+    "VER-QLOG-QUIC-0003"
+  ],
+  "addresses": [
+    "REQ-QLOG-QUIC-S6-0001",
+    "REQ-QLOG-QUIC-S7-0001"
+  ],
+  "design_links": [
+    "ARC-QLOG-BASELINE-0001"
+  ],
+  "verification_links": [
+    "VER-QLOG-QUIC-0003"
+  ],
+  "summary": "Implement the qlog QUIC migration, key lifecycle, recovery, and congestion event contracts.",
+  "planned_changes": "Add typed payload contracts for connection_id_updated, migration_state_updated, key_updated, key_discarded, recovery_parameters_set, recovery_metrics_updated, congestion_state_updated, and packet_lost. Keep the mapping boundary explicit so later QUIC runtime integration can emit these events without depending on writer internals.",
+  "out_of_scope": [
+    "Core envelope and contained JSON writer work.",
+    "Packet and UDP datagram activity.",
+    "Stream and datagram movement.",
+    "Sequential JSON Text Sequences output."
+  ],
+  "verification_plan": "Run snapshot and contract tests for migration and recovery events and confirm the event contracts preserve draft-aware unknown-field behavior."
+}

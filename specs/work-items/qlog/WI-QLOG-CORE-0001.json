@@ -1,0 +1,41 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "artifact_id": "WI-QLOG-CORE-0001",
+  "artifact_type": "work_item",
+  "title": "Qlog Core Model And Contained JSON Writer Work Item",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-QUIC",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-BASELINE-0001",
+    "VER-QLOG-CORE-0001"
+  ],
+  "addresses": [
+    "REQ-QLOG-MAIN-S3-0001",
+    "REQ-QLOG-MAIN-S4-0001",
+    "REQ-QLOG-MAIN-S6-0001",
+    "REQ-QLOG-MAIN-S7-0001",
+    "REQ-QLOG-MAIN-S8P1-0001",
+    "REQ-QLOG-MAIN-S8P1-0002",
+    "REQ-QLOG-MAIN-S8P2-0001",
+    "REQ-QLOG-MAIN-S8P2-0002"
+  ],
+  "design_links": [
+    "ARC-QLOG-BASELINE-0001"
+  ],
+  "verification_links": [
+    "VER-QLOG-CORE-0001"
+  ],
+  "summary": "Implement the contained qlog core model, file envelope, trace and event contracts, common fields, and a writer boundary that can emit contained JSON without forcing the sequential envelope into v1.",
+  "planned_changes": "Introduce core types for qlog files, traces, events, common fields, schema URIs, and extension-preserving event payloads. Keep the writer boundary serialization-neutral enough that future sequential output can be added without reshaping the domain model, but do not add sequential JSON Text Sequences behavior in this slice.",
+  "out_of_scope": [
+    "Sequential JSON Text Sequences output in v1.",
+    "QUIC event vocabulary mapping.",
+    "HTTP/3 event mapping.",
+    "Viewer, CLI, or UI tooling."
+  ],
+  "verification_plan": "Run focused unit tests for the envelope and model contracts, contract or snapshot tests for contained JSON shapes, and the repo-local SpecTrace validator before widening to QUIC adapters."
+}
