@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Incursa.Qlog/Incursa.Qlog.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Incursa.Qlog.Tests/Incursa.Qlog.Tests.csproj" />
+  </Folder>
+</Solution>
+

@@ -1,0 +1,38 @@
+# Build outputs
+bin/
+obj/
+artifacts/
+TestResults/
+BenchmarkDotNet.Artifacts/
+
+# Package outputs
+*.nupkg
+*.snupkg
+
+# Coverage and test artifacts
+coverage*.json
+coverage*.xml
+coverage*.info
+*.coverage
+*.coveragexml
+*.trx
+
+# IDE and OS files
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.slnx.docstates
+*.rsuser
+.DS_Store
+Thumbs.db
+
+# Tooling and local caches
+.dotnet/
+.codex-profile/
+node_modules/
+
+# Generated content
+**/Generated/__codegen.marker
+
