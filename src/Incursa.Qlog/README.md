@@ -17,8 +17,9 @@ dotnet add package Incursa.Qlog
 
 ## When To Use Which Serializer
 
-- Use `QlogJsonSerializer` for contained qlog files with a `traces` array.
-- Use `QlogJsonTextSequenceSerializer` for the draft sequential format when you have one trace header record followed by event records.
+- Use `QlogJsonSerializer` for standard contained qlog JSON files with a `traces` array.
+- Use `QlogJsonTextSequenceSerializer` for the draft sequential JSON Text Sequences format when you have one trace header record followed by event records.
+- Both serializers expose `Serialize(Stream, ...)` overloads, so you can write to a file stream, network stream, or memory buffer.
 
 ## Minimal Example
 

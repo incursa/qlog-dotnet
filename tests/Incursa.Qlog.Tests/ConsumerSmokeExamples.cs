@@ -1,3 +1,4 @@
+using System.Text;
 using Incursa.Qlog.Serialization.Json;
 using Xunit;
 
@@ -56,5 +57,50 @@ public sealed class ConsumerSmokeExamples
 
         Assert.StartsWith("\u001e{\"file_schema\":\"urn:ietf:params:qlog:file:sequential\"", jsonTextSequence, StringComparison.Ordinal);
         Assert.Contains("\"name\":\"example:connection_started\"", jsonTextSequence, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void CanWriteContainedAndSequentialArtifactsToStreams()
+    {
+        QlogTrace trace = new()
+        {
+            Title = "example-trace",
+        };
+
+        trace.EventSchemas.Add(new Uri("urn:ietf:params:qlog:events:example"));
+        trace.Events.Add(new QlogEvent
+        {
+            Time = 0,
+            Name = "example:connection_started",
+        });
+
+        QlogFile containedFile = new();
+        containedFile.Traces.Add(trace);
+
+        string containedJson;
+        using (MemoryStream containedStream = new())
+        {
+            QlogJsonSerializer.Serialize(containedStream, containedFile);
+            containedJson = Encoding.UTF8.GetString(containedStream.ToArray());
+        }
+
+        Assert.StartsWith("{\"file_schema\":\"urn:ietf:params:qlog:file:contained\"", containedJson, StringComparison.Ordinal);
+
+        QlogFile sequentialFile = new()
+        {
+            FileSchema = QlogKnownValues.SequentialFileSchemaUri,
+            SerializationFormat = QlogKnownValues.SequentialJsonTextSequencesSerializationFormat,
+        };
+        sequentialFile.Traces.Add(trace);
+
+        string sequentialJsonTextSequence;
+        using (MemoryStream sequentialStream = new())
+        {
+            QlogJsonTextSequenceSerializer.Serialize(sequentialStream, sequentialFile);
+            sequentialJsonTextSequence = Encoding.UTF8.GetString(sequentialStream.ToArray());
+        }
+
+        Assert.StartsWith("\u001e{\"file_schema\":\"urn:ietf:params:qlog:file:sequential\"", sequentialJsonTextSequence, StringComparison.Ordinal);
+        Assert.EndsWith("\n", sequentialJsonTextSequence, StringComparison.Ordinal);
     }
 }

@@ -17,7 +17,7 @@ Use `Incursa.Qlog.Quic` when you also need:
 ## Contained vs Sequential
 
 - Contained JSON is the default qlog envelope shape. Use it when you want a single file with a `traces` array.
-- Sequential JSON Text Sequences is the draft sequential format. Use it when you want one trace header record followed by event records.
+- Sequential JSON Text Sequences is the draft sequential, stream-oriented format. Use it when you want one trace header record followed by event records.
 - These are the only first-class serialization families in this repository today. Other qlog formats, including non-JSON encodings, stay deferred until the requirement corpus explicitly adds them.
 
 ## Minimal Core Example
