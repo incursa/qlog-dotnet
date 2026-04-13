@@ -6,7 +6,7 @@ This directory contains derived support material for qlog requirements work.
 
 - [`source-provenance.md`](source-provenance.md): draft source documents, versions, and extraction notes
 - [`scope-boundary.md`](scope-boundary.md): the initial scope boundary for the qlog baseline
-- [`implementation-slices.md`](implementation-slices.md): the bounded v1 implementation sequence and deferred follow-on
+- [`implementation-slices.md`](implementation-slices.md): the bounded v1 implementation sequence, including the sequential JSON Text Sequences slice
 - [`source-manifest.json`](source-manifest.json): machine-readable draft source metadata and snapshot hashes
 - [`source-docs/`](source-docs/): local text snapshots from the official IETF archive for the recorded draft revisions
 

@@ -19,9 +19,9 @@ Each canonical artifact is authored in `.json`.
 - [`WI-QLOG-QUIC-0001.json`](WI-QLOG-QUIC-0001.json): QUIC vocabulary foundation work item
 - [`WI-QLOG-QUIC-0002.json`](WI-QLOG-QUIC-0002.json): QUIC transport activity work item
 - [`WI-QLOG-QUIC-0003.json`](WI-QLOG-QUIC-0003.json): QUIC migration and recovery work item
-- [`WI-QLOG-SEQUENTIAL-0001.json`](WI-QLOG-SEQUENTIAL-0001.json): sequential JSON Text Sequences follow-on work item
+- [`WI-QLOG-SEQUENTIAL-0001.json`](WI-QLOG-SEQUENTIAL-0001.json): sequential JSON Text Sequences work item
 
 ## Notes
 
 - Keep work items descriptive of delivery work, not of the normative requirement text itself.
-- The sequential qlog slice is intentionally separated so contained JSON can stabilize first.
+- The sequential qlog slice now exists as a bounded serializer/envelope boundary over the contained JSON model.

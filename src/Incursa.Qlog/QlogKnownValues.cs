@@ -1,7 +1,7 @@
 namespace Incursa.Qlog;
 
 /// <summary>
-/// Provides the draft-known qlog values used by the contained JSON baseline.
+/// Provides the draft-known qlog values used by the qlog serializers.
 /// </summary>
 public static class QlogKnownValues
 {
@@ -11,9 +11,19 @@ public static class QlogKnownValues
     public static Uri ContainedFileSchemaUri { get; } = new("urn:ietf:params:qlog:file:contained", UriKind.Absolute);
 
     /// <summary>
+    /// Gets the sequential qlog file schema URI from the recorded draft baseline.
+    /// </summary>
+    public static Uri SequentialFileSchemaUri { get; } = new("urn:ietf:params:qlog:file:sequential", UriKind.Absolute);
+
+    /// <summary>
     /// Gets the default media type for contained qlog JSON artifacts.
     /// </summary>
     public const string ContainedJsonSerializationFormat = "application/qlog+json";
+
+    /// <summary>
+    /// Gets the media type for sequential qlog JSON Text Sequences artifacts.
+    /// </summary>
+    public const string SequentialJsonTextSequencesSerializationFormat = "application/qlog+json-seq";
 
     /// <summary>
     /// Gets the qlog time format for timestamps measured relative to the reference epoch.

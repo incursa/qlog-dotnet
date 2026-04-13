@@ -19,4 +19,4 @@ Each canonical artifact is authored in `.json`.
 ## Notes
 
 - Keep the design layer focused on satisfaction paths, invariants, and tradeoffs.
-- The current architecture remains draft-aware and intentionally leaves sequential `JSON Text Sequences` to a follow-on slice.
+- The current architecture remains draft-aware and keeps sequential `JSON Text Sequences` as a bounded serializer slice over the shared qlog model.

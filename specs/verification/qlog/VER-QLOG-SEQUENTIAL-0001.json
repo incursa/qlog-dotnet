@@ -2,9 +2,9 @@
   "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
   "artifact_id": "VER-QLOG-SEQUENTIAL-0001",
   "artifact_type": "verification",
-  "title": "Qlog Sequential JSON Text Sequences Verification Placeholder",
+  "title": "Qlog Sequential JSON Text Sequences Verification",
   "domain": "qlog",
-  "status": "planned",
+  "status": "passed",
   "owner": "qlog-maintainers",
   "related_artifacts": [
     "SPEC-QLOG-MAIN",
@@ -15,15 +15,16 @@
     "REQ-QLOG-MAIN-S5-0001",
     "REQ-QLOG-MAIN-S11P2-0001"
   ],
-  "scope": "Placeholder for the sequential qlog and JSON Text Sequences follow-on slice. This artifact exists so the deferred work stays visible without claiming evidence before the contained JSON slice is stable.",
-  "verification_method": "Planned only.",
+  "scope": "Verify the sequential qlog envelope and JSON Text Sequences serializer boundary over the existing qlog core model. The slice covers a single trace header, RS/LF framing, lowercase qlog field names, and sequential-specific rejection of trace errors or extra trace components.",
+  "verification_method": "Requirement-homed unit tests and contained JSON regression coverage.",
   "preconditions": [
-    "The contained JSON core slice is stable.",
-    "The team has chosen to schedule sequential qlog and JSON Text Sequences work."
+    "The sequential serializer implementation exists.",
+    "The contained JSON serializer remains available for regression comparison."
   ],
   "procedure": [
-    "Define the sequential envelope and field-casing checks.",
-    "Add snapshot coverage once the follow-on slice is scheduled."
+    "Run the core and QUIC test projects.",
+    "Verify that sequential JSON Text Sequences output is emitted as RS-delimited records with lowercase qlog field names.",
+    "Confirm that contained JSON round-tripping still passes."
   ],
-  "expected_result": "Sequential qlog behavior is specified and ready for later implementation, but no evidence is claimed in the current v1 plan."
+  "expected_result": "Sequential qlog serialization passes the requirement-homed tests and the contained JSON baseline remains green."
 }

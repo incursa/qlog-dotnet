@@ -19,10 +19,10 @@ Each canonical artifact is authored in `.json`.
 - [`VER-QLOG-QUIC-0001.json`](VER-QLOG-QUIC-0001.json): QUIC vocabulary foundation verification shell
 - [`VER-QLOG-QUIC-0002.json`](VER-QLOG-QUIC-0002.json): QUIC transport activity verification shell
 - [`VER-QLOG-QUIC-0003.json`](VER-QLOG-QUIC-0003.json): QUIC migration and recovery verification shell
-- [`VER-QLOG-SEQUENTIAL-0001.json`](VER-QLOG-SEQUENTIAL-0001.json): sequential JSON Text Sequences follow-on placeholder
+- [`VER-QLOG-SEQUENTIAL-0001.json`](VER-QLOG-SEQUENTIAL-0001.json): sequential JSON Text Sequences verification artifact
 
 ## Notes
 
 - Keep verification artifacts homogeneous in status.
 - Split artifacts when the requirements they cover do not share the same outcome.
-- The sequential follow-on is a placeholder until the contained JSON slice is stable enough to schedule it.
+- The sequential verification artifact now tracks the implemented serializer boundary.

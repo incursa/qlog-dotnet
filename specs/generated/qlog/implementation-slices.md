@@ -62,7 +62,7 @@ slice boundaries are planning guidance rather than frozen protocol truth.
 - Planned verification:
   - `VER-QLOG-QUIC-0003`
 
-## Slice 5: Deferred Sequential Follow-On
+## Slice 5: Sequential JSON Text Sequences
 
 - Requirements:
   - `REQ-QLOG-MAIN-S5-0001`
@@ -76,6 +76,5 @@ slice boundaries are planning guidance rather than frozen protocol truth.
 
 ## Review Items
 
-- `json-seq-first-class` still needs a concrete implementation decision.
 - `private-schema-policy` still needs a concrete implementation rule.
 - The qlog drafts remain draft-state, so event names, section references, and schema URIs may drift.

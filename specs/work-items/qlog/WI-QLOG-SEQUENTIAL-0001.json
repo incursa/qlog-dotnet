@@ -2,9 +2,9 @@
   "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
   "artifact_id": "WI-QLOG-SEQUENTIAL-0001",
   "artifact_type": "work_item",
-  "title": "Qlog Sequential JSON Text Sequences Follow-On Work Item",
+  "title": "Qlog Sequential JSON Text Sequences Work Item",
   "domain": "qlog",
-  "status": "planned",
+  "status": "complete",
   "owner": "qlog-maintainers",
   "related_artifacts": [
     "SPEC-QLOG-MAIN",
@@ -22,13 +22,13 @@
   "verification_links": [
     "VER-QLOG-SEQUENTIAL-0001"
   ],
-  "summary": "Prepare the sequential qlog envelope and JSON Text Sequences follow-on slice for later work, after the contained JSON writer has stabilized.",
-  "planned_changes": "Define the sequential-file envelope, ordering rules, and lowercase JSON Text Sequences behavior as a separate follow-on so the contained JSON writer can stabilize first.",
+  "summary": "Implement the sequential qlog envelope and JSON Text Sequences serializer boundary as a bounded slice.",
+  "planned_changes": "Add the sequential-file envelope, ordering rules, and lowercase JSON Text Sequences behavior as a separate writer boundary over the existing qlog core model.",
   "out_of_scope": [
     "Contained core writer implementation.",
     "QUIC event vocabulary mapping.",
     "HTTP/3 event mapping.",
     "Viewer, CLI, or UI tooling."
   ],
-  "verification_plan": "Keep the follow-on verification shell in place with no evidence until the contained JSON implementation is stable and the sequential envelope is intentionally scheduled."
+  "verification_plan": "Run requirement-homed sequential serializer tests alongside the contained JSON regression coverage."
 }

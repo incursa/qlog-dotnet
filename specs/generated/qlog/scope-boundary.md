@@ -19,7 +19,6 @@ start implementation work without absorbing a QUIC-sized backlog.
 - HTTP/3 event mapping
 - advanced viewer, CLI, or UI tooling
 - broad runtime diagnostics integration or machine-wide tracing control
-- sequential `JSON Text Sequences` output in the first implementation pass
 - non-JSON sinks that are not needed to represent the draft qlog model
 - additional protocol vocabularies beyond the recorded QUIC draft
 - large backlog automation, chunk manifests, or proof-generation machinery
@@ -37,4 +36,4 @@ The current implementation plan is summarized in
 [`implementation-slices.md`](implementation-slices.md).
 The intended order is core model and envelope first, then QUIC vocabulary
 foundation, then transport activity, then migration/recovery state, and only
-after that the sequential `JSON Text Sequences` follow-on.
+after that the sequential `JSON Text Sequences` slice.
