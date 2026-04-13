@@ -31,6 +31,11 @@ public static class QlogQuicKnownValues
     public const string ConnectionClosedEventName = "quic:connection_closed";
 
     /// <summary>
+    /// Gets the fully qualified event name for <c>connection_id_updated</c>.
+    /// </summary>
+    public const string ConnectionIdUpdatedEventName = "quic:connection_id_updated";
+
+    /// <summary>
     /// Gets the fully qualified event name for <c>connection_state_updated</c>.
     /// </summary>
     public const string ConnectionStateUpdatedEventName = "quic:connection_state_updated";
@@ -114,6 +119,41 @@ public static class QlogQuicKnownValues
     /// Gets the fully qualified event name for <c>datagram_data_moved</c>.
     /// </summary>
     public const string DatagramDataMovedEventName = "quic:datagram_data_moved";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>migration_state_updated</c>.
+    /// </summary>
+    public const string MigrationStateUpdatedEventName = "quic:migration_state_updated";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>key_updated</c>.
+    /// </summary>
+    public const string KeyUpdatedEventName = "quic:key_updated";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>key_discarded</c>.
+    /// </summary>
+    public const string KeyDiscardedEventName = "quic:key_discarded";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>recovery_parameters_set</c>.
+    /// </summary>
+    public const string RecoveryParametersSetEventName = "quic:recovery_parameters_set";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>recovery_metrics_updated</c>.
+    /// </summary>
+    public const string RecoveryMetricsUpdatedEventName = "quic:recovery_metrics_updated";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>congestion_state_updated</c>.
+    /// </summary>
+    public const string CongestionStateUpdatedEventName = "quic:congestion_state_updated";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>packet_lost</c>.
+    /// </summary>
+    public const string PacketLostEventName = "quic:packet_lost";
 
     /// <summary>
     /// Gets the qlog packet type identifier for an initial packet.
@@ -239,6 +279,21 @@ public static class QlogQuicKnownValues
     /// Gets the packet-buffered trigger for unavailable keys.
     /// </summary>
     public const string PacketBufferedTriggerKeysUnavailable = "keys_unavailable";
+
+    /// <summary>
+    /// Gets the packet-lost trigger for reordering-threshold loss detection.
+    /// </summary>
+    public const string PacketLostTriggerReorderingThreshold = "reordering_threshold";
+
+    /// <summary>
+    /// Gets the packet-lost trigger for time-threshold loss detection.
+    /// </summary>
+    public const string PacketLostTriggerTimeThreshold = "time_threshold";
+
+    /// <summary>
+    /// Gets the packet-lost trigger for PTO-expired loss detection.
+    /// </summary>
+    public const string PacketLostTriggerPtoExpired = "pto_expired";
 
     /// <summary>
     /// Gets the packet-number space for initial packets.
@@ -429,4 +484,89 @@ public static class QlogQuicKnownValues
     /// Gets the connection-close trigger when the implementation cannot determine a more precise reason.
     /// </summary>
     public const string CloseTriggerUnspecified = "unspecified";
+
+    /// <summary>
+    /// Gets the migration state for the start of probing.
+    /// </summary>
+    public const string MigrationStateProbingStarted = "probing_started";
+
+    /// <summary>
+    /// Gets the migration state for an abandoned probe attempt.
+    /// </summary>
+    public const string MigrationStateProbingAbandoned = "probing_abandoned";
+
+    /// <summary>
+    /// Gets the migration state for a successful probe.
+    /// </summary>
+    public const string MigrationStateProbingSuccessful = "probing_successful";
+
+    /// <summary>
+    /// Gets the migration state for an active migration attempt.
+    /// </summary>
+    public const string MigrationStateStarted = "migration_started";
+
+    /// <summary>
+    /// Gets the migration state for an abandoned migration attempt.
+    /// </summary>
+    public const string MigrationStateAbandoned = "migration_abandoned";
+
+    /// <summary>
+    /// Gets the migration state for a completed migration.
+    /// </summary>
+    public const string MigrationStateComplete = "migration_complete";
+
+    /// <summary>
+    /// Gets the key type for the server initial secret.
+    /// </summary>
+    public const string KeyTypeServerInitialSecret = "server_initial_secret";
+
+    /// <summary>
+    /// Gets the key type for the client initial secret.
+    /// </summary>
+    public const string KeyTypeClientInitialSecret = "client_initial_secret";
+
+    /// <summary>
+    /// Gets the key type for the server handshake secret.
+    /// </summary>
+    public const string KeyTypeServerHandshakeSecret = "server_handshake_secret";
+
+    /// <summary>
+    /// Gets the key type for the client handshake secret.
+    /// </summary>
+    public const string KeyTypeClientHandshakeSecret = "client_handshake_secret";
+
+    /// <summary>
+    /// Gets the key type for the server 0-RTT secret.
+    /// </summary>
+    public const string KeyTypeServerZeroRttSecret = "server_0rtt_secret";
+
+    /// <summary>
+    /// Gets the key type for the client 0-RTT secret.
+    /// </summary>
+    public const string KeyTypeClientZeroRttSecret = "client_0rtt_secret";
+
+    /// <summary>
+    /// Gets the key type for the server 1-RTT secret.
+    /// </summary>
+    public const string KeyTypeServerOneRttSecret = "server_1rtt_secret";
+
+    /// <summary>
+    /// Gets the key type for the client 1-RTT secret.
+    /// </summary>
+    public const string KeyTypeClientOneRttSecret = "client_1rtt_secret";
+
+    /// <summary>
+    /// Gets the key lifecycle trigger for TLS-derived keys.
+    /// </summary>
+    public const string KeyLifecycleTriggerTls = "tls";
+
+    /// <summary>
+    /// Gets the key lifecycle trigger for a remote update.
+    /// </summary>
+    public const string KeyLifecycleTriggerRemoteUpdate = "remote_update";
+
+    /// <summary>
+    /// Gets the key lifecycle trigger for a local update.
+    /// </summary>
+    public const string KeyLifecycleTriggerLocalUpdate = "local_update";
 }

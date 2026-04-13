@@ -278,6 +278,14 @@ public static partial class QlogQuicEvents
         }
     }
 
+    private static void AddOptionalNumber(IDictionary<string, QlogValue> target, string propertyName, double? value)
+    {
+        if (value.HasValue)
+        {
+            target[propertyName] = QlogValue.FromNumber(value.Value);
+        }
+    }
+
     private static void AddOptionalStringArray(IDictionary<string, QlogValue> target, string propertyName, IList<string> values)
     {
         if (values.Count == 0)
