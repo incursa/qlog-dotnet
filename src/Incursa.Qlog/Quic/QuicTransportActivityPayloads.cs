@@ -166,7 +166,7 @@ public sealed class QuicPacketSent
     /// <summary>
     /// Gets or sets the coalescing datagram identifier, if known.
     /// </summary>
-    public ulong? DatagramId { get; set; }
+    public uint? DatagramId { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the packet is an MTU probe.
@@ -217,7 +217,7 @@ public sealed class QuicPacketReceived
     /// <summary>
     /// Gets or sets the coalescing datagram identifier, if known.
     /// </summary>
-    public ulong? DatagramId { get; set; }
+    public uint? DatagramId { get; set; }
 
     /// <summary>
     /// Gets or sets the receive trigger, if known.
@@ -248,7 +248,7 @@ public sealed class QuicPacketDropped
     /// <summary>
     /// Gets or sets the coalescing datagram identifier, if known.
     /// </summary>
-    public ulong? DatagramId { get; set; }
+    public uint? DatagramId { get; set; }
 
     /// <summary>
     /// Gets implementation-specific drop details.
@@ -284,7 +284,7 @@ public sealed class QuicPacketBuffered
     /// <summary>
     /// Gets or sets the coalescing datagram identifier, if known.
     /// </summary>
-    public ulong? DatagramId { get; set; }
+    public uint? DatagramId { get; set; }
 
     /// <summary>
     /// Gets or sets the buffering trigger, if known.

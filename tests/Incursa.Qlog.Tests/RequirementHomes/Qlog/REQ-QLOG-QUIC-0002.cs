@@ -19,7 +19,7 @@ public sealed class REQ_QLOG_QUIC_0002
                 PacketType = QlogQuicKnownValues.PacketTypeInitial,
                 PacketNumberLength = 2,
                 PacketNumber = 17,
-                Token = new QuicPacketToken
+                Token = new QuicToken
                 {
                     Type = QlogQuicKnownValues.TokenTypeRetry,
                     Raw = new QuicRawInfo
