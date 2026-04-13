@@ -2,7 +2,7 @@
 
 `Incursa.Qlog` is the .NET repository for qlog-related models, abstractions, and tooling. It is intended to support QUIC/qlog diagnostics and related structured event work.
 
-This repository is still an early-stage scaffold, but the first bounded qlog slices are now implemented: the contained JSON core model and the QUIC lifecycle / negotiation vocabulary foundation.
+This repository is still an early-stage scaffold, but the first bounded qlog slices are now implemented: the contained JSON core model, the QUIC lifecycle / negotiation vocabulary foundation, and the QUIC transport activity vocabulary slice.
 
 ## Repository Layout
 
@@ -30,5 +30,5 @@ dotnet pack src/Incursa.Qlog/Incursa.Qlog.csproj -c Release
 
 - Repository naming is aligned to `Incursa.Qlog`.
 - The qlog v1 planning baseline is split across the qlog requirements, architecture, work-item, verification, and implementation-slice artifacts.
-- The first bounded v1 slices now exist: core model plus contained JSON serialization, and the QUIC lifecycle / negotiation vocabulary foundation.
+- The first bounded v1 slices now exist: core model plus contained JSON serialization, the QUIC lifecycle / negotiation vocabulary foundation, and the QUIC transport activity vocabulary slice.
 - Sequential JSON Text Sequences remains a separate follow-on slice.

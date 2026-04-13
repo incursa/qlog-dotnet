@@ -61,12 +61,292 @@ public static class QlogQuicKnownValues
     public const string ParametersRestoredEventName = "quic:parameters_restored";
 
     /// <summary>
-    /// Gets the local initiator identifier.
+    /// Gets the fully qualified event name for <c>packet_sent</c>.
+    /// </summary>
+    public const string PacketSentEventName = "quic:packet_sent";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>packet_received</c>.
+    /// </summary>
+    public const string PacketReceivedEventName = "quic:packet_received";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>packet_dropped</c>.
+    /// </summary>
+    public const string PacketDroppedEventName = "quic:packet_dropped";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>packet_buffered</c>.
+    /// </summary>
+    public const string PacketBufferedEventName = "quic:packet_buffered";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>packets_acked</c>.
+    /// </summary>
+    public const string PacketsAckedEventName = "quic:packets_acked";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>udp_datagrams_sent</c>.
+    /// </summary>
+    public const string UdpDatagramsSentEventName = "quic:udp_datagrams_sent";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>udp_datagrams_received</c>.
+    /// </summary>
+    public const string UdpDatagramsReceivedEventName = "quic:udp_datagrams_received";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>udp_datagram_dropped</c>.
+    /// </summary>
+    public const string UdpDatagramDroppedEventName = "quic:udp_datagram_dropped";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>stream_state_updated</c>.
+    /// </summary>
+    public const string StreamStateUpdatedEventName = "quic:stream_state_updated";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>stream_data_moved</c>.
+    /// </summary>
+    public const string StreamDataMovedEventName = "quic:stream_data_moved";
+
+    /// <summary>
+    /// Gets the fully qualified event name for <c>datagram_data_moved</c>.
+    /// </summary>
+    public const string DatagramDataMovedEventName = "quic:datagram_data_moved";
+
+    /// <summary>
+    /// Gets the qlog packet type identifier for an initial packet.
+    /// </summary>
+    public const string PacketTypeInitial = "initial";
+
+    /// <summary>
+    /// Gets the qlog packet type identifier for a handshake packet.
+    /// </summary>
+    public const string PacketTypeHandshake = "handshake";
+
+    /// <summary>
+    /// Gets the qlog packet type identifier for a 0-RTT packet.
+    /// </summary>
+    public const string PacketTypeZeroRtt = "0RTT";
+
+    /// <summary>
+    /// Gets the qlog packet type identifier for a 1-RTT packet.
+    /// </summary>
+    public const string PacketTypeOneRtt = "1RTT";
+
+    /// <summary>
+    /// Gets the qlog packet type identifier for a retry packet.
+    /// </summary>
+    public const string PacketTypeRetry = "retry";
+
+    /// <summary>
+    /// Gets the qlog packet type identifier for a version-negotiation packet.
+    /// </summary>
+    public const string PacketTypeVersionNegotiation = "version_negotiation";
+
+    /// <summary>
+    /// Gets the qlog packet type identifier for a stateless-reset packet.
+    /// </summary>
+    public const string PacketTypeStatelessReset = "stateless_reset";
+
+    /// <summary>
+    /// Gets the qlog packet type identifier for an unknown packet type.
+    /// </summary>
+    public const string PacketTypeUnknown = "unknown";
+
+    /// <summary>
+    /// Gets the packet-sent trigger for a reordered retransmission.
+    /// </summary>
+    public const string PacketSentTriggerRetransmitReordered = "retransmit_reordered";
+
+    /// <summary>
+    /// Gets the packet-sent trigger for a timeout retransmission.
+    /// </summary>
+    public const string PacketSentTriggerRetransmitTimeout = "retransmit_timeout";
+
+    /// <summary>
+    /// Gets the packet-sent trigger for a probe timeout.
+    /// </summary>
+    public const string PacketSentTriggerPtoProbe = "pto_probe";
+
+    /// <summary>
+    /// Gets the packet-sent trigger for a crypto retransmission.
+    /// </summary>
+    public const string PacketSentTriggerRetransmitCrypto = "retransmit_crypto";
+
+    /// <summary>
+    /// Gets the packet-sent trigger for a congestion-control bandwidth probe.
+    /// </summary>
+    public const string PacketSentTriggerCcBandwidthProbe = "cc_bandwidth_probe";
+
+    /// <summary>
+    /// Gets the packet-received trigger for packets that became processable after keys arrived.
+    /// </summary>
+    public const string PacketReceivedTriggerKeysAvailable = "keys_available";
+
+    /// <summary>
+    /// Gets the packet-dropped trigger for internal errors.
+    /// </summary>
+    public const string PacketDroppedTriggerInternalError = "internal_error";
+
+    /// <summary>
+    /// Gets the packet-dropped trigger for rejected packets.
+    /// </summary>
+    public const string PacketDroppedTriggerRejected = "rejected";
+
+    /// <summary>
+    /// Gets the packet-dropped trigger for unsupported packets.
+    /// </summary>
+    public const string PacketDroppedTriggerUnsupported = "unsupported";
+
+    /// <summary>
+    /// Gets the packet-dropped trigger for invalid packets.
+    /// </summary>
+    public const string PacketDroppedTriggerInvalid = "invalid";
+
+    /// <summary>
+    /// Gets the packet-dropped trigger for duplicate packets.
+    /// </summary>
+    public const string PacketDroppedTriggerDuplicate = "duplicate";
+
+    /// <summary>
+    /// Gets the packet-dropped trigger for packets that could not be matched to a connection.
+    /// </summary>
+    public const string PacketDroppedTriggerConnectionUnknown = "connection_unknown";
+
+    /// <summary>
+    /// Gets the packet-dropped trigger for decryption failures.
+    /// </summary>
+    public const string PacketDroppedTriggerDecryptionFailure = "decryption_failure";
+
+    /// <summary>
+    /// Gets the packet-dropped trigger for unavailable keys.
+    /// </summary>
+    public const string PacketDroppedTriggerKeyUnavailable = "key_unavailable";
+
+    /// <summary>
+    /// Gets the packet-dropped trigger for general packet drops.
+    /// </summary>
+    public const string PacketDroppedTriggerGeneral = "general";
+
+    /// <summary>
+    /// Gets the packet-buffered trigger for backpressure.
+    /// </summary>
+    public const string PacketBufferedTriggerBackpressure = "backpressure";
+
+    /// <summary>
+    /// Gets the packet-buffered trigger for unavailable keys.
+    /// </summary>
+    public const string PacketBufferedTriggerKeysUnavailable = "keys_unavailable";
+
+    /// <summary>
+    /// Gets the packet-number space for initial packets.
+    /// </summary>
+    public const string PacketNumberSpaceInitial = "initial";
+
+    /// <summary>
+    /// Gets the packet-number space for handshake packets.
+    /// </summary>
+    public const string PacketNumberSpaceHandshake = "handshake";
+
+    /// <summary>
+    /// Gets the packet-number space for application-data packets.
+    /// </summary>
+    public const string PacketNumberSpaceApplicationData = "application_data";
+
+    /// <summary>
+    /// Gets the token type for retry tokens.
+    /// </summary>
+    public const string TokenTypeRetry = "retry";
+
+    /// <summary>
+    /// Gets the token type for resumption tokens.
+    /// </summary>
+    public const string TokenTypeResumption = "resumption";
+
+    /// <summary>
+    /// Gets the stream type for unidirectional streams.
+    /// </summary>
+    public const string StreamTypeUnidirectional = "unidirectional";
+
+    /// <summary>
+    /// Gets the stream type for bidirectional streams.
+    /// </summary>
+    public const string StreamTypeBidirectional = "bidirectional";
+
+    /// <summary>
+    /// Gets the stream side for send-state updates.
+    /// </summary>
+    public const string StreamSideSending = "sending";
+
+    /// <summary>
+    /// Gets the stream side for receive-state updates.
+    /// </summary>
+    public const string StreamSideReceiving = "receiving";
+
+    /// <summary>
+    /// Gets the stream-state trigger for local actions.
+    /// </summary>
+    public const string StreamStateTriggerLocal = "local";
+
+    /// <summary>
+    /// Gets the stream-state trigger for remote actions.
+    /// </summary>
+    public const string StreamStateTriggerRemote = "remote";
+
+    /// <summary>
+    /// Gets the data-location identifier for application-layer buffers.
+    /// </summary>
+    public const string DataLocationApplication = "application";
+
+    /// <summary>
+    /// Gets the data-location identifier for transport-layer buffers.
+    /// </summary>
+    public const string DataLocationTransport = "transport";
+
+    /// <summary>
+    /// Gets the data-location identifier for network-layer buffers.
+    /// </summary>
+    public const string DataLocationNetwork = "network";
+
+    /// <summary>
+    /// Gets the additional-info marker for a finished stream.
+    /// </summary>
+    public const string DataMovedAdditionalInfoFinSet = "fin_set";
+
+    /// <summary>
+    /// Gets the additional-info marker for a stream reset.
+    /// </summary>
+    public const string DataMovedAdditionalInfoStreamReset = "stream_reset";
+
+    /// <summary>
+    /// Gets the ECN value for non-ECN-marked packets.
+    /// </summary>
+    public const string EcnNotEct = "Not-ECT";
+
+    /// <summary>
+    /// Gets the ECN value for ECT(1)-marked packets.
+    /// </summary>
+    public const string EcnEct1 = "ECT(1)";
+
+    /// <summary>
+    /// Gets the ECN value for ECT(0)-marked packets.
+    /// </summary>
+    public const string EcnEct0 = "ECT(0)";
+
+    /// <summary>
+    /// Gets the ECN value for congestion-experienced packets.
+    /// </summary>
+    public const string EcnCe = "CE";
+
+    /// <summary>
+    /// Gets the client initiator identifier.
     /// </summary>
     public const string LocalInitiator = "local";
 
     /// <summary>
-    /// Gets the remote initiator identifier.
+    /// Gets the server initiator identifier.
     /// </summary>
     public const string RemoteInitiator = "remote";
 
