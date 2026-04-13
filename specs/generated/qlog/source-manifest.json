@@ -1,0 +1,28 @@
+{
+  "generated_utc": "2026-04-13T15:32:32.3674611Z",
+  "repo_root": "C:/src/incursa/qlog-dotnet",
+  "documents": [
+    {
+      "draft_name": "draft-ietf-quic-qlog-main-schema",
+      "revision": 13,
+      "artifact_id": "SPEC-QLOG-MAIN",
+      "purpose": "qlog core model and serialization envelope",
+      "datatracker_url": "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13",
+      "archive_txt_url": "https://www.ietf.org/archive/id/draft-ietf-quic-qlog-main-schema-13.txt",
+      "local_snapshot": "specs/generated/qlog/source-docs/draft-ietf-quic-qlog-main-schema-13.txt",
+      "sha256": "c14df4fe3eced74e6ed66bc368730097da52447e19c0cba2c38d9522fb61615e",
+      "retrieved_utc": "2026-04-13T15:32:32.3674611Z"
+    },
+    {
+      "draft_name": "draft-ietf-quic-qlog-quic-events",
+      "revision": 12,
+      "artifact_id": "SPEC-QLOG-QUIC",
+      "purpose": "qlog QUIC event vocabulary",
+      "datatracker_url": "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-quic-events-12",
+      "archive_txt_url": "https://www.ietf.org/archive/id/draft-ietf-quic-qlog-quic-events-12.txt",
+      "local_snapshot": "specs/generated/qlog/source-docs/draft-ietf-quic-qlog-quic-events-12.txt",
+      "sha256": "9936bb6c0918627ff980b14ad652d3959ea233f076b173149c39cc08fa590c73",
+      "retrieved_utc": "2026-04-13T15:32:32.3674611Z"
+    }
+  ]
+}

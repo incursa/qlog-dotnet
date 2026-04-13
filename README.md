@@ -13,7 +13,9 @@ This repository is still an early-stage scaffold. It currently provides the shar
 - `specs/work-items/qlog`: the qlog implementation planning slice
 - `specs/verification/qlog`: the qlog verification planning slice
 - `specs/generated/qlog`: provenance and scope notes for the draft source material
+- `specs/generated/qlog/source-docs`: local text snapshots for the recorded draft revisions
 - `docs/requirements-workflow.md`: the repo-local SpecTrace workflow note
+- `scripts/Refresh-QlogDraftSources.ps1`: refresh the draft snapshots and source manifest
 
 ## Build
 

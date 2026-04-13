@@ -17,12 +17,13 @@ This note defines how `Incursa.Qlog` will move from draft text to traceable impl
 1. Start from the relevant draft section or qlog concern.
 2. Check for an existing owning `SPEC-...` file and any open gap in [`REQUIREMENT-GAPS.md`](../specs/requirements/qlog/REQUIREMENT-GAPS.md).
 3. Record the provenance and the initial boundary before implementation work begins.
-4. Write or revise canonical requirements in `specs/requirements/qlog`.
-5. Add architecture notes when the satisfaction path, invariants, or tradeoffs need explanation.
-6. Add or update the linked work item only after the requirement text is stable enough to trace.
-7. Write the verification artifact early enough that the proof burden is explicit before coding starts.
-8. Implement.
-9. Validate the canonical JSON artifacts before treating the slice as ready for implementation work.
+4. Refresh the draft snapshot manifest with [`../scripts/Refresh-QlogDraftSources.ps1`](../scripts/Refresh-QlogDraftSources.ps1) whenever the source drafts move.
+5. Write or revise canonical requirements in `specs/requirements/qlog`.
+6. Add architecture notes when the satisfaction path, invariants, or tradeoffs need explanation.
+7. Add or update the linked work item only after the requirement text is stable enough to trace.
+8. Write the verification artifact early enough that the proof burden is explicit before coding starts.
+9. Implement.
+10. Validate the canonical JSON artifacts before treating the slice as ready for implementation work.
 
 ## Notes
 
