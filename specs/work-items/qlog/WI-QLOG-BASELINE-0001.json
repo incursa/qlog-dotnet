@@ -1,0 +1,49 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "artifact_id": "WI-QLOG-BASELINE-0001",
+  "artifact_type": "work_item",
+  "title": "Qlog Baseline Implementation Lane",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-QUIC",
+    "ARC-QLOG-BASELINE-0001",
+    "VER-QLOG-BASELINE-0001"
+  ],
+  "addresses": [
+    "REQ-QLOG-MAIN-S3-0001",
+    "REQ-QLOG-MAIN-S4-0001",
+    "REQ-QLOG-MAIN-S5-0001",
+    "REQ-QLOG-MAIN-S6-0001",
+    "REQ-QLOG-MAIN-S7-0001",
+    "REQ-QLOG-MAIN-S8P1-0001",
+    "REQ-QLOG-MAIN-S8P1-0002",
+    "REQ-QLOG-MAIN-S8P2-0001",
+    "REQ-QLOG-MAIN-S8P2-0002",
+    "REQ-QLOG-MAIN-S11P2-0001",
+    "REQ-QLOG-QUIC-S2-0001",
+    "REQ-QLOG-QUIC-S4-0001",
+    "REQ-QLOG-QUIC-S5P1-0001",
+    "REQ-QLOG-QUIC-S5P2-0001",
+    "REQ-QLOG-QUIC-S5P3-0001",
+    "REQ-QLOG-QUIC-S6-0001",
+    "REQ-QLOG-QUIC-S7-0001"
+  ],
+  "design_links": [
+    "ARC-QLOG-BASELINE-0001"
+  ],
+  "verification_links": [
+    "VER-QLOG-BASELINE-0001"
+  ],
+  "summary": "Create the first implementation lane for Incursa.Qlog around the core qlog model, serialization envelope, and QUIC vocabulary adapter. Keep the baseline narrow enough to support requirement-by-requirement delivery without importing the heavy quic-dotnet backlog machinery.",
+  "planned_changes": "Introduce core trace, event, and envelope contracts for Incursa.Qlog; add QUIC-specific mapping types that translate transport state into the qlog vocabulary; and keep serializer-specific work behind the core model boundary so later sinks can be added deliberately.",
+  "out_of_scope": [
+    "HTTP/3 adapters in the first baseline.",
+    "Non-JSON sinks or transport layers that are not required by the draft source material.",
+    "Large work-item backlogs, phase prompts, or chunk-manifest machinery.",
+    "Fake completeness or fabricated verification evidence."
+  ],
+  "verification_plan": "Use focused unit and contract tests for the core qlog envelope and QUIC vocabulary shapes; add JSON snapshot checks for draft-specific output; and keep the repository-level SpecTrace validation script in the loop before the implementation grows."
+}

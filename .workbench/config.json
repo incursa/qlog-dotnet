@@ -1,0 +1,51 @@
+{
+  "Paths": {
+    "DocsRoot": "docs",
+    "SpecsRoot": "specs",
+    "ArchitectureDir": "specs/architecture",
+    "WorkItemsSpecsDir": "specs/work-items",
+    "GeneratedDir": "specs/generated",
+    "SpecsTemplatesDir": "specs/templates",
+    "SpecsSchemasDir": "specs/schemas",
+    "WorkRoot": "specs/work-items",
+    "ItemsDir": "specs/work-items/qlog"
+  },
+  "Ids": {
+    "Width": 4
+  },
+  "Git": {
+    "BranchPattern": "work/{id}-{slug}",
+    "CommitMessagePattern": "Promote {id}: {title}",
+    "DefaultBaseBranch": "main",
+    "RequireCleanWorkingTree": true
+  },
+  "Github": {
+    "Provider": "octokit",
+    "DefaultDraft": false,
+    "Host": "github.com",
+    "Owner": "incursa",
+    "Repository": "qlog-dotnet",
+    "Sync": {
+      "Mode": "generate",
+      "ConflictDefault": "fail",
+      "ScheduleEnabled": false
+    }
+  },
+  "Validation": {
+    "LinkExclude": [
+      "artifacts/spec-trace-migration/backups/",
+      "artifacts/spec-trace-json-migration/backups/",
+      "specs_old/"
+    ],
+    "DocExclude": [
+      "artifacts/spec-trace-migration/backups/",
+      "artifacts/spec-trace-json-migration/backups/",
+      "specs_old/"
+    ]
+  },
+  "Tui": {
+    "Theme": "powershell",
+    "UseEmoji": false,
+    "AutoRefreshSeconds": 60
+  }
+}

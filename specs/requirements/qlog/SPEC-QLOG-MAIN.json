@@ -1,0 +1,290 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "related_artifacts": [
+    "SPEC-QLOG-QUIC",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-BASELINE-0001",
+    "VER-QLOG-BASELINE-0001"
+  ],
+  "artifact_id": "SPEC-QLOG-MAIN",
+  "artifact_type": "specification",
+  "title": "Qlog Core Model and Serialization Envelope (Draft Main Schema)",
+  "domain": "qlog",
+  "capability": "core-model",
+  "status": "draft",
+  "owner": "qlog-maintainers",
+  "tags": [
+    "draft",
+    "qlog",
+    "serialization"
+  ],
+  "purpose": "Capture the draft qlog main-schema requirements for Incursa.Qlog as the basis for a serialization-independent core model and trace envelope.",
+  "scope": "This specification covers the qlog file envelope, trace and trace-sequence metadata, event identity, common fields, schema-URI rules, and JSON or JSON Text Sequences serialization behavior needed for a stable core library baseline. It intentionally leaves HTTP/3 and other application-specific adapters to later work.",
+  "context": "Source material is draft-ietf-quic-qlog-main-schema v13, which is still a work-in-progress document. The requirements below preserve draft provenance and should be revisited if the draft changes.",
+  "open_questions": [
+    "Should non-JSON sinks be added only after the core model and QUIC adapter stabilize?",
+    "Should JSON Text Sequences gain a separate follow-on spec if the serialization surface expands?"
+  ],
+  "requirements": [
+    {
+      "id": "REQ-QLOG-MAIN-S3-0001",
+      "title": "Declare qlog file metadata",
+      "statement": "A qlog file MUST declare a file schema URI and a serialization format media type.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-13 §3",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-3"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S4-0001",
+      "title": "Carry component traces or trace errors in contained files",
+      "statement": "A contained qlog file MUST carry component traces or explicit trace conversion errors.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-13 §§4.2-4.3",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-4.2"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S5-0001",
+      "title": "Carry a single trace header in sequential files",
+      "statement": "A sequential qlog file MUST carry a single trace header whose events are appended after it.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-13 §5.1 and §11.1",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-5.1"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S6-0001",
+      "title": "Preserve trace metadata and shared fields",
+      "statement": "A qlog trace MUST expose event_schemas and preserve shared trace context through common_fields and vantage_point.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-13 §§4.2, 5.1, 6, 7.5",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-7.5"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S7-0001",
+      "title": "Record each event as time, name, and data",
+      "statement": "A qlog event MUST record time, name, and data.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-13 §7",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-7"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S8P1-0001",
+      "title": "Use namespace-qualified event names",
+      "statement": "A qlog event name MUST combine the namespace identifier, a colon, and the event type identifier.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-13 §8",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-8"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S8P1-0002",
+      "title": "Register absolute event schema URIs",
+      "statement": "An event schema URI MUST be absolute and include the namespace identifier.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-13 §8.1",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-8.1"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S8P2-0001",
+      "title": "Extend the protocol event data type",
+      "statement": "An event data definition MUST extend ProtocolEventData when it adds new qlog events.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-13 §8.2",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-8.2"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S8P2-0002",
+      "title": "Ignore unknown common fields and advisory schema listings",
+      "statement": "A qlog implementation MUST ignore unknown entries in common_fields and treat event_schemas as advisory rather than exhaustive.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-13 §§7.5, 8.1",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-7.5"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S11P2-0001",
+      "title": "Lowercase JSON Text Sequence field names",
+      "statement": "A JSON Text Sequences qlog file MUST serialize qlog field names in lowercase.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-13 §11.2",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-11.2"
+        ]
+      }
+    }
+  ]
+}

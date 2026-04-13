@@ -12,4 +12,4 @@ dotnet test tests/Incursa.Qlog.Tests/Incursa.Qlog.Tests.csproj
 
 - The project exists so future requirements-driven tests have a stable home.
 - No qlog behavior tests have been added yet.
-
+- Future test work should be driven by `specs/verification/qlog`.

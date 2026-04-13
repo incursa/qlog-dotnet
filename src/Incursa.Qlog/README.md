@@ -12,5 +12,4 @@ dotnet add package Incursa.Qlog
 
 - This project is only a scaffold right now.
 - No qlog serialization or event-mapping logic has been implemented yet.
-- Future implementation should be driven by canonical requirements in `specs/requirements`.
-
+- Future implementation should be driven by canonical requirements in `specs/requirements/qlog`.

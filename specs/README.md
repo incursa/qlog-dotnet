@@ -1,11 +1,13 @@
 # Specs
 
-This directory is reserved for future requirements-driven work for `Incursa.Qlog`.
-
-The repository intentionally starts without a requirements corpus, work items, or verification artifacts so the qlog scope can be introduced deliberately.
+This directory is the home for requirements-driven qlog work in `Incursa.Qlog`.
 
 ## Planned Layout
 
-- `specs/requirements`: canonical requirements and gap notes when the corpus is introduced
-- `specs/verification`: evidence and verification artifacts tied to those requirements
-
+- `specs/requirements/qlog`: canonical qlog requirements and gap notes
+- `specs/architecture/qlog`: design artifacts that explain how the requirements will be satisfied
+- `specs/work-items/qlog`: implementation planning artifacts tied to the requirements and architecture
+- `specs/verification/qlog`: verification planning artifacts tied to the same corpus
+- `specs/generated/qlog`: derived provenance, scope, and future triage notes
+- `specs/templates`: local guidance for authoring new SpecTrace artifacts
+- `specs/schemas`: local guidance for schema and validation support

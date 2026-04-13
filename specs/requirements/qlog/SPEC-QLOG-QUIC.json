@@ -1,0 +1,213 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-BASELINE-0001",
+    "VER-QLOG-BASELINE-0001"
+  ],
+  "artifact_id": "SPEC-QLOG-QUIC",
+  "artifact_type": "specification",
+  "title": "Qlog QUIC Event Vocabulary (Draft QUIC Events)",
+  "domain": "qlog",
+  "capability": "quic-events",
+  "status": "draft",
+  "owner": "qlog-maintainers",
+  "tags": [
+    "draft",
+    "qlog",
+    "quic",
+    "events"
+  ],
+  "purpose": "Capture the draft QUIC event vocabulary requirements for Incursa.Qlog so the repository can map QUIC diagnostics into qlog without collapsing the core model into protocol-specific detail.",
+  "scope": "This specification covers the qlog QUIC event namespace, connection and path lifecycle events, version and transport parameter negotiation, packet and UDP datagram activity, stream and datagram movement, migration and key lifecycle changes, and recovery and congestion state. It intentionally leaves HTTP/3 and any future protocol vocabularies to later work.",
+  "context": "Source material is draft-ietf-quic-qlog-quic-events-12, which remains a work-in-progress Internet-Draft. The baseline therefore treats event names, section numbers, and draft URIs as provisional and will need a refresh if the upstream draft changes.",
+  "open_questions": [
+    "Should HTTP/3 event mapping become a separate qlog specification once the QUIC vocabulary stabilizes?",
+    "Should future protocol vocabularies share the same architecture and verification slices or receive separate baseline artifacts?"
+  ],
+  "requirements": [
+    {
+      "id": "REQ-QLOG-QUIC-S2-0001",
+      "title": "Register the qlog QUIC event namespace",
+      "statement": "A qlog implementation MUST register the `quic` event namespace and the draft event schema URI `urn:ietf:params:qlog:events:quic-12` while this source remains draft.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-quic-events-12 §2.1",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-quic-events-12#section-2.1"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-QUIC-S4-0001",
+      "title": "Log connection and path lifecycle changes",
+      "statement": "A qlog implementation MUST log server_listening, connection_started, connection_state_updated, connection_closed, and tuple_assigned events when those connection or path lifecycle transitions occur.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-quic-events-12 §§4.1-4.7",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-quic-events-12#section-4"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-QUIC-S5P1-0001",
+      "title": "Log version and transport parameter negotiation",
+      "statement": "A qlog implementation MUST log version_information, alpn_information, parameters_set, and parameters_restored events when version negotiation, ALPN negotiation, or transport parameter restoration occurs.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-quic-events-12 §§5.1-5.4",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-quic-events-12#section-5.1"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-QUIC-S5P2-0001",
+      "title": "Log packet and UDP datagram activity",
+      "statement": "A qlog implementation MUST log packet_sent, packet_received, packet_dropped, packet_buffered, packets_acked, udp_datagrams_sent, udp_datagrams_received, and udp_datagram_dropped events when packet or UDP datagram activity occurs.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-quic-events-12 §§5.5-5.12",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-quic-events-12#section-5.5"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-QUIC-S5P3-0001",
+      "title": "Log stream and datagram movement",
+      "statement": "A qlog implementation MUST log stream_state_updated, stream_data_moved, and datagram_data_moved events when stream or datagram payload movement changes.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-quic-events-12 §§5.13-5.16",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-quic-events-12#section-5.13"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-QUIC-S6-0001",
+      "title": "Log migration and key lifecycle changes",
+      "statement": "A qlog implementation MUST log connection_id_updated, migration_state_updated, key_updated, and key_discarded events when connection IDs, migration, or key state changes.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-quic-events-12 §§4.4, 5.20, 6.1-6.2",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-quic-events-12#section-4.4"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-QUIC-S7-0001",
+      "title": "Log recovery and congestion state",
+      "statement": "A qlog implementation MUST log recovery_parameters_set, recovery_metrics_updated, congestion_state_updated, and packet_lost events when recovery or congestion state changes.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-quic-events-12 §§7.1-7.4",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-quic-events-12#section-7.1"
+        ]
+      }
+    }
+  ]
+}

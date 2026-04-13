@@ -1,0 +1,48 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "artifact_id": "VER-QLOG-BASELINE-0001",
+  "artifact_type": "verification",
+  "title": "Qlog Baseline Verification",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-QUIC",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-BASELINE-0001"
+  ],
+  "verifies": [
+    "REQ-QLOG-MAIN-S3-0001",
+    "REQ-QLOG-MAIN-S4-0001",
+    "REQ-QLOG-MAIN-S5-0001",
+    "REQ-QLOG-MAIN-S6-0001",
+    "REQ-QLOG-MAIN-S7-0001",
+    "REQ-QLOG-MAIN-S8P1-0001",
+    "REQ-QLOG-MAIN-S8P1-0002",
+    "REQ-QLOG-MAIN-S8P2-0001",
+    "REQ-QLOG-MAIN-S8P2-0002",
+    "REQ-QLOG-MAIN-S11P2-0001",
+    "REQ-QLOG-QUIC-S2-0001",
+    "REQ-QLOG-QUIC-S4-0001",
+    "REQ-QLOG-QUIC-S5P1-0001",
+    "REQ-QLOG-QUIC-S5P2-0001",
+    "REQ-QLOG-QUIC-S5P3-0001",
+    "REQ-QLOG-QUIC-S6-0001",
+    "REQ-QLOG-QUIC-S7-0001"
+  ],
+  "scope": "Verify the qlog core model and QUIC vocabulary together, with attention to draft-specific envelope rules, event naming, and reciprocal trace links. The verification slice is intentionally bounded to the first baseline and does not imply HTTP/3 or additional protocol vocabularies.",
+  "verification_method": "Specification conformance checks, focused unit tests, and draft-shape snapshot comparison.",
+  "preconditions": [
+    "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
+    "The first implementation slice exists for the core qlog model and QUIC vocabulary adapter.",
+    "The draft source versions recorded in the provenance note have not changed since the baseline was authored."
+  ],
+  "procedure": [
+    "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
+    "Run unit tests for the core qlog model and QUIC event mapping surface.",
+    "Run snapshot or contract tests against representative draft qlog outputs.",
+    "Review any failures for draft drift before widening the baseline."
+  ],
+  "expected_result": "The qlog canonical artifacts validate, the first implementation slice matches the draft envelope and QUIC vocabulary requirements, and the baseline stays explicitly draft-aware without claiming broader protocol or sink coverage."
+}

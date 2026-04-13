@@ -1,0 +1,64 @@
+{
+  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "artifact_id": "ARC-QLOG-BASELINE-0001",
+  "artifact_type": "architecture",
+  "title": "Qlog Baseline Architecture",
+  "domain": "qlog",
+  "status": "draft",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-QUIC",
+    "WI-QLOG-BASELINE-0001",
+    "VER-QLOG-BASELINE-0001"
+  ],
+  "satisfies": [
+    "REQ-QLOG-MAIN-S3-0001",
+    "REQ-QLOG-MAIN-S4-0001",
+    "REQ-QLOG-MAIN-S5-0001",
+    "REQ-QLOG-MAIN-S6-0001",
+    "REQ-QLOG-MAIN-S7-0001",
+    "REQ-QLOG-MAIN-S8P1-0001",
+    "REQ-QLOG-MAIN-S8P1-0002",
+    "REQ-QLOG-MAIN-S8P2-0001",
+    "REQ-QLOG-MAIN-S8P2-0002",
+    "REQ-QLOG-MAIN-S11P2-0001",
+    "REQ-QLOG-QUIC-S2-0001",
+    "REQ-QLOG-QUIC-S4-0001",
+    "REQ-QLOG-QUIC-S5P1-0001",
+    "REQ-QLOG-QUIC-S5P2-0001",
+    "REQ-QLOG-QUIC-S5P3-0001",
+    "REQ-QLOG-QUIC-S6-0001",
+    "REQ-QLOG-QUIC-S7-0001"
+  ],
+  "purpose": "Describe how the first qlog implementation slice can satisfy the draft main-schema and QUIC event requirements without coupling the core model to a specific serializer or protocol adapter.",
+  "design_summary": "The architecture keeps the qlog core model separate from QUIC-specific vocabulary so the repository can stabilize the file envelope, trace metadata, event identity, and schema handling before implementation broadens into more adapters or sink types. The first baseline should project QUIC transport state into qlog event contracts through a narrow adapter layer while preserving draft-provenance boundaries and forward-compatibility for unknown fields and extensions.",
+  "key_components": [
+    "qlog core model contracts",
+    "trace and file envelope handling",
+    "QUIC event vocabulary adapter",
+    "schema and namespace registration",
+    "SpecTrace provenance and validation support"
+  ],
+  "data_and_state_considerations": "The core model should preserve file-envelope state separately from trace state so contained and sequential qlog forms can be validated without binding the serializer to QUIC semantics. The QUIC adapter should map transport state into qlog events while preserving unknown fields, extension members, and draft-version drift so the baseline remains stable as the I-Ds evolve.",
+  "edge_cases_and_constraints": [
+    "Draft section numbers and event names may shift as the upstream drafts evolve.",
+    "Contained and sequential file forms use different envelope rules and should not be conflated.",
+    "Unknown common fields and extension payloads must survive round-tripping.",
+    "HTTP/3 and future protocol vocabularies stay outside the first baseline."
+  ],
+  "alternatives_considered": [
+    "One merged qlog specification versus separate core-model and QUIC-vocabulary specifications.",
+    "A generator-first workflow versus a first-pass hand-authored baseline backed by validation.",
+    "Immediate multi-protocol coverage versus a bounded QUIC-only first slice."
+  ],
+  "risks": [
+    "Draft churn could invalidate section references, event names, or URI details.",
+    "Overly broad abstractions could hide transport details that diagnostics need to preserve.",
+    "Sink-specific work could pressure the core model before the qlog envelope stabilizes."
+  ],
+  "open_questions": [
+    "Should non-JSON sinks wait until the core model and QUIC adapter stabilize?",
+    "Should future protocol vocabularies share this architecture slice or get their own baseline artifacts?"
+  ]
+}
