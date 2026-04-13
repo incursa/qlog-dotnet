@@ -9,6 +9,7 @@ start implementation work without absorbing a QUIC-sized backlog.
 - qlog file envelopes and trace/container structure
 - trace metadata, common fields, timestamps, event identity, and schema URIs
 - serialization-neutral core qlog model contracts
+- first-class contained JSON and sequential JSON Text Sequences writer boundaries over the shared model
 - a small writer/sink boundary that can support contained JSON and qlog-compatible output
 - the sibling `Incursa.Qlog.Quic` package for the recorded QUIC event vocabulary and mapping layer
 - QUIC event vocabulary registration and mapping for the recorded draft revision
@@ -19,7 +20,7 @@ start implementation work without absorbing a QUIC-sized backlog.
 - HTTP/3 event mapping
 - advanced viewer, CLI, or UI tooling
 - broad runtime diagnostics integration or machine-wide tracing control
-- non-JSON sinks that are not needed to represent the draft qlog model
+- non-JSON sinks such as CBOR, CSV, protobuf, or flatbuffers until the corpus defines explicit requirements
 - additional protocol vocabularies beyond the recorded QUIC draft
 - large backlog automation, chunk manifests, or proof-generation machinery
 - any behavior not covered by the two draft source documents listed in the provenance note
@@ -29,6 +30,7 @@ start implementation work without absorbing a QUIC-sized backlog.
 - The source material is draft-state and still moving.
 - The repository needs a stable implementation plan before code starts.
 - Keeping the first pass small enough to reason about makes later requirement-by-requirement work tractable.
+- The current corpus only justifies JSON and JSON Text Sequences, so a general multi-format serializer abstraction would add complexity before there is a second format to exercise it.
 
 ## Slice Order
 
