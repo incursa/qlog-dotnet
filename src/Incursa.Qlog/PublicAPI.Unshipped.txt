@@ -85,6 +85,7 @@ Incursa.Qlog.QlogTraceError.Uri.set -> void
 Incursa.Qlog.QlogTraceError.VantagePoint.get -> Incursa.Qlog.QlogVantagePoint?
 Incursa.Qlog.QlogTraceError.VantagePoint.set -> void
 Incursa.Qlog.QlogValue
+Incursa.Qlog.QlogValue.QlogValue() -> void
 static Incursa.Qlog.QlogValue.Null.get -> Incursa.Qlog.QlogValue
 Incursa.Qlog.QlogValue.Kind.get -> Incursa.Qlog.QlogValueKind
 static Incursa.Qlog.QlogValue.Parse(string! json) -> Incursa.Qlog.QlogValue

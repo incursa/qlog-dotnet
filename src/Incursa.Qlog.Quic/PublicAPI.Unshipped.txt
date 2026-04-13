@@ -113,8 +113,6 @@ const Incursa.Qlog.Quic.QlogQuicKnownValues.UdpDatagramsReceivedEventName = "qui
 const Incursa.Qlog.Quic.QlogQuicKnownValues.UdpDatagramsSentEventName = "quic:udp_datagrams_sent" -> string!
 const Incursa.Qlog.Quic.QlogQuicKnownValues.VersionInformationEventName = "quic:version_information" -> string!
 Incursa.Qlog.Quic.QlogQuicEvents
-Incursa.Qlog.Quic.QlogQuicEvents
-Incursa.Qlog.Quic.QlogQuicKnownValues
 Incursa.Qlog.Quic.QuicAlpnIdentifier
 Incursa.Qlog.Quic.QuicAlpnIdentifier.ByteValue.get -> string?
 Incursa.Qlog.Quic.QuicAlpnIdentifier.ByteValue.set -> void
