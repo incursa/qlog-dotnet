@@ -85,6 +85,13 @@ public readonly struct QlogValue : IEquatable<QlogValue>
     public static QlogValue FromNumber(double value) => CreateValue(writer => writer.WriteNumberValue(value));
 
     /// <summary>
+    /// Creates a qlog unsigned integer number value.
+    /// </summary>
+    /// <param name="value">The unsigned integer value.</param>
+    /// <returns>The created qlog value.</returns>
+    public static QlogValue FromNumber(ulong value) => CreateValue(writer => writer.WriteNumberValue(value));
+
+    /// <summary>
     /// Returns the JSON text for the carried value.
     /// </summary>
     /// <returns>The JSON representation.</returns>
@@ -103,6 +110,8 @@ public readonly struct QlogValue : IEquatable<QlogValue>
     public override int GetHashCode() => StringComparer.Ordinal.GetHashCode(ToJson());
 
     internal static QlogValue FromElement(JsonElement element) => new(element.Clone());
+
+    internal static QlogValue Create(Action<Utf8JsonWriter> writeValue) => CreateValue(writeValue);
 
     private static QlogValue CreateValue(Action<Utf8JsonWriter> writeValue)
     {

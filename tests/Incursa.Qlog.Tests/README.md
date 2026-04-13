@@ -10,6 +10,6 @@ dotnet test tests/Incursa.Qlog.Tests/Incursa.Qlog.Tests.csproj
 
 ## Status
 
-- The project now carries the first qlog core-slice tests for contained JSON round-trip and validation behavior.
-- The tests are intentionally scoped to the v1 core slice; QUIC vocabulary and sequential JSON Text Sequences remain later work.
+- The project now carries requirement-homed tests for the contained JSON core slice and the first QUIC lifecycle / negotiation slice.
+- Sequential JSON Text Sequences remains later work.
 - Future test work should still be driven by `specs/verification/qlog`.
