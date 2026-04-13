@@ -30,4 +30,5 @@ dotnet pack src/Incursa.Qlog/Incursa.Qlog.csproj -c Release
 
 - Repository naming is aligned to `Incursa.Qlog`.
 - The qlog v1 planning baseline is split across the qlog requirements, architecture, work-item, verification, and implementation-slice artifacts.
-- No qlog implementation has been added yet.
+- The first bounded v1 slice now exists: core model plus contained JSON serialization.
+- Sequential JSON Text Sequences and QUIC vocabulary work remain separate follow-on slices.

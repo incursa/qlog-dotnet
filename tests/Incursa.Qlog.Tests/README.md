@@ -10,6 +10,6 @@ dotnet test tests/Incursa.Qlog.Tests/Incursa.Qlog.Tests.csproj
 
 ## Status
 
-- The project exists so future requirements-driven tests have a stable home.
-- No qlog behavior tests have been added yet.
-- Future test work should be driven by `specs/verification/qlog`.
+- The project now carries the first qlog core-slice tests for contained JSON round-trip and validation behavior.
+- The tests are intentionally scoped to the v1 core slice; QUIC vocabulary and sequential JSON Text Sequences remain later work.
+- Future test work should still be driven by `specs/verification/qlog`.

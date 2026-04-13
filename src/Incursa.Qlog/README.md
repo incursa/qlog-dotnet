@@ -10,6 +10,8 @@ dotnet add package Incursa.Qlog
 
 ## Status
 
-- This project is only a scaffold right now.
-- No qlog serialization or event-mapping logic has been implemented yet.
-- Future implementation should be driven by canonical requirements in `specs/requirements/qlog`.
+- The qlog core model and contained JSON baseline now exist for the v1 core slice.
+- The current implementation is intentionally contained-only; sequential JSON Text Sequences remain a later slice.
+- Unknown file, trace, common-field, vantage-point, reference-time, and event members are preserved through explicit extension data.
+- Event `data` remains an open JSON object in this slice; typed protocol payloads wait for the QUIC mapping work.
+- Future implementation should still be driven by canonical requirements in `specs/requirements/qlog`.
