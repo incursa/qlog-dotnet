@@ -29,7 +29,7 @@ public sealed class QuicRawInfo
 /// <summary>
 /// Represents a QUIC token carried in a packet header.
 /// </summary>
-public sealed class QuicPacketToken
+public sealed class QuicToken
 {
     /// <summary>
     /// Gets or sets the token type, if known.
@@ -95,7 +95,7 @@ public sealed class QuicPacketHeader
     /// <summary>
     /// Gets or sets the retry or resumption token, if logged.
     /// </summary>
-    public QuicPacketToken? Token { get; set; }
+    public QuicToken? Token { get; set; }
 
     /// <summary>
     /// Gets or sets the long-header payload length field, if logged.
@@ -341,7 +341,7 @@ public sealed class QuicUdpDatagramsSent
     /// <summary>
     /// Gets the datagram identifiers used for packet coalescing correlation.
     /// </summary>
-    public IList<ulong> DatagramIds { get; } = new List<ulong>();
+    public IList<uint> DatagramIds { get; } = new List<uint>();
 
     /// <summary>
     /// Gets unknown or extension fields that should survive mapping.
@@ -372,7 +372,7 @@ public sealed class QuicUdpDatagramsReceived
     /// <summary>
     /// Gets the datagram identifiers used for packet coalescing correlation.
     /// </summary>
-    public IList<ulong> DatagramIds { get; } = new List<ulong>();
+    public IList<uint> DatagramIds { get; } = new List<uint>();
 
     /// <summary>
     /// Gets unknown or extension fields that should survive mapping.

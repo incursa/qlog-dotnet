@@ -194,7 +194,7 @@ public static partial class QlogQuicEvents
             AddOptionalNumber(target, "count", data.Count);
             AddOptionalRawInfoArray(target, "raw", data.Raw);
             AddOptionalStringArray(target, "ecn", data.Ecn);
-            AddOptionalNumberArray(target, "datagram_ids", data.DatagramIds);
+            AddOptionalUnsignedIntArray(target, "datagram_ids", data.DatagramIds);
             AddExtensions(target, data.ExtensionData);
         });
     }
@@ -213,7 +213,7 @@ public static partial class QlogQuicEvents
             AddOptionalNumber(target, "count", data.Count);
             AddOptionalRawInfoArray(target, "raw", data.Raw);
             AddOptionalStringArray(target, "ecn", data.Ecn);
-            AddOptionalNumberArray(target, "datagram_ids", data.DatagramIds);
+            AddOptionalUnsignedIntArray(target, "datagram_ids", data.DatagramIds);
             AddExtensions(target, data.ExtensionData);
         });
     }
@@ -309,6 +309,16 @@ public static partial class QlogQuicEvents
         target[propertyName] = QlogValueFactory.Array(values, value => QlogValue.FromNumber(value));
     }
 
+    private static void AddOptionalUnsignedIntArray(IDictionary<string, QlogValue> target, string propertyName, IList<uint> values)
+    {
+        if (values.Count == 0)
+        {
+            return;
+        }
+
+        target[propertyName] = QlogValueFactory.Array(values, value => QlogValue.FromNumber((long)value));
+    }
+
     private static void AddOptionalValuesArray(IDictionary<string, QlogValue> target, string propertyName, IList<QlogValue> values)
     {
         if (values.Count == 0)
@@ -381,7 +391,7 @@ public static partial class QlogQuicEvents
         });
     }
 
-    private static QlogValue CreatePacketTokenValue(QuicPacketToken value)
+    private static QlogValue CreatePacketTokenValue(QuicToken value)
     {
         ArgumentNullException.ThrowIfNull(value);
         ValidateToken(value);
@@ -523,7 +533,7 @@ public static partial class QlogQuicEvents
         }
     }
 
-    private static void ValidateToken(QuicPacketToken value)
+    private static void ValidateToken(QuicToken value)
     {
         ArgumentNullException.ThrowIfNull(value);
         ValidateOptionalKnownValue(value.Type, nameof(value.Type), TokenTypes);

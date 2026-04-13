@@ -5,7 +5,7 @@ namespace Incursa.Qlog.Quic;
 /// <summary>
 /// Creates generic qlog events from the bounded QUIC vocabulary payloads.
 /// </summary>
-public static class QlogQuicEvents
+public static partial class QlogQuicEvents
 {
     /// <summary>
     /// Ensures that the trace advertises the draft QUIC event schema URI required by the current baseline.
@@ -255,6 +255,14 @@ public static class QlogQuicEvents
     }
 
     private static void AddOptionalNumber(IDictionary<string, QlogValue> target, string propertyName, ushort? value)
+    {
+        if (value.HasValue)
+        {
+            target[propertyName] = QlogValue.FromNumber((long)value.Value);
+        }
+    }
+
+    private static void AddOptionalNumber(IDictionary<string, QlogValue> target, string propertyName, uint? value)
     {
         if (value.HasValue)
         {
