@@ -17,6 +17,8 @@ public sealed class QlogEvent
 
     /// <summary>
     /// Gets the event data object members.
+    /// Use <see cref="QlogValue.Parse(string)"/>, <see cref="QlogValue.FromObject(IEnumerable{KeyValuePair{string, QlogValue}})"/>,
+    /// and <see cref="QlogValue.FromArray(IEnumerable{QlogValue})"/> to build nested values without introducing a separate model type.
     /// </summary>
     public IDictionary<string, QlogValue> Data { get; } = new Dictionary<string, QlogValue>(StringComparer.Ordinal);
 

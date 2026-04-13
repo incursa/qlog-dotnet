@@ -1,7 +1,7 @@
 namespace Incursa.Qlog;
 
 /// <summary>
-/// Represents a contained qlog file envelope.
+/// Represents a qlog file envelope.
 /// </summary>
 public sealed class QlogFile
 {
@@ -36,6 +36,7 @@ public sealed class QlogFile
 
     /// <summary>
     /// Gets the contained traces and trace errors carried by the file.
+    /// For sequential JSON Text Sequences output, this collection must contain exactly one <see cref="QlogTrace"/>.
     /// </summary>
     public IList<QlogTraceComponent> Traces { get; } = new List<QlogTraceComponent>();
 

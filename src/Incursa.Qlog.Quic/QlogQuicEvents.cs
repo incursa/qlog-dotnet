@@ -5,6 +5,10 @@ namespace Incursa.Qlog.Quic;
 /// <summary>
 /// Creates generic qlog events from the bounded QUIC vocabulary payloads.
 /// </summary>
+/// <remarks>
+/// Call <see cref="RegisterDraftSchema(QlogTrace)"/> before serializing a trace that uses these event builders so the
+/// trace advertises the draft QUIC event schema expected by this package.
+/// </remarks>
 public static partial class QlogQuicEvents
 {
     /// <summary>

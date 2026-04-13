@@ -6,6 +6,10 @@ namespace Incursa.Qlog.Serialization.Json;
 /// <summary>
 /// Serializes and parses contained qlog JSON artifacts for the v1 core baseline.
 /// </summary>
+/// <remarks>
+/// Use this serializer for qlog envelopes that carry a <c>traces</c> array. For sequential JSON Text Sequences,
+/// use <see cref="QlogJsonTextSequenceSerializer"/>.
+/// </remarks>
 public static class QlogJsonSerializer
 {
     /// <summary>

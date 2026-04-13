@@ -1,13 +1,87 @@
 # Incursa.Qlog
 
-`Incursa.Qlog` is the .NET repository for qlog-related models, abstractions, and tooling. It is intended to support qlog diagnostics and related structured event work.
+`Incursa.Qlog` is the core qlog model and serializer package for Incursa. `Incursa.Qlog.Quic` layers the bounded QUIC vocabulary and event builders on top of that core.
 
-This repository is still an early-stage scaffold, but the first bounded qlog slices are now implemented and split across two packages: the contained JSON core model in `Incursa.Qlog`, and the QUIC lifecycle / negotiation plus transport activity vocabulary in `Incursa.Qlog.Quic`.
+Use `Incursa.Qlog` when you need:
+
+- qlog file, trace, event, and extension-data models
+- contained qlog JSON serialization
+- sequential qlog JSON Text Sequences serialization
+
+Use `Incursa.Qlog.Quic` when you also need:
+
+- QUIC-specific qlog event builders
+- draft QUIC schema registration for traces
+- bounded QUIC constants and payload types
+
+## Contained vs Sequential
+
+- Contained JSON is the default qlog envelope shape. Use it when you want a single file with a `traces` array.
+- Sequential JSON Text Sequences is the draft sequential format. Use it when you want one trace header record followed by event records.
+
+## Minimal Core Example
+
+```csharp
+using System;
+using Incursa.Qlog;
+using Incursa.Qlog.Serialization.Json;
+
+QlogFile file = new();
+QlogTrace trace = new()
+{
+    Title = "Example trace",
+    Description = "A small contained qlog example.",
+    VantagePoint = new QlogVantagePoint
+    {
+        Type = QlogKnownValues.ClientVantagePoint,
+    },
+};
+
+trace.EventSchemas.Add(new Uri("urn:ietf:params:qlog:events:example"));
+trace.Events.Add(new QlogEvent
+{
+    Time = 0,
+    Name = "example:connection_started",
+});
+
+file.Traces.Add(trace);
+
+string containedJson = QlogJsonSerializer.Serialize(file, indented: true);
+QlogFile sequentialFile = new()
+{
+    FileSchema = QlogKnownValues.SequentialFileSchemaUri,
+    SerializationFormat = QlogKnownValues.SequentialJsonTextSequencesSerializationFormat,
+};
+sequentialFile.Traces.Add(trace);
+
+string sequentialJsonTextSequence = QlogJsonTextSequenceSerializer.Serialize(sequentialFile, indented: true);
+```
+
+## Minimal QUIC Example
+
+```csharp
+using Incursa.Qlog;
+using Incursa.Qlog.Quic;
+using Incursa.Qlog.Serialization.Json;
+
+QlogTrace trace = new();
+QlogQuicEvents.RegisterDraftSchema(trace);
+trace.Events.Add(QlogQuicEvents.CreateServerListening(0, new QuicServerListening
+{
+    IpV4 = "203.0.113.1",
+    PortV4 = 443,
+}));
+
+QlogFile file = new();
+file.Traces.Add(trace);
+
+string json = QlogJsonSerializer.Serialize(file, indented: true);
+```
 
 ## Repository Layout
 
-- `src/Incursa.Qlog`: the packable `Incursa.Qlog` core library project
-- `src/Incursa.Qlog.Quic`: the packable `Incursa.Qlog.Quic` vocabulary and mapping library
+- `src/Incursa.Qlog`: the packable core library project
+- `src/Incursa.Qlog.Quic`: the packable QUIC vocabulary and event-builder library
 - `tests/Incursa.Qlog.Tests`: the core requirement-homed test project
 - `tests/Incursa.Qlog.Quic.Tests`: the QUIC requirement-homed test project
 - `specs/requirements/qlog`: the canonical qlog requirements slice
@@ -15,7 +89,6 @@ This repository is still an early-stage scaffold, but the first bounded qlog sli
 - `specs/work-items/qlog`: the qlog implementation planning slice
 - `specs/verification/qlog`: the qlog verification planning slice
 - `specs/generated/qlog`: provenance, scope, and implementation-slice notes for the draft source material
-- `specs/generated/qlog/source-docs`: local text snapshots for the recorded draft revisions
 - `docs/requirements-workflow.md`: the repo-local SpecTrace workflow note
 - `scripts/Refresh-QlogDraftSources.ps1`: refresh the draft snapshots and source manifest
 
@@ -31,7 +104,6 @@ dotnet pack src/Incursa.Qlog.Quic/Incursa.Qlog.Quic.csproj -c Release
 
 ## Status
 
-- Repository naming is aligned to `Incursa.Qlog`.
-- The qlog v1 planning baseline is split across the qlog requirements, architecture, work-item, verification, and implementation-slice artifacts.
-- The first bounded v1 slices now exist: core model plus contained JSON serialization in `Incursa.Qlog`, and the QUIC lifecycle / negotiation plus transport activity vocabulary in `Incursa.Qlog.Quic`.
-- Sequential JSON Text Sequences now exists as a separate serializer boundary in `Incursa.Qlog`.
+- The first bounded qlog slices now exist: core model plus contained JSON serialization in `Incursa.Qlog`, and the QUIC lifecycle / negotiation plus transport activity vocabulary in `Incursa.Qlog.Quic`.
+- Sequential JSON Text Sequences is implemented as a separate serializer boundary in `Incursa.Qlog`.
+- The package boundary stays clean: `Incursa.Qlog` contains the core qlog model and serializers, while QUIC vocabulary and event builders live in `Incursa.Qlog.Quic`.

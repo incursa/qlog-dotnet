@@ -1,1 +1,126 @@
-
+#nullable enable
+Incursa.Qlog.QlogCommonFields
+Incursa.Qlog.QlogCommonFields.QlogCommonFields() -> void
+Incursa.Qlog.QlogCommonFields.Tuple.get -> string?
+Incursa.Qlog.QlogCommonFields.Tuple.set -> void
+Incursa.Qlog.QlogCommonFields.TimeFormat.get -> string?
+Incursa.Qlog.QlogCommonFields.TimeFormat.set -> void
+Incursa.Qlog.QlogCommonFields.ReferenceTime.get -> Incursa.Qlog.QlogReferenceTime?
+Incursa.Qlog.QlogCommonFields.ReferenceTime.set -> void
+Incursa.Qlog.QlogCommonFields.GroupId.get -> string?
+Incursa.Qlog.QlogCommonFields.GroupId.set -> void
+Incursa.Qlog.QlogCommonFields.ExtensionData.get -> System.Collections.Generic.IDictionary<string!, Incursa.Qlog.QlogValue>!
+Incursa.Qlog.QlogEvent
+Incursa.Qlog.QlogEvent.QlogEvent() -> void
+Incursa.Qlog.QlogEvent.Time.get -> double
+Incursa.Qlog.QlogEvent.Time.set -> void
+Incursa.Qlog.QlogEvent.Name.get -> string!
+Incursa.Qlog.QlogEvent.Name.set -> void
+Incursa.Qlog.QlogEvent.Data.get -> System.Collections.Generic.IDictionary<string!, Incursa.Qlog.QlogValue>!
+Incursa.Qlog.QlogEvent.Tuple.get -> string?
+Incursa.Qlog.QlogEvent.Tuple.set -> void
+Incursa.Qlog.QlogEvent.TimeFormat.get -> string?
+Incursa.Qlog.QlogEvent.TimeFormat.set -> void
+Incursa.Qlog.QlogEvent.GroupId.get -> string?
+Incursa.Qlog.QlogEvent.GroupId.set -> void
+Incursa.Qlog.QlogEvent.SystemInfo.get -> System.Collections.Generic.IDictionary<string!, Incursa.Qlog.QlogValue>?
+Incursa.Qlog.QlogEvent.SystemInfo.set -> void
+Incursa.Qlog.QlogEvent.ExtensionData.get -> System.Collections.Generic.IDictionary<string!, Incursa.Qlog.QlogValue>!
+Incursa.Qlog.QlogFile
+Incursa.Qlog.QlogFile.QlogFile() -> void
+Incursa.Qlog.QlogFile.FileSchema.get -> System.Uri!
+Incursa.Qlog.QlogFile.FileSchema.set -> void
+Incursa.Qlog.QlogFile.SerializationFormat.get -> string!
+Incursa.Qlog.QlogFile.SerializationFormat.set -> void
+Incursa.Qlog.QlogFile.Title.get -> string?
+Incursa.Qlog.QlogFile.Title.set -> void
+Incursa.Qlog.QlogFile.Description.get -> string?
+Incursa.Qlog.QlogFile.Description.set -> void
+Incursa.Qlog.QlogFile.Traces.get -> System.Collections.Generic.IList<Incursa.Qlog.QlogTraceComponent!>!
+Incursa.Qlog.QlogFile.ExtensionData.get -> System.Collections.Generic.IDictionary<string!, Incursa.Qlog.QlogValue>!
+Incursa.Qlog.QlogKnownValues
+static Incursa.Qlog.QlogKnownValues.ContainedFileSchemaUri.get -> System.Uri!
+static Incursa.Qlog.QlogKnownValues.SequentialFileSchemaUri.get -> System.Uri!
+const Incursa.Qlog.QlogKnownValues.ContainedJsonSerializationFormat = "application/qlog+json" -> string!
+const Incursa.Qlog.QlogKnownValues.SequentialJsonTextSequencesSerializationFormat = "application/qlog+json-seq" -> string!
+const Incursa.Qlog.QlogKnownValues.RelativeToEpochTimeFormat = "relative_to_epoch" -> string!
+const Incursa.Qlog.QlogKnownValues.RelativeToPreviousEventTimeFormat = "relative_to_previous_event" -> string!
+const Incursa.Qlog.QlogKnownValues.SystemClockType = "system" -> string!
+const Incursa.Qlog.QlogKnownValues.MonotonicClockType = "monotonic" -> string!
+const Incursa.Qlog.QlogKnownValues.UnknownEpoch = "unknown" -> string!
+const Incursa.Qlog.QlogKnownValues.ClientVantagePoint = "client" -> string!
+const Incursa.Qlog.QlogKnownValues.ServerVantagePoint = "server" -> string!
+const Incursa.Qlog.QlogKnownValues.NetworkVantagePoint = "network" -> string!
+const Incursa.Qlog.QlogKnownValues.UnknownVantagePoint = "unknown" -> string!
+Incursa.Qlog.QlogReferenceTime
+Incursa.Qlog.QlogReferenceTime.QlogReferenceTime() -> void
+Incursa.Qlog.QlogReferenceTime.ClockType.get -> string!
+Incursa.Qlog.QlogReferenceTime.ClockType.set -> void
+Incursa.Qlog.QlogReferenceTime.Epoch.get -> string!
+Incursa.Qlog.QlogReferenceTime.Epoch.set -> void
+Incursa.Qlog.QlogReferenceTime.WallClockTime.get -> string?
+Incursa.Qlog.QlogReferenceTime.WallClockTime.set -> void
+Incursa.Qlog.QlogReferenceTime.ExtensionData.get -> System.Collections.Generic.IDictionary<string!, Incursa.Qlog.QlogValue>!
+Incursa.Qlog.QlogTrace
+Incursa.Qlog.QlogTrace.QlogTrace() -> void
+Incursa.Qlog.QlogTrace.Title.get -> string?
+Incursa.Qlog.QlogTrace.Title.set -> void
+Incursa.Qlog.QlogTrace.Description.get -> string?
+Incursa.Qlog.QlogTrace.Description.set -> void
+Incursa.Qlog.QlogTrace.CommonFields.get -> Incursa.Qlog.QlogCommonFields?
+Incursa.Qlog.QlogTrace.CommonFields.set -> void
+Incursa.Qlog.QlogTrace.VantagePoint.get -> Incursa.Qlog.QlogVantagePoint?
+Incursa.Qlog.QlogTrace.VantagePoint.set -> void
+Incursa.Qlog.QlogTrace.EventSchemas.get -> System.Collections.Generic.IList<System.Uri!>!
+Incursa.Qlog.QlogTrace.Events.get -> System.Collections.Generic.IList<Incursa.Qlog.QlogEvent!>!
+Incursa.Qlog.QlogTraceComponent
+Incursa.Qlog.QlogTraceComponent.QlogTraceComponent() -> void
+Incursa.Qlog.QlogTraceComponent.ExtensionData.get -> System.Collections.Generic.IDictionary<string!, Incursa.Qlog.QlogValue>!
+Incursa.Qlog.QlogTraceError
+Incursa.Qlog.QlogTraceError.QlogTraceError() -> void
+Incursa.Qlog.QlogTraceError.ErrorDescription.get -> string!
+Incursa.Qlog.QlogTraceError.ErrorDescription.set -> void
+Incursa.Qlog.QlogTraceError.Uri.get -> string?
+Incursa.Qlog.QlogTraceError.Uri.set -> void
+Incursa.Qlog.QlogTraceError.VantagePoint.get -> Incursa.Qlog.QlogVantagePoint?
+Incursa.Qlog.QlogTraceError.VantagePoint.set -> void
+Incursa.Qlog.QlogValue
+static Incursa.Qlog.QlogValue.Null.get -> Incursa.Qlog.QlogValue
+Incursa.Qlog.QlogValue.Kind.get -> Incursa.Qlog.QlogValueKind
+static Incursa.Qlog.QlogValue.Parse(string! json) -> Incursa.Qlog.QlogValue
+static Incursa.Qlog.QlogValue.FromString(string! value) -> Incursa.Qlog.QlogValue
+static Incursa.Qlog.QlogValue.FromBoolean(bool value) -> Incursa.Qlog.QlogValue
+static Incursa.Qlog.QlogValue.FromNumber(long value) -> Incursa.Qlog.QlogValue
+static Incursa.Qlog.QlogValue.FromNumber(double value) -> Incursa.Qlog.QlogValue
+static Incursa.Qlog.QlogValue.FromNumber(ulong value) -> Incursa.Qlog.QlogValue
+static Incursa.Qlog.QlogValue.FromObject(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, Incursa.Qlog.QlogValue>>! properties) -> Incursa.Qlog.QlogValue
+static Incursa.Qlog.QlogValue.FromArray(System.Collections.Generic.IEnumerable<Incursa.Qlog.QlogValue>! values) -> Incursa.Qlog.QlogValue
+Incursa.Qlog.QlogValue.ToJson() -> string!
+override Incursa.Qlog.QlogValue.ToString() -> string!
+override Incursa.Qlog.QlogValue.Equals(object? obj) -> bool
+Incursa.Qlog.QlogValue.Equals(Incursa.Qlog.QlogValue other) -> bool
+override Incursa.Qlog.QlogValue.GetHashCode() -> int
+Incursa.Qlog.QlogValueKind
+Incursa.Qlog.QlogValueKind.Null = 0 -> Incursa.Qlog.QlogValueKind
+Incursa.Qlog.QlogValueKind.Boolean = 1 -> Incursa.Qlog.QlogValueKind
+Incursa.Qlog.QlogValueKind.Number = 2 -> Incursa.Qlog.QlogValueKind
+Incursa.Qlog.QlogValueKind.String = 3 -> Incursa.Qlog.QlogValueKind
+Incursa.Qlog.QlogValueKind.Object = 4 -> Incursa.Qlog.QlogValueKind
+Incursa.Qlog.QlogValueKind.Array = 5 -> Incursa.Qlog.QlogValueKind
+Incursa.Qlog.QlogVantagePoint
+Incursa.Qlog.QlogVantagePoint.QlogVantagePoint() -> void
+Incursa.Qlog.QlogVantagePoint.Name.get -> string?
+Incursa.Qlog.QlogVantagePoint.Name.set -> void
+Incursa.Qlog.QlogVantagePoint.Type.get -> string!
+Incursa.Qlog.QlogVantagePoint.Type.set -> void
+Incursa.Qlog.QlogVantagePoint.Flow.get -> string?
+Incursa.Qlog.QlogVantagePoint.Flow.set -> void
+Incursa.Qlog.QlogVantagePoint.ExtensionData.get -> System.Collections.Generic.IDictionary<string!, Incursa.Qlog.QlogValue>!
+Incursa.Qlog.Serialization.Json.QlogJsonSerializer
+static Incursa.Qlog.Serialization.Json.QlogJsonSerializer.Serialize(Incursa.Qlog.QlogFile! file, bool indented = false) -> string!
+static Incursa.Qlog.Serialization.Json.QlogJsonSerializer.Serialize(System.IO.Stream! stream, Incursa.Qlog.QlogFile! file, bool indented = false) -> void
+static Incursa.Qlog.Serialization.Json.QlogJsonSerializer.Deserialize(string! json) -> Incursa.Qlog.QlogFile!
+static Incursa.Qlog.Serialization.Json.QlogJsonSerializer.Deserialize(System.IO.Stream! stream) -> Incursa.Qlog.QlogFile!
+Incursa.Qlog.Serialization.Json.QlogJsonTextSequenceSerializer
+static Incursa.Qlog.Serialization.Json.QlogJsonTextSequenceSerializer.Serialize(Incursa.Qlog.QlogFile! file, bool indented = false) -> string!
+static Incursa.Qlog.Serialization.Json.QlogJsonTextSequenceSerializer.Serialize(System.IO.Stream! stream, Incursa.Qlog.QlogFile! file, bool indented = false) -> void

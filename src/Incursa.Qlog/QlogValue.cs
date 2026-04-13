@@ -92,6 +92,50 @@ public readonly struct QlogValue : IEquatable<QlogValue>
     public static QlogValue FromNumber(ulong value) => CreateValue(writer => writer.WriteNumberValue(value));
 
     /// <summary>
+    /// Creates a qlog object value from property pairs.
+    /// </summary>
+    /// <param name="properties">The properties to write in order.</param>
+    /// <returns>The created qlog value.</returns>
+    public static QlogValue FromObject(IEnumerable<KeyValuePair<string, QlogValue>> properties)
+    {
+        ArgumentNullException.ThrowIfNull(properties);
+
+        return CreateValue(writer =>
+        {
+            writer.WriteStartObject();
+            foreach (KeyValuePair<string, QlogValue> property in properties)
+            {
+                ArgumentNullException.ThrowIfNull(property.Key);
+                writer.WritePropertyName(property.Key);
+                property.Value.WriteTo(writer);
+            }
+
+            writer.WriteEndObject();
+        });
+    }
+
+    /// <summary>
+    /// Creates a qlog array value from child values.
+    /// </summary>
+    /// <param name="values">The values to write in order.</param>
+    /// <returns>The created qlog value.</returns>
+    public static QlogValue FromArray(IEnumerable<QlogValue> values)
+    {
+        ArgumentNullException.ThrowIfNull(values);
+
+        return CreateValue(writer =>
+        {
+            writer.WriteStartArray();
+            foreach (QlogValue value in values)
+            {
+                value.WriteTo(writer);
+            }
+
+            writer.WriteEndArray();
+        });
+    }
+
+    /// <summary>
     /// Returns the JSON text for the carried value.
     /// </summary>
     /// <returns>The JSON representation.</returns>

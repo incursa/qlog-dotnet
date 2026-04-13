@@ -6,6 +6,10 @@ namespace Incursa.Qlog.Serialization.Json;
 /// <summary>
 /// Serializes sequential qlog JSON Text Sequences artifacts for the draft sequential file slice.
 /// </summary>
+/// <remarks>
+/// Sequential qlog files contain a single trace header record followed by zero or more event records. Use this
+/// serializer only when the file schema and media type are the sequential qlog values from <see cref="QlogKnownValues"/>.
+/// </remarks>
 public static class QlogJsonTextSequenceSerializer
 {
     private const byte RecordSeparator = 0x1E;

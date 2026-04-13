@@ -4,19 +4,29 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <NoWarn>$(NoWarn);1591</NoWarn>
+    <NoWarn>$(NoWarn);1591;RS0026;RS0027;RS0059;RS0060</NoWarn>
     <IsPackable>true</IsPackable>
     <IsTrimmable>true</IsTrimmable>
     <IsAotCompatible>true</IsAotCompatible>
+    <PackageId>Incursa.Qlog</PackageId>
     <AssemblyName>Incursa.Qlog</AssemblyName>
     <RootNamespace>Incursa.Qlog</RootNamespace>
-    <Description>Core qlog library for Incursa.</Description>
+    <Description>Core qlog models, serializers, and value infrastructure for contained and sequential JSON artifacts.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>qlog;diagnostics;telemetry;networking</PackageTags>
+    <PackageTags>qlog;json;serialization;diagnostics;telemetry;networking</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="PublicAPI.Shipped.txt" />
+    <AdditionalFiles Include="PublicAPI.Unshipped.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
