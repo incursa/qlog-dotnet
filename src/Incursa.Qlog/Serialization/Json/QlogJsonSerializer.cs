@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using Incursa.Qlog.Serialization;
 
 namespace Incursa.Qlog.Serialization.Json;
 
@@ -38,10 +39,10 @@ public static class QlogJsonSerializer
         ArgumentNullException.ThrowIfNull(stream);
         ArgumentNullException.ThrowIfNull(file);
 
-        QlogJsonSerializationHelpers.ValidateContainedFile(file);
+        QlogSerializationCore.ValidateContainedFile(file);
 
         using Utf8JsonWriter writer = new(stream, QlogJsonSerializationHelpers.CreateWriterOptions(indented));
-        QlogJsonSerializationHelpers.WriteContainedFile(writer, file);
+        QlogSerializationCore.WriteContainedFile(writer, file);
         writer.Flush();
     }
 
@@ -106,7 +107,7 @@ public static class QlogJsonSerializer
             }
         }
 
-        QlogJsonSerializationHelpers.ValidateContainedFile(file);
+        QlogSerializationCore.ValidateContainedFile(file);
         return file;
     }
 

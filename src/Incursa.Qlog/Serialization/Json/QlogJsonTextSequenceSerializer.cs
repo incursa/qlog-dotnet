@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using Incursa.Qlog.Serialization;
 
 namespace Incursa.Qlog.Serialization.Json;
 
@@ -40,14 +41,14 @@ public static class QlogJsonTextSequenceSerializer
         ArgumentNullException.ThrowIfNull(stream);
         ArgumentNullException.ThrowIfNull(file);
 
-        QlogJsonSerializationHelpers.ValidateSequentialFile(file);
+        QlogSerializationCore.ValidateSequentialFile(file);
 
-        WriteRecord(stream, writer => QlogJsonSerializationHelpers.WriteSequentialFileHeader(writer, file), indented);
+        WriteRecord(stream, writer => QlogSerializationCore.WriteSequentialFileHeader(writer, file), indented);
 
         QlogTrace trace = (QlogTrace)file.Traces[0];
         foreach (QlogEvent qlogEvent in trace.Events)
         {
-            WriteRecord(stream, writer => QlogJsonSerializationHelpers.WriteEvent(writer, qlogEvent), indented);
+            WriteRecord(stream, writer => QlogSerializationCore.WriteEvent(writer, qlogEvent), indented);
         }
     }
 
