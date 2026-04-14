@@ -16,12 +16,22 @@ public static class QlogJsonTextSequenceSerializer
     private const byte RecordSeparator = 0x1E;
 
     /// <summary>
+    /// Serializes a sequential qlog file to a JSON Text Sequences string without indentation.
+    /// </summary>
+    /// <param name="file">The file to serialize.</param>
+    /// <returns>The serialized JSON Text Sequences text.</returns>
+    public static string Serialize(QlogFile file)
+    {
+        return Serialize(file, indented: false);
+    }
+
+    /// <summary>
     /// Serializes a sequential qlog file to a JSON Text Sequences string.
     /// </summary>
     /// <param name="file">The file to serialize.</param>
     /// <param name="indented">Indicates whether the output should be indented.</param>
     /// <returns>The serialized JSON Text Sequences text.</returns>
-    public static string Serialize(QlogFile file, bool indented = false)
+    public static string Serialize(QlogFile file, bool indented)
     {
         ArgumentNullException.ThrowIfNull(file);
 
@@ -36,7 +46,7 @@ public static class QlogJsonTextSequenceSerializer
     /// <param name="stream">The destination stream.</param>
     /// <param name="file">The file to serialize.</param>
     /// <param name="indented">Indicates whether the output should be indented.</param>
-    public static void Serialize(Stream stream, QlogFile file, bool indented = false)
+    public static void Serialize(Stream stream, QlogFile file, bool indented)
     {
         ArgumentNullException.ThrowIfNull(stream);
         ArgumentNullException.ThrowIfNull(file);

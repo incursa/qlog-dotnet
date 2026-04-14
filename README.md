@@ -92,6 +92,27 @@ string json = QlogJsonSerializer.Serialize(file, indented: true);
 - `specs/generated/qlog`: provenance, scope, and implementation-slice notes for the draft source material
 - `docs/requirements-workflow.md`: the repo-local SpecTrace workflow note
 - `scripts/Refresh-QlogDraftSources.ps1`: refresh the draft snapshots and source manifest
+- `scripts/setup-git-hooks.ps1`: configure Git to use the repo-local hook scripts
+- `scripts/release/Invoke-ReleaseVersioning.ps1`: compute, apply, and publish release version bumps
+- `scripts/release/validate-public-api-versioning.ps1`: validate shipped public API baselines against a release tag
+
+## Tooling
+
+The repository includes the same release-hardening helpers used by the other Incursa .NET repos:
+
+- `.pre-commit-config.yaml` wires up repo-local checks for formatting, JSON/YAML/XML validity, SpecTrace JSON validation, and release smoke checks.
+- `.githooks/pre-commit` and `.githooks/pre-push` invoke `pre-commit` through the repo-local hook path.
+- `.github/workflows/ci.yml` runs restore, build, validation, tests, and packing on every branch push and pull request.
+- `.github/workflows/publish-nuget-packages.yml` publishes `v*.*.*` releases or manually supplied versions after validating the public API baseline policy.
+
+To install the local hook path after cloning:
+
+```bash
+pwsh scripts/setup-git-hooks.ps1
+python -m pip install pre-commit
+```
+
+The current public release line starts at `1.0.6`.
 
 ## Build
 

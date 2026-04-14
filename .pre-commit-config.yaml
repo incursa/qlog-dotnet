@@ -1,0 +1,65 @@
+default_language_version:
+  python: python3
+
+minimum_pre_commit_version: "4.0.0"
+default_stages: [pre-commit]
+
+exclude: |
+  (?x)(
+    ^artifacts/|
+    ^src/.+/bin/|
+    ^src/.+/obj/|
+    ^tests/.+/bin/|
+    ^tests/.+/obj/|
+    ^.vs/
+  )
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        files: "(?i)\\.(md|markdown|mdx|ya?ml|json|ps1|sh|cmd|bat|csproj|slnx?|props|targets|config|editorconfig|txt)$"
+        exclude: "^src/.+\\.(json|md)$"
+      - id: end-of-file-fixer
+        files: "(?i)\\.(md|markdown|mdx|ya?ml|json|ps1|sh|cmd|bat|csproj|slnx?|props|targets|config|editorconfig|txt)$"
+        exclude: "^src/.+\\.(json|md)$"
+      - id: check-yaml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=5120"]
+      - id: detect-private-key
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+        files: "(?i)\\.(cs|csproj|sln|slnx|props|targets|md|markdown|mdx|ya?ml|json|ps1|sh|cmd|bat|config|editorconfig|txt)$"
+      - id: check-xml
+
+  - repo: local
+    hooks:
+      - id: validate-spec-trace-json
+        name: validate qlog SpecTrace JSON
+        language: system
+        entry: pwsh -NoProfile -File scripts/Validate-SpecTraceJson.ps1
+        stages: [pre-commit, manual]
+        files: "(?i)^(specs/(requirements|architecture|work-items|verification)/qlog/.+\\.json|scripts/Validate-SpecTraceJson\\.ps1)$"
+        pass_filenames: false
+      - id: dotnet-format
+        name: dotnet format (manual baseline)
+        language: system
+        entry: >
+          pwsh -NoProfile -Command
+          "dotnet format Incursa.Qlog.slnx"
+        stages: [manual]
+        files: "(?i)\\.(cs|csproj|sln|slnx|props|targets)$"
+        pass_filenames: false
+      - id: dotnet-test
+        name: dotnet test (pre-push)
+        language: system
+        entry: >
+          pwsh -NoProfile -Command
+          "dotnet test Incursa.Qlog.slnx -c Release"
+        stages: [pre-push, manual]
+        files: "(?i)\\.(cs|csproj|sln|slnx|props|targets|json|ya?ml|ps1)$"
+        pass_filenames: false

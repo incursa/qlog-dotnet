@@ -80,7 +80,7 @@ public sealed class ConsumerSmokeExamples
         string containedJson;
         using (MemoryStream containedStream = new())
         {
-            QlogJsonSerializer.Serialize(containedStream, containedFile);
+            QlogJsonSerializer.Serialize(containedStream, containedFile, indented: false);
             containedJson = Encoding.UTF8.GetString(containedStream.ToArray());
         }
 
@@ -96,7 +96,7 @@ public sealed class ConsumerSmokeExamples
         string sequentialJsonTextSequence;
         using (MemoryStream sequentialStream = new())
         {
-            QlogJsonTextSequenceSerializer.Serialize(sequentialStream, sequentialFile);
+            QlogJsonTextSequenceSerializer.Serialize(sequentialStream, sequentialFile, indented: false);
             sequentialJsonTextSequence = Encoding.UTF8.GetString(sequentialStream.ToArray());
         }
 

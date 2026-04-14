@@ -14,12 +14,22 @@ namespace Incursa.Qlog.Serialization.Json;
 public static class QlogJsonSerializer
 {
     /// <summary>
+    /// Serializes a contained qlog file to a JSON string without indentation.
+    /// </summary>
+    /// <param name="file">The file to serialize.</param>
+    /// <returns>The serialized JSON text.</returns>
+    public static string Serialize(QlogFile file)
+    {
+        return Serialize(file, indented: false);
+    }
+
+    /// <summary>
     /// Serializes a contained qlog file to a JSON string.
     /// </summary>
     /// <param name="file">The file to serialize.</param>
     /// <param name="indented">Indicates whether the output should be indented.</param>
     /// <returns>The serialized JSON text.</returns>
-    public static string Serialize(QlogFile file, bool indented = false)
+    public static string Serialize(QlogFile file, bool indented)
     {
         ArgumentNullException.ThrowIfNull(file);
 
@@ -34,7 +44,7 @@ public static class QlogJsonSerializer
     /// <param name="stream">The destination stream.</param>
     /// <param name="file">The file to serialize.</param>
     /// <param name="indented">Indicates whether the output should be indented.</param>
-    public static void Serialize(Stream stream, QlogFile file, bool indented = false)
+    public static void Serialize(Stream stream, QlogFile file, bool indented)
     {
         ArgumentNullException.ThrowIfNull(stream);
         ArgumentNullException.ThrowIfNull(file);
