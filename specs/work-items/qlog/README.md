@@ -12,7 +12,7 @@ workbench:
 This directory holds qlog implementation planning artifacts.
 Each canonical artifact is authored in `.json`.
 
-## Current Artifacts
+## Artifacts
 
 - [`WI-QLOG-BASELINE-0001.json`](WI-QLOG-BASELINE-0001.json): umbrella qlog v1 implementation plan
 - [`WI-QLOG-CORE-0001.json`](WI-QLOG-CORE-0001.json): contained core model and JSON writer work item
@@ -24,4 +24,4 @@ Each canonical artifact is authored in `.json`.
 ## Notes
 
 - Keep work items descriptive of delivery work, not of the normative requirement text itself.
-- The sequential qlog slice now exists as a bounded serializer/envelope boundary over the contained JSON model.
+- The sequential qlog slice uses a bounded serializer and envelope boundary over the contained JSON model.

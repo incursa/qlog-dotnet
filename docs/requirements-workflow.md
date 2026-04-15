@@ -5,7 +5,7 @@ This note captures the working order for draft-driven qlog work in `Incursa.Qlog
 ## Order Of Operations
 
 1. Capture the source material.
-   - Use the draft main-schema and draft quic-events documents as the current source set.
+   - Use the draft main-schema and draft quic-events documents as the recorded source set.
    - Record provenance and the first-scope boundary in `specs/generated/qlog/source-provenance.md` and `specs/generated/qlog/scope-boundary.md`.
    - Refresh the local snapshots and hash manifest with `scripts/Refresh-QlogDraftSources.ps1` when the upstream drafts change.
 2. Draft the smallest stable requirement slice.

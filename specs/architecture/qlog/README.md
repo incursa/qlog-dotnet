@@ -12,11 +12,11 @@ workbench:
 This directory holds the qlog design artifact(s) for the implementation plan.
 Each canonical artifact is authored in `.json`.
 
-## Current Artifacts
+## Artifacts
 
 - [`ARC-QLOG-BASELINE-0001.json`](ARC-QLOG-BASELINE-0001.json): canonical qlog v1 architecture and implementation boundary
 
 ## Notes
 
 - Keep the design layer focused on satisfaction paths, invariants, and tradeoffs.
-- The current architecture remains draft-aware and keeps sequential `JSON Text Sequences` as a bounded serializer slice over the shared qlog model.
+- The architecture stays draft-aware and keeps sequential `JSON Text Sequences` as a bounded serializer slice over the shared qlog model.

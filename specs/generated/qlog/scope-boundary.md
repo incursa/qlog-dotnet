@@ -30,11 +30,11 @@ start implementation work without absorbing a QUIC-sized backlog.
 - The source material is draft-state and still moving.
 - The repository needs a stable implementation plan before code starts.
 - Keeping the first pass small enough to reason about makes later requirement-by-requirement work tractable.
-- The current corpus only justifies JSON and JSON Text Sequences, so a general multi-format serializer abstraction would add complexity before there is a second format to exercise it.
+- The recorded corpus only justifies JSON and JSON Text Sequences, so a general multi-format serializer abstraction would add complexity before there is a second format to exercise it.
 
 ## Slice Order
 
-The current implementation plan is summarized in
+The implementation plan is summarized in
 [`implementation-slices.md`](implementation-slices.md).
 The intended order is core model and envelope first, then QUIC vocabulary
 foundation, then transport activity, then migration/recovery state, and only

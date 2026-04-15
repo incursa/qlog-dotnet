@@ -2,7 +2,7 @@
 
 This directory contains derived support material for qlog requirements work.
 
-## Current Notes
+## Contents
 
 - [`source-provenance.md`](source-provenance.md): draft source documents, versions, and extraction notes
 - [`scope-boundary.md`](scope-boundary.md): the initial scope boundary for the qlog baseline

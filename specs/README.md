@@ -8,6 +8,6 @@ This directory is the home for requirements-driven qlog work in `Incursa.Qlog`.
 - `specs/architecture/qlog`: design artifacts that explain how the requirements will be satisfied
 - `specs/work-items/qlog`: implementation planning artifacts tied to the requirements and architecture
 - `specs/verification/qlog`: verification planning artifacts tied to the same corpus
-- `specs/generated/qlog`: derived provenance, scope, and future triage notes
+- `specs/generated/qlog`: derived provenance, scope, and supporting planning notes
 - `specs/templates`: local guidance for authoring new SpecTrace artifacts
 - `specs/schemas`: local guidance for schema and validation support

@@ -1,6 +1,6 @@
 # Qlog Implementation Slices
 
-This note groups the current qlog requirement baseline into a bounded v1
+This note groups the recorded qlog requirement baseline into a bounded v1
 implementation sequence.
 The recorded source drafts remain work-in-progress Internet-Drafts, so the
 slice boundaries are planning guidance rather than frozen protocol truth.

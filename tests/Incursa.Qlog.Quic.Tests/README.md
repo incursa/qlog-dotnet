@@ -1,6 +1,6 @@
 # Incursa.Qlog.Quic.Tests
 
-[`Incursa.Qlog.Quic.Tests`](../../README.md) is the dedicated requirement-homed test project for the QUIC qlog slices.
+[`Incursa.Qlog.Quic.Tests`](../../README.md) is the requirement-homed test project for the `Incursa.Qlog.Quic` package.
 
 ## Run
 
@@ -8,8 +8,8 @@
 dotnet test tests/Incursa.Qlog.Quic.Tests/Incursa.Qlog.Quic.Tests.csproj
 ```
 
-## Status
+## Scope
 
-- The project carries requirement-homed tests for the QUIC lifecycle / negotiation slice, the QUIC transport activity slice, and the QUIC migration / recovery slice.
-- Core qlog coverage remains in `tests/Incursa.Qlog.Tests`.
-- Future test work should still be driven by `specs/verification/qlog`.
+- Covers the QUIC lifecycle, negotiation, transport activity, and state/recovery slices traced in `specs/verification/qlog`.
+- Leaves core qlog coverage in `tests/Incursa.Qlog.Tests`.
+- Extends only when the linked verification artifacts expand or change.

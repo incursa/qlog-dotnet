@@ -58,5 +58,5 @@ string json = QlogJsonSerializer.Serialize(file, indented: true);
 ## Notes
 
 - The package depends on `Incursa.Qlog` for the core qlog model, contained JSON serializer, and generic value infrastructure.
-- The current surface is intentionally bounded to the implemented QUIC event families in this repository.
+- The package surface is intentionally bounded to the implemented QUIC event families in this repository.
 - Repository details and scope notes live at `https://github.com/incursa/qlog-dotnet`.

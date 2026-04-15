@@ -12,7 +12,7 @@ workbench:
 This directory holds the qlog verification artifacts for the implementation plan.
 Each canonical artifact is authored in `.json`.
 
-## Current Artifacts
+## Artifacts
 
 - [`VER-QLOG-BASELINE-0001.json`](VER-QLOG-BASELINE-0001.json): umbrella qlog v1 verification plan
 - [`VER-QLOG-CORE-0001.json`](VER-QLOG-CORE-0001.json): contained core model verification shell
@@ -25,4 +25,4 @@ Each canonical artifact is authored in `.json`.
 
 - Keep verification artifacts homogeneous in status.
 - Split artifacts when the requirements they cover do not share the same outcome.
-- The sequential verification artifact now tracks the implemented serializer boundary.
+- The sequential verification artifact tracks the serializer boundary for the sequential format.

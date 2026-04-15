@@ -1,109 +1,74 @@
 # Incursa.Qlog
 
-`Incursa.Qlog` is the core qlog model and serializer package for Incursa. `Incursa.Qlog.Quic` layers the bounded QUIC vocabulary and event builders on top of that core.
+[![CI](https://github.com/incursa/qlog-dotnet/actions/workflows/ci.yml/badge.svg)](https://github.com/incursa/qlog-dotnet/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/incursa/qlog-dotnet)](LICENSE)
 
-Use `Incursa.Qlog` when you need:
+`Incursa.Qlog` is a .NET qlog library set with a requirements-driven repository. It includes the packable core qlog package, the bounded QUIC companion package, and the SpecTrace corpus that defines the repository scope.
 
-- qlog file, trace, event, and extension-data models
-- contained qlog JSON serialization
-- sequential qlog JSON Text Sequences serialization
+## Packages
 
-Use `Incursa.Qlog.Quic` when you also need:
+- [`Incursa.Qlog`](src/Incursa.Qlog/README.md): core qlog models, common fields, value infrastructure, and JSON serializers for contained and sequential artifacts.
+- [`Incursa.Qlog.Quic`](src/Incursa.Qlog.Quic/README.md): bounded QUIC vocabulary, payloads, schema registration, and event builders built on `Incursa.Qlog`.
 
-- QUIC-specific qlog event builders
-- draft QUIC schema registration for traces
-- bounded QUIC constants and payload types
+## Scope
 
-## Contained vs Sequential
+- qlog file, trace, event, vantage-point, reference-time, and extension-data models
+- contained JSON serialization and sequential JSON Text Sequences serialization
+- QUIC draft event vocabulary and helper types that map to the scoped requirements corpus
+- requirements, architecture, work items, verification, and provenance notes under `specs/`
+- excludes broader protocol vocabularies, transports, and additional qlog serialization families until the requirements corpus adds them
 
-- Contained JSON is the default qlog envelope shape. Use it when you want a single file with a `traces` array.
-- Sequential JSON Text Sequences is the draft sequential, stream-oriented format. Use it when you want one trace header record followed by event records.
-- These are the only first-class serialization families in this repository today. Other qlog formats, including non-JSON encodings, stay deferred until the requirement corpus explicitly adds them.
+## Install
 
-## Minimal Core Example
+Install the core package when you need the qlog model and serializers:
 
-```csharp
-using System;
-using Incursa.Qlog;
-using Incursa.Qlog.Serialization.Json;
-
-QlogFile file = new();
-QlogTrace trace = new()
-{
-    Title = "Example trace",
-    Description = "A small contained qlog example.",
-    VantagePoint = new QlogVantagePoint
-    {
-        Type = QlogKnownValues.ClientVantagePoint,
-    },
-};
-
-trace.EventSchemas.Add(new Uri("urn:ietf:params:qlog:events:example"));
-trace.Events.Add(new QlogEvent
-{
-    Time = 0,
-    Name = "example:connection_started",
-});
-
-file.Traces.Add(trace);
-
-string containedJson = QlogJsonSerializer.Serialize(file, indented: true);
-QlogFile sequentialFile = new()
-{
-    FileSchema = QlogKnownValues.SequentialFileSchemaUri,
-    SerializationFormat = QlogKnownValues.SequentialJsonTextSequencesSerializationFormat,
-};
-sequentialFile.Traces.Add(trace);
-
-string sequentialJsonTextSequence = QlogJsonTextSequenceSerializer.Serialize(sequentialFile, indented: true);
+```bash
+dotnet add package Incursa.Qlog
 ```
 
-## Minimal QUIC Example
+Add the QUIC package when you also need the scoped QUIC vocabulary:
 
-```csharp
-using Incursa.Qlog;
-using Incursa.Qlog.Quic;
-using Incursa.Qlog.Serialization.Json;
-
-QlogTrace trace = new();
-QlogQuicEvents.RegisterDraftSchema(trace);
-trace.Events.Add(QlogQuicEvents.CreateServerListening(0, new QuicServerListening
-{
-    IpV4 = "203.0.113.1",
-    PortV4 = 443,
-}));
-
-QlogFile file = new();
-file.Traces.Add(trace);
-
-string json = QlogJsonSerializer.Serialize(file, indented: true);
+```bash
+dotnet add package Incursa.Qlog.Quic
 ```
+
+## Build
+
+```bash
+dotnet restore Incursa.Qlog.slnx
+dotnet build Incursa.Qlog.slnx -c Release
+dotnet test Incursa.Qlog.slnx -c Release
+dotnet pack src/Incursa.Qlog/Incursa.Qlog.csproj -c Release
+dotnet pack src/Incursa.Qlog.Quic/Incursa.Qlog.Quic.csproj -c Release
+```
+
+## Start Here
+
+- Core package guide: [`src/Incursa.Qlog/README.md`](src/Incursa.Qlog/README.md)
+- QUIC package guide: [`src/Incursa.Qlog.Quic/README.md`](src/Incursa.Qlog.Quic/README.md)
+- Requirements workflow: [`docs/requirements-workflow.md`](docs/requirements-workflow.md)
+- SpecTrace prep note: [`docs/spec-trace-prep.md`](docs/spec-trace-prep.md)
 
 ## Repository Layout
 
-- `src/Incursa.Qlog`: the packable core library project
-- `src/Incursa.Qlog.Quic`: the packable QUIC vocabulary and event-builder library
-- `tests/Incursa.Qlog.Tests`: the core requirement-homed test project
-- `tests/Incursa.Qlog.Quic.Tests`: the QUIC requirement-homed test project
-- `specs/requirements/qlog`: the canonical qlog requirements slice
-- `specs/architecture/qlog`: the qlog architecture baseline
-- `specs/work-items/qlog`: the qlog implementation planning slice
-- `specs/verification/qlog`: the qlog verification planning slice
-- `specs/generated/qlog`: provenance, scope, and implementation-slice notes for the draft source material
-- `docs/requirements-workflow.md`: the repo-local SpecTrace workflow note
-- `scripts/Refresh-QlogDraftSources.ps1`: refresh the draft snapshots and source manifest
-- `scripts/setup-git-hooks.ps1`: configure Git to use the repo-local hook scripts
-- `scripts/release/Invoke-ReleaseVersioning.ps1`: compute, apply, and publish release version bumps
-- `scripts/release/validate-public-api-versioning.ps1`: validate shipped public API baselines against a release tag
+- `src/Incursa.Qlog`: packable core library project
+- `src/Incursa.Qlog.Quic`: packable QUIC vocabulary and event-builder project
+- `tests/Incursa.Qlog.Tests`: requirement-homed tests for the core package
+- `tests/Incursa.Qlog.Quic.Tests`: requirement-homed tests for the QUIC package
+- `specs/requirements/qlog`: canonical qlog requirements slice
+- `specs/architecture/qlog`: qlog architecture artifacts
+- `specs/work-items/qlog`: implementation planning artifacts
+- `specs/verification/qlog`: verification artifacts
+- `specs/generated/qlog`: provenance, boundary, and derived planning support material
 
 ## Tooling
 
-The repository includes the same release-hardening helpers used by the other Incursa .NET repos:
-
-- `.pre-commit-config.yaml` wires up repo-local checks for formatting, JSON/YAML/XML validity, SpecTrace JSON validation, and release smoke checks.
+- `.pre-commit-config.yaml` wires up formatting, JSON/YAML/XML validation, SpecTrace validation, and release smoke checks.
 - `.githooks/pre-commit` and `.githooks/pre-push` invoke `pre-commit` through the repo-local hook path.
-- `.github/workflows/ci.yml` runs restore, build, validation, tests, and packing on every branch push and pull request.
-- `.github/workflows/publish-nuget-packages.yml` publishes `v*.*.*` releases or manually supplied versions after validating the public API baseline policy.
+- [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs restore, build, validation, tests, and packing on branch pushes and pull requests.
+- [`.github/workflows/publish-nuget-packages.yml`](.github/workflows/publish-nuget-packages.yml) validates public API release policy before packing and publishing tagged releases.
+- [`scripts/setup-git-hooks.ps1`](scripts/setup-git-hooks.ps1) configures Git to use the repo-local hook path.
+- [`scripts/Validate-SpecTraceJson.ps1`](scripts/Validate-SpecTraceJson.ps1) validates the canonical qlog SpecTrace corpus.
 
 To install the local hook path after cloning:
 
@@ -112,20 +77,12 @@ pwsh scripts/setup-git-hooks.ps1
 python -m pip install pre-commit
 ```
 
-The current public release line starts at `1.0.6`.
+## Contributing
 
-## Build
+- Keep names, namespaces, projects, and package metadata aligned to `Incursa.Qlog`.
+- Drive behavior changes from the owning artifacts under `specs/requirements/qlog` before expanding implementation scope.
+- Prefer durable repository documentation over time-sensitive progress notes in committed Markdown.
 
-```bash
-dotnet restore Incursa.Qlog.slnx
-dotnet build Incursa.Qlog.slnx
-dotnet test Incursa.Qlog.slnx
-dotnet pack src/Incursa.Qlog/Incursa.Qlog.csproj -c Release
-dotnet pack src/Incursa.Qlog.Quic/Incursa.Qlog.Quic.csproj -c Release
-```
+## License
 
-## Status
-
-- The first bounded qlog slices now exist: core model plus contained JSON serialization in `Incursa.Qlog`, and the QUIC lifecycle / negotiation plus transport activity vocabulary in `Incursa.Qlog.Quic`.
-- Sequential JSON Text Sequences is implemented as a separate serializer boundary in `Incursa.Qlog`.
-- The package boundary stays clean: `Incursa.Qlog` contains the core qlog model and serializers, while QUIC vocabulary and event builders live in `Incursa.Qlog.Quic`.
+MIT. See [`LICENSE`](LICENSE).

@@ -11,4 +11,4 @@ This directory holds repo-local helpers for canonical JSON-authored SpecTrace ar
 - Canonical SpecTrace artifacts are authored in `.json`, and the repository does not keep sibling canonical `.md` companions for those families.
 - The validator prefers the repo-local `model.schema.json` snapshot so CI and clean clones use the same contract as local development.
 - If the repo-local snapshot is absent, the validator falls back to a sibling `spec-trace` checkout and then the published schema URI.
-- The qlog repository does not yet carry the heavier generation and lane-running scripts from `quic-dotnet`.
+- The qlog repository keeps only the lightweight validation helpers it needs here; heavier generation and lane-running scripts remain out of scope unless the repo requires them.

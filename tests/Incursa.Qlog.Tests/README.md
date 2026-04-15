@@ -1,6 +1,6 @@
 # Incursa.Qlog.Tests
 
-[`Incursa.Qlog.Tests`](../../README.md) is the companion test project scaffold for the Incursa Qlog repository.
+[`Incursa.Qlog.Tests`](../../README.md) is the requirement-homed test project for the core `Incursa.Qlog` package.
 
 ## Run
 
@@ -8,9 +8,8 @@
 dotnet test tests/Incursa.Qlog.Tests/Incursa.Qlog.Tests.csproj
 ```
 
-## Status
+## Scope
 
-- The project now carries requirement-homed tests for the contained JSON core slice.
-- QUIC requirement-homed tests live in `tests/Incursa.Qlog.Quic.Tests`.
-- Requirement-homed tests now cover the sequential JSON Text Sequences slice.
-- Future test work should still be driven by `specs/verification/qlog`.
+- Covers the core qlog model and the contained and sequential JSON serializer behavior traced in `specs/verification/qlog`.
+- Keeps QUIC-specific coverage in `tests/Incursa.Qlog.Quic.Tests`.
+- Extends only when the linked verification artifacts expand or change.
