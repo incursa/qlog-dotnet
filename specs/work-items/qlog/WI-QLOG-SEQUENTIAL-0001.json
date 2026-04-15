@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "artifact_id": "WI-QLOG-SEQUENTIAL-0001",
   "artifact_type": "work_item",
   "title": "Qlog Sequential JSON Text Sequences Work Item",
@@ -32,3 +32,4 @@
   ],
   "verification_plan": "Run requirement-homed sequential serializer tests alongside the contained JSON regression coverage."
 }
+

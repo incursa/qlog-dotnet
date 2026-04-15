@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "artifact_id": "VER-QLOG-QUIC-0003",
   "artifact_type": "verification",
   "title": "Qlog QUIC Migration And Recovery Verification",
@@ -31,3 +31,4 @@
   ],
   "expected_result": "Migration, key lifecycle, recovery, and congestion payloads match the draft requirements and remain separate from packet and stream slices."
 }
+

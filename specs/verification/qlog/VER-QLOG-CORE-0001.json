@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "artifact_id": "VER-QLOG-CORE-0001",
   "artifact_type": "verification",
   "title": "Qlog Core Model Verification",
@@ -37,3 +37,4 @@
   ],
   "expected_result": "The core model validates, the contained writer emits the expected draft-shaped JSON, and the slice stays draft-aware without claiming sequential output."
 }
+

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "artifact_id": "ARC-QLOG-BASELINE-0001",
   "artifact_type": "architecture",
   "title": "Qlog Baseline Architecture",
@@ -81,3 +81,4 @@
     "Should future protocol vocabularies share this architecture slice or get their own baseline artifacts?"
   ]
 }
+

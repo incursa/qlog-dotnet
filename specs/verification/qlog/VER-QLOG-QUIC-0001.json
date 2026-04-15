@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "artifact_id": "VER-QLOG-QUIC-0001",
   "artifact_type": "verification",
   "title": "Qlog QUIC Vocabulary Foundation Verification",
@@ -32,3 +32,4 @@
   ],
   "expected_result": "The qlog QUIC namespace and lifecycle/negotiation payloads match the draft requirements and remain separate from packet, stream, and recovery slices."
 }
+

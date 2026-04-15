@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "related_artifacts": [
     "SPEC-QLOG-QUIC",
     "ARC-QLOG-BASELINE-0001",
@@ -288,3 +288,4 @@
     }
   ]
 }
+

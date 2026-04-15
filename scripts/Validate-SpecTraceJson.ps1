@@ -3,6 +3,7 @@ param(
     [string]$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [string[]]$Profiles = @('core'),
     [string]$SchemaUri = 'https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json',
+    [string]$RepoLocalSchemaPath = 'scripts/spec-trace/model.schema.json',
     [string]$JsonReportPath
 )
 
@@ -411,9 +412,24 @@ function Test-ReferenceExists {
 
 $resolvedRepoRoot = (Resolve-Path -LiteralPath $RepoRoot).Path
 $localSchemaPath = $null
-$candidateSchemaPath = Join-Path (Split-Path -Parent $resolvedRepoRoot) 'spec-trace/model/model.schema.json'
-if (Test-Path -LiteralPath $candidateSchemaPath) {
-    $localSchemaPath = (Resolve-Path -LiteralPath $candidateSchemaPath).Path
+$schemaSource = $SchemaUri
+$repoLocalSchemaFullPath = if ([System.IO.Path]::IsPathRooted($RepoLocalSchemaPath)) {
+    $RepoLocalSchemaPath
+}
+else {
+    Join-Path $resolvedRepoRoot $RepoLocalSchemaPath
+}
+
+if (Test-Path -LiteralPath $repoLocalSchemaFullPath) {
+    $localSchemaPath = (Resolve-Path -LiteralPath $repoLocalSchemaFullPath).Path
+    $schemaSource = $localSchemaPath
+}
+else {
+    $candidateSchemaPath = Join-Path (Split-Path -Parent $resolvedRepoRoot) 'spec-trace/model/model.schema.json'
+    if (Test-Path -LiteralPath $candidateSchemaPath) {
+        $localSchemaPath = (Resolve-Path -LiteralPath $candidateSchemaPath).Path
+        $schemaSource = $localSchemaPath
+    }
 }
 
 $schemaValidationAvailable = [bool](Get-Command Test-Json -ErrorAction SilentlyContinue)
@@ -616,6 +632,7 @@ if ($profiles -contains 'traceable') {
 $report = [ordered]@{
     repo_root      = $resolvedRepoRoot
     schema_uri     = $SchemaUri
+    schema_source  = $schemaSource
     profiles       = $profiles
     artifact_count = $jsonPaths.Count
     errors         = @($errors)

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "artifact_id": "WI-QLOG-QUIC-0003",
   "artifact_type": "work_item",
   "title": "Qlog QUIC Migration And Recovery Work Item",
@@ -33,3 +33,4 @@
   ],
   "verification_plan": "Run snapshot and contract tests for migration and recovery events and confirm the event contracts preserve draft-aware unknown-field behavior."
 }
+

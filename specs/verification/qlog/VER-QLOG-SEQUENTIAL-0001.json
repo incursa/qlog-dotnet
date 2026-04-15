@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "artifact_id": "VER-QLOG-SEQUENTIAL-0001",
   "artifact_type": "verification",
   "title": "Qlog Sequential JSON Text Sequences Verification",
@@ -28,3 +28,4 @@
   ],
   "expected_result": "Sequential qlog serialization passes the requirement-homed tests and the contained JSON baseline remains green."
 }
+

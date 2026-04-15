@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "artifact_id": "WI-QLOG-CORE-0001",
   "artifact_type": "work_item",
   "title": "Qlog Core Model And Contained JSON Writer Work Item",
@@ -39,3 +39,4 @@
   ],
   "verification_plan": "Run focused unit tests for the envelope and model contracts, contract or snapshot tests for contained JSON shapes, and the repo-local SpecTrace validator before widening to QUIC adapters."
 }
+

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "artifact_id": "VER-QLOG-QUIC-0002",
   "artifact_type": "verification",
   "title": "Qlog QUIC Transport Activity Verification",
@@ -31,3 +31,4 @@
   ],
   "expected_result": "Packet, UDP datagram, stream, and datagram movement payloads match the recorded draft requirements and serialize through the core writer without special casing."
 }
+

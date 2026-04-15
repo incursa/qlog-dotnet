@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "artifact_id": "WI-QLOG-BASELINE-0001",
   "artifact_type": "work_item",
   "title": "Qlog Baseline Implementation Lane",
@@ -63,3 +63,4 @@
   ],
   "verification_plan": "Use slice-specific unit, contract, and snapshot tests for the core model and QUIC vocabulary families, keep the umbrella SpecTrace validation script in the loop, and leave the sequential follow-on as a placeholder until it is intentionally scheduled."
 }
+

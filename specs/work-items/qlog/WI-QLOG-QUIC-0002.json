@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "artifact_id": "WI-QLOG-QUIC-0002",
   "artifact_type": "work_item",
   "title": "Qlog QUIC Transport Activity Work Item",
@@ -33,3 +33,4 @@
   ],
   "verification_plan": "Run snapshot and contract tests over representative packet and data-movement events and confirm the core writer can serialize the payloads without special casing."
 }
+

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "artifact_id": "WI-QLOG-QUIC-0001",
   "artifact_type": "work_item",
   "title": "Qlog QUIC Vocabulary Foundation Work Item",
@@ -34,3 +34,4 @@
   ],
   "verification_plan": "Run contract tests for namespace and schema registration plus representative snapshots for lifecycle and negotiation payloads."
 }
+

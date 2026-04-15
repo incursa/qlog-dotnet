@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/incursa/spec-trace/raw/refs/heads/main/model/model.schema.json",
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
   "artifact_id": "VER-QLOG-BASELINE-0001",
   "artifact_type": "verification",
   "title": "Qlog Baseline Verification",
@@ -58,3 +58,4 @@
   ],
   "expected_result": "The qlog canonical artifacts validate, the v1 slices match the draft envelope and QUIC vocabulary requirements, and the baseline stays explicitly draft-aware without claiming the sequential follow-on as implemented."
 }
+
