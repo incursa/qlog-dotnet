@@ -42,15 +42,23 @@ dotnet pack src/Incursa.Qlog/Incursa.Qlog.csproj -c Release
 dotnet pack src/Incursa.Qlog.Quic/Incursa.Qlog.Quic.csproj -c Release
 ```
 
+## Benchmarks
+
+```bash
+dotnet run -c Release --project benchmarks/Incursa.Qlog.Benchmarks.csproj -- --job Dry --filter "*QlogStreamDataMoved*"
+```
+
 ## Start Here
 
 - Core package guide: [`src/Incursa.Qlog/README.md`](src/Incursa.Qlog/README.md)
 - QUIC package guide: [`src/Incursa.Qlog.Quic/README.md`](src/Incursa.Qlog.Quic/README.md)
+- Benchmark guide: [`benchmarks/README.md`](benchmarks/README.md)
 - Requirements workflow: [`docs/requirements-workflow.md`](docs/requirements-workflow.md)
 - SpecTrace prep note: [`docs/spec-trace-prep.md`](docs/spec-trace-prep.md)
 
 ## Repository Layout
 
+- `benchmarks`: BenchmarkDotNet suites for representative qlog overhead baselines
 - `src/Incursa.Qlog`: packable core library project
 - `src/Incursa.Qlog.Quic`: packable QUIC vocabulary and event-builder project
 - `tests/Incursa.Qlog.Tests`: requirement-homed tests for the core package
