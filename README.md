@@ -85,4 +85,4 @@ python -m pip install pre-commit
 
 ## License
 
-MIT. See [`LICENSE`](LICENSE).
+Apache 2.0. See [`LICENSE`](LICENSE).
