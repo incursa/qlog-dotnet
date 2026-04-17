@@ -1,0 +1,242 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-SINKS",
+    "ARC-QLOG-CBOR-0001",
+    "WI-QLOG-CBOR-0001",
+    "VER-QLOG-CBOR-0001"
+  ],
+  "artifact_id": "SPEC-QLOG-CBOR",
+  "artifact_type": "specification",
+  "title": "Qlog Contained CBOR Serialization Surface",
+  "domain": "qlog",
+  "capability": "cbor-serialization",
+  "status": "draft",
+  "owner": "qlog-maintainers",
+  "tags": [
+    "qlog",
+    "serialization",
+    "cbor",
+    "binary"
+  ],
+  "purpose": "Define the first qlog CBOR serialization slice as the selected third built-in format after contained JSON and sequential JSON Text Sequences.",
+  "scope": "This specification covers the first binary qlog serializer boundary over the retained qlog model, initial contained-file scope, stream-first byte output behavior, and extension-preserving CBOR publication semantics. It intentionally excludes built-in sink integration and any sequential or append-oriented CBOR stream contract.",
+  "context": "The upstream qlog main-schema draft is serialization-agnostic and cites CBOR as one possible format, but it only standardizes JSON and JSON Text Sequences mappings. This repository-local slice records CBOR as the selected next format and resolves the first implementation policy: ship the contained CBOR serializer in a sibling package, reuse the contained qlog file schema URI, use `application/cbor` as the serialization format media type, and use `.qlog.cbor` as the canonical file extension.",
+  "requirements": [
+    {
+      "id": "REQ-QLOG-CBOR-S1-0001",
+      "title": "Provide a first-class CBOR serializer slice",
+      "statement": "The library MUST provide a first-class qlog CBOR serialization surface as the selected third built-in format after contained JSON and sequential JSON Text Sequences.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CBOR-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CBOR-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CBOR-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN",
+          "SPEC-QLOG-SINKS"
+        ]
+      },
+      "notes": [
+        "This requirement selects CBOR as the next non-JSON format without requiring immediate sink integration."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-CBOR-S1-0002",
+      "title": "Preserve contained qlog semantics in the CBOR mapping",
+      "statement": "The first qlog CBOR surface MUST serialize the existing contained qlog file, trace, event, common-field, schema-URI, and extension-member semantics without requiring format-specific changes to the public retained qlog model.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CBOR-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CBOR-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CBOR-0001"
+        ],
+        "derived_from": [
+          "REQ-QLOG-MAIN-S3-0001",
+          "REQ-QLOG-MAIN-S4-0001",
+          "REQ-QLOG-MAIN-S6-0001",
+          "REQ-QLOG-MAIN-S7-0001",
+          "REQ-QLOG-MAIN-S8P1-0002",
+          "REQ-QLOG-MAIN-S8P2-0002",
+          "REQ-QLOG-MAIN-S8P2-0003"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-13 §§2, 3, 4, 6, 7, 8, 11",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-11"
+        ]
+      },
+      "notes": [
+        "The first CBOR slice is contained-file only and does not imply a sequential or appendable CBOR stream contract."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-CBOR-S1-0003",
+      "title": "Expose stream-first binary serializer entry points",
+      "statement": "The first qlog CBOR serializer MUST expose Stream serialization entry points so callers can write binary qlog output directly to files, network streams, or memory buffers without materializing intermediate JSON text.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CBOR-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CBOR-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CBOR-0001"
+        ],
+        "derived_from": [
+          "REQ-QLOG-MAIN-S9-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ]
+      },
+      "notes": [
+        "Additional buffer-oriented overloads may be added later without changing this minimum stream-first contract."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-CBOR-S1-0004",
+      "title": "Ship the first CBOR surface as a sibling package",
+      "statement": "The first qlog CBOR serialization surface MUST ship in a sibling package instead of expanding the core JSON package.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "not_applicable",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CBOR-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CBOR-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CBOR-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-CBOR-S1-0005",
+      "title": "Reuse the contained qlog file schema URI",
+      "statement": "Contained qlog CBOR artifacts MUST reuse the contained qlog file schema URI rather than claiming a serialization-specific file schema.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CBOR-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CBOR-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CBOR-0001"
+        ],
+        "derived_from": [
+          "REQ-QLOG-MAIN-S3-0001",
+          "REQ-QLOG-MAIN-S4-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-CBOR-S1-0006",
+      "title": "Use a standard CBOR media type",
+      "statement": "Contained qlog CBOR artifacts MUST use `application/cbor` as the serialization_format media type until an upstream qlog-specific CBOR media type exists.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CBOR-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CBOR-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CBOR-0001"
+        ],
+        "derived_from": [
+          "REQ-QLOG-MAIN-S3-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ]
+      },
+      "notes": [
+        "This repository chooses the standard CBOR media type instead of inventing an unregistered qlog-specific token."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-CBOR-S1-0007",
+      "title": "Choose one canonical CBOR file extension",
+      "statement": "Contained qlog CBOR artifacts SHOULD use `.qlog.cbor` as the canonical file extension.",
+      "coverage": {
+        "positive": "required",
+        "negative": "optional",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CBOR-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CBOR-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CBOR-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ]
+      },
+      "notes": [
+        "A single canonical extension keeps tooling and documentation simpler; aliases can be evaluated later if interoperability pressure appears."
+      ]
+    }
+  ]
+}

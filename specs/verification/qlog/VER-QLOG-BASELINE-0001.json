@@ -4,7 +4,7 @@
   "artifact_type": "verification",
   "title": "Qlog Baseline Verification",
   "domain": "qlog",
-  "status": "planned",
+  "status": "passed",
   "owner": "qlog-maintainers",
   "related_artifacts": [
     "SPEC-QLOG-MAIN",
@@ -32,6 +32,9 @@
     "REQ-QLOG-MAIN-S8P1-0002",
     "REQ-QLOG-MAIN-S8P2-0001",
     "REQ-QLOG-MAIN-S8P2-0002",
+    "REQ-QLOG-MAIN-S8P2-0003",
+    "REQ-QLOG-MAIN-S9-0001",
+    "REQ-QLOG-MAIN-S11P1-0001",
     "REQ-QLOG-MAIN-S11P2-0001",
     "REQ-QLOG-QUIC-S2-0001",
     "REQ-QLOG-QUIC-S4-0001",
@@ -41,8 +44,8 @@
     "REQ-QLOG-QUIC-S6-0001",
     "REQ-QLOG-QUIC-S7-0001"
   ],
-  "scope": "Verify the qlog v1 slices separately, then roll them up under the umbrella baseline. The core verification covers the contained JSON writer and model shape, the QUIC verifications cover the three vocabulary families, and the sequential JSON Text Sequences artifact stays a placeholder.",
-  "verification_method": "Specification conformance checks, focused unit tests, contract tests, and draft-shape snapshot comparison.",
+  "scope": "Verify the qlog v1 slices separately, then roll them up under the umbrella baseline. The core verification covers the contained JSON writer, serializer entry points, and model shape, the QUIC verifications cover the three vocabulary families, and the sequential JSON Text Sequences artifact keeps its dedicated writer and stream entry points.",
+  "verification_method": "Specification conformance checks, focused unit tests, contract tests, and draft-shape snapshot comparison across string and Stream targets.",
   "preconditions": [
     "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
     "The core and QUIC slice work items exist.",
@@ -51,11 +54,12 @@
   "procedure": [
     "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
     "Run unit, contract, and snapshot tests for the contained core model slice.",
+    "Run string and Stream parity checks for the contained and sequential serializer surfaces.",
     "Run unit, contract, and snapshot tests for the QUIC vocabulary foundation slice.",
     "Run unit, contract, and snapshot tests for the QUIC transport activity slice.",
     "Run unit, contract, and snapshot tests for the QUIC migration and recovery slice.",
-    "Review any failures for draft drift before widening into the sequential follow-on."
+    "Review any failures for draft drift before widening beyond the current JSON serialization surfaces."
   ],
-  "expected_result": "The qlog canonical artifacts validate, the v1 slices match the draft envelope and QUIC vocabulary requirements, and the baseline stays explicitly draft-aware without claiming the sequential follow-on as implemented."
+  "expected_result": "The qlog canonical artifacts validate, the v1 slices match the draft envelope and QUIC vocabulary requirements, and the baseline stays explicitly draft-aware while shipping both JSON serialization surfaces."
 }
 

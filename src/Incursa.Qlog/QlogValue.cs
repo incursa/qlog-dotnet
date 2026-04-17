@@ -157,6 +157,10 @@ public readonly struct QlogValue : IEquatable<QlogValue>
 
     internal static QlogValue Create(Action<Utf8JsonWriter> writeValue) => CreateValue(writeValue);
 
+    internal bool HasJsonValue => hasValue;
+
+    internal JsonElement JsonElement => element;
+
     private static QlogValue CreateValue(Action<Utf8JsonWriter> writeValue)
     {
         var buffer = new ArrayBufferWriter<byte>();

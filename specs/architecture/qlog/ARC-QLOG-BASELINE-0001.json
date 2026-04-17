@@ -32,6 +32,9 @@
     "REQ-QLOG-MAIN-S8P1-0002",
     "REQ-QLOG-MAIN-S8P2-0001",
     "REQ-QLOG-MAIN-S8P2-0002",
+    "REQ-QLOG-MAIN-S8P2-0003",
+    "REQ-QLOG-MAIN-S9-0001",
+    "REQ-QLOG-MAIN-S11P1-0001",
     "REQ-QLOG-MAIN-S11P2-0001",
     "REQ-QLOG-QUIC-S2-0001",
     "REQ-QLOG-QUIC-S4-0001",
@@ -41,8 +44,8 @@
     "REQ-QLOG-QUIC-S6-0001",
     "REQ-QLOG-QUIC-S7-0001"
   ],
-  "purpose": "Describe how the qlog v1 implementation can satisfy the draft main-schema and QUIC requirements through a contained JSON core package, a sibling QUIC vocabulary package, and a deferred sequential follow-on.",
-  "design_summary": "Keep the qlog core model, contained JSON serializer, and generic value infrastructure in `Incursa.Qlog`, and keep QUIC vocabulary contracts and mapping in a sibling `Incursa.Qlog.Quic` assembly. The architecture keeps the qlog core model separate from QUIC-specific vocabulary, and it keeps sequential JSON Text Sequences as a later slice. V1 should stand up the contained JSON writer in core and the typed QUIC event contracts in the sibling package so envelope state, event state, and transport state do not collapse into one object model.",
+  "purpose": "Describe how the qlog v1 implementation satisfies the draft main-schema and QUIC requirements through a contained-and-sequential JSON core package and a sibling QUIC vocabulary package.",
+  "design_summary": "Keep the qlog core model, contained JSON serializer, sequential JSON Text Sequences serializer, and generic value infrastructure in `Incursa.Qlog`, and keep QUIC vocabulary contracts and mapping in a sibling `Incursa.Qlog.Quic` assembly. The architecture keeps the qlog core model separate from QUIC-specific vocabulary while keeping the two JSON serialization surfaces as dedicated writer boundaries over the same retained model, so envelope state, event state, and transport state do not collapse into one object model.",
   "key_components": [
     "Incursa.Qlog core model contracts",
     "Incursa.Qlog.Serialization.Json contained writer boundary",
@@ -51,19 +54,18 @@
     "QUIC vocabulary foundation package boundary",
     "QUIC transport activity package boundary",
     "QUIC migration and recovery package boundary",
-    "sequential JSON Text Sequences follow-on",
+    "sequential JSON Text Sequences writer boundary",
     "SpecTrace provenance and validation support"
   ],
-  "data_and_state_considerations": "The core model should preserve file-envelope state separately from trace state so contained qlog forms can be validated without binding the serializer to QUIC semantics. The QUIC package should map transport state into qlog events while preserving unknown fields, extension members, and draft-version drift so the baseline remains stable as the I-Ds evolve. Sequential output should not force the core model to carry sequential-specific behavior in v1.",
+  "data_and_state_considerations": "The core model should preserve file-envelope state separately from trace state so contained qlog forms can be validated without binding the serializer to QUIC semantics. The QUIC package should map transport state into qlog events while preserving unknown fields, extension members, and draft-version drift so the baseline remains stable as the I-Ds evolve. Sequential output should remain a distinct writer boundary over the shared model so format-specific rules do not leak into the domain contracts.",
   "edge_cases_and_constraints": [
     "Draft section numbers and event names may shift as the upstream drafts evolve.",
     "Contained and sequential file forms use different envelope rules and should not be conflated.",
     "Unknown common fields and extension payloads must survive round-tripping.",
-    "Sequential JSON Text Sequences stay outside the first implementation pass.",
     "HTTP/3 and future protocol vocabularies stay outside the first baseline."
   ],
   "alternatives_considered": [
-    "One merged qlog writer versus a slice-first contained writer with a deferred sequential follow-on.",
+    "One merged qlog writer versus separate contained and sequential writer boundaries over one retained model.",
     "One assembly with layered namespaces versus separate core and QUIC projects.",
     "A generator-first workflow versus a first-pass hand-authored baseline backed by validation.",
     "Immediate multi-protocol coverage versus a bounded QUIC-only first slice.",
@@ -73,11 +75,9 @@
     "Draft churn could invalidate section references, event names, or URI details.",
     "Overly broad abstractions could hide transport details that diagnostics need to preserve.",
     "Sink-specific work could pressure the core model before the qlog envelope stabilizes.",
-    "Sequential behavior could creep into v1 if it is not kept behind a follow-on boundary."
+    "Letting sibling serialization packages diverge from the retained core model could fragment the ecosystem story."
   ],
   "open_questions": [
-    "Should non-JSON sinks wait until the core model and QUIC adapter stabilize?",
-    "Should sequential JSON Text Sequences remain a separate follow-on until the contained JSON writer is stable?",
     "Should future protocol vocabularies share this architecture slice or get their own baseline artifacts?"
   ]
 }

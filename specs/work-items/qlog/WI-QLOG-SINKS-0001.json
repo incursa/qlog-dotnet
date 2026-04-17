@@ -1,0 +1,44 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "WI-QLOG-SINKS-0001",
+  "artifact_type": "work_item",
+  "title": "Qlog Built-In Sink Adapter Work Item",
+  "domain": "qlog",
+  "status": "complete",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-CAPTURE",
+    "SPEC-QLOG-CBOR",
+    "SPEC-QLOG-SINKS",
+    "ARC-QLOG-CAPTURE-0001",
+    "ARC-QLOG-CBOR-0001",
+    "ARC-QLOG-SINKS-0001",
+    "VER-QLOG-SINKS-0001"
+  ],
+  "addresses": [
+    "REQ-QLOG-SINKS-S1-0001",
+    "REQ-QLOG-SINKS-S1-0002",
+    "REQ-QLOG-SINKS-S1-0003",
+    "REQ-QLOG-SINKS-S1-0004",
+    "REQ-QLOG-SINKS-S1-0005",
+    "REQ-QLOG-SINKS-S1-0006",
+    "REQ-QLOG-SINKS-S1-0007",
+    "REQ-QLOG-SINKS-S1-0008",
+    "REQ-QLOG-SINKS-S1-0009"
+  ],
+  "design_links": [
+    "ARC-QLOG-SINKS-0001"
+  ],
+  "verification_links": [
+    "VER-QLOG-SINKS-0001"
+  ],
+  "summary": "Implement the first out-of-the-box qlog file and stream sink adapters over the internal frozen-snapshot capture boundary, with both JSON qlog formats in the core package, contained CBOR output in the sibling package, and deterministic contained-envelope metadata behavior supported.",
+  "planned_changes": "Add built-in file and stream sink adapters, keep them consuming frozen snapshots from the internal capture coordinator, support contained JSON and sequential JSON Text Sequences output in the core package, support contained CBOR output through sibling sink adapters in `Incursa.Qlog.Cbor`, aggregate contained output through one serialized writer when the destination can be rewritten safely, define a deterministic first-writer-wins plus backfill policy for shared contained-envelope metadata, define bounded completion semantics for accepted events, and add requirement-home tests plus bounded benchmarks for sink overhead without turning the current per-session serialization order into a public contract.",
+  "out_of_scope": [
+    "Remote collector integrations.",
+    "Sink rotation, retention, or archival policy beyond the first bounded file target behavior.",
+    "Public queue or dispatcher abstractions.",
+    "Viewer, CLI, or UI tooling."
+  ],
+  "verification_plan": "Run SpecTrace validation, requirement-home coverage audit, targeted sink adapter unit tests for both JSON formats plus contained CBOR output, negative and edge cases around failure, completion behavior, contained multi-session aggregation, conflicting shared-envelope metadata, non-seekable contained-stream rejection, and a bounded benchmark dry run for sink overhead."
+}

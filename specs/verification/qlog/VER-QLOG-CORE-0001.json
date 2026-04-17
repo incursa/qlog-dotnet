@@ -4,7 +4,7 @@
   "artifact_type": "verification",
   "title": "Qlog Core Model Verification",
   "domain": "qlog",
-  "status": "planned",
+  "status": "passed",
   "owner": "qlog-maintainers",
   "related_artifacts": [
     "SPEC-QLOG-MAIN",
@@ -20,10 +20,11 @@
     "REQ-QLOG-MAIN-S8P1-0001",
     "REQ-QLOG-MAIN-S8P1-0002",
     "REQ-QLOG-MAIN-S8P2-0001",
-    "REQ-QLOG-MAIN-S8P2-0002"
+    "REQ-QLOG-MAIN-S8P2-0002",
+    "REQ-QLOG-MAIN-S9-0001"
   ],
-  "scope": "Verify the contained qlog core model, envelope, event naming, schema URI handling, common fields, and extension preservation. This slice deliberately does not include sequential JSON Text Sequences.",
-  "verification_method": "Specification conformance checks, focused unit tests, contract tests, and contained JSON snapshot comparison.",
+  "scope": "Verify the contained qlog core model, envelope, event naming, schema URI handling, common fields, extension preservation, and contained serializer string and Stream entry points. This slice deliberately does not include sequential JSON Text Sequences.",
+  "verification_method": "Specification conformance checks, focused unit tests, contract tests, and contained JSON snapshot comparison across string and Stream targets.",
   "preconditions": [
     "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
     "The core work item exists for the contained qlog writer slice.",
@@ -32,6 +33,7 @@
   "procedure": [
     "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
     "Run core model and contained writer tests.",
+    "Confirm that the contained serializer string and Stream overloads emit equivalent JSON.",
     "Compare emitted snapshots for file, trace, common-field, and extension-preservation behavior.",
     "Review any failures before widening to QUIC adapters."
   ],

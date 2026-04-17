@@ -29,4 +29,4 @@ This note defines how `Incursa.Qlog` will move from draft text to traceable impl
 ## Notes
 
 - The draft source set is split between the core main-schema material and the QUIC event schema material, so the repository keeps those as separate `SPEC-...` files.
-- The repository keeps only the lighter-weight automation it needs locally; heavier batch or triage automation from `quic-dotnet` stays out of scope unless the implementation workload justifies it.
+- The repository now carries a local Codex autopilot entrypoint for worktree-based backlog execution because the capture, sink, and verification workload justifies it. Keep that automation subordinate to the canonical requirements, tests, and runtime state.

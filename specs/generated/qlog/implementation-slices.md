@@ -74,7 +74,24 @@ slice boundaries are planning guidance rather than frozen protocol truth.
 - Planned verification:
   - `VER-QLOG-SEQUENTIAL-0001`
 
+## Slice 6: Contained CBOR Serialization
+
+- Requirements:
+  - `REQ-QLOG-CBOR-S1-0001`
+  - `REQ-QLOG-CBOR-S1-0002`
+  - `REQ-QLOG-CBOR-S1-0003`
+  - `REQ-QLOG-CBOR-S1-0004`
+  - `REQ-QLOG-CBOR-S1-0005`
+  - `REQ-QLOG-CBOR-S1-0006`
+  - `REQ-QLOG-CBOR-S1-0007`
+- Implementation focus:
+  - sibling `Incursa.Qlog.Cbor` package boundary
+  - contained qlog CBOR serializer over the retained model
+  - stream-first binary output
+  - contained artifact policy using `urn:ietf:params:qlog:file:contained`, `application/cbor`, and `.qlog.cbor`
+- Planned verification:
+  - `VER-QLOG-CBOR-0001`
+
 ## Review Items
 
-- `private-schema-policy` still needs a concrete implementation rule.
 - The qlog drafts remain draft-state, so event names, section references, and schema URIs may drift.

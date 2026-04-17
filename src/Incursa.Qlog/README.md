@@ -63,6 +63,6 @@ string jsonTextSequence = QlogJsonTextSequenceSerializer.Serialize(sequentialFil
 
 - Unknown file, trace, common-field, vantage-point, reference-time, and event members are preserved through explicit extension data.
 - The core package stays free of QUIC-specific vocabulary; that surface lives in `Incursa.Qlog.Quic`.
-- The package is intentionally JSON-first: contained JSON and sequential JSON Text Sequences are the only first-class formats.
-- Other serialization families, including non-JSON encodings, remain deferred until a later requirement slice justifies a separate format-specific boundary.
+- The package is intentionally JSON-first: contained JSON and sequential JSON Text Sequences stay in the core package.
+- The first non-JSON encoding now lives in the sibling `Incursa.Qlog.Cbor` package so binary serializer evolution does not reshape the core JSON surface.
 - Repository details and scope notes live at `https://github.com/incursa/qlog-dotnet`.

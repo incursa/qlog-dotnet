@@ -26,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Incursa.Qlog.Cbor\Incursa.Qlog.Cbor.csproj" />
     <ProjectReference Include="..\..\src\Incursa.Qlog\Incursa.Qlog.csproj" />
   </ItemGroup>
 
 </Project>
-

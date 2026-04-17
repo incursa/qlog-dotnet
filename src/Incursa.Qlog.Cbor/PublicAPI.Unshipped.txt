@@ -1,0 +1,7 @@
+#nullable enable
+Incursa.Qlog.Serialization.Cbor.QlogCborKnownValues
+const Incursa.Qlog.Serialization.Cbor.QlogCborKnownValues.ContainedCborSerializationFormat = "application/cbor" -> string!
+const Incursa.Qlog.Serialization.Cbor.QlogCborKnownValues.ContainedCborFileExtension = ".qlog.cbor" -> string!
+Incursa.Qlog.Serialization.Cbor.QlogCborSerializer
+static Incursa.Qlog.Serialization.Cbor.QlogCborSerializer.Serialize(Incursa.Qlog.QlogFile! file) -> byte[]!
+static Incursa.Qlog.Serialization.Cbor.QlogCborSerializer.Serialize(System.IO.Stream! stream, Incursa.Qlog.QlogFile! file) -> void

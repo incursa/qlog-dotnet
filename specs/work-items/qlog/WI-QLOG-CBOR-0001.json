@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "WI-QLOG-CBOR-0001",
+  "artifact_type": "work_item",
+  "title": "Qlog Contained CBOR Serialization Work Item",
+  "domain": "qlog",
+  "status": "complete",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-SINKS",
+    "SPEC-QLOG-CBOR",
+    "ARC-QLOG-CBOR-0001",
+    "VER-QLOG-CBOR-0001"
+  ],
+  "addresses": [
+    "REQ-QLOG-CBOR-S1-0001",
+    "REQ-QLOG-CBOR-S1-0002",
+    "REQ-QLOG-CBOR-S1-0003",
+    "REQ-QLOG-CBOR-S1-0004",
+    "REQ-QLOG-CBOR-S1-0005",
+    "REQ-QLOG-CBOR-S1-0006",
+    "REQ-QLOG-CBOR-S1-0007"
+  ],
+  "design_links": [
+    "ARC-QLOG-CBOR-0001"
+  ],
+  "verification_links": [
+    "VER-QLOG-CBOR-0001"
+  ],
+  "summary": "Implement the first contained qlog CBOR serializer boundary over the retained qlog model as a sibling package.",
+  "planned_changes": "Add a contained-only CBOR serializer boundary in `Incursa.Qlog.Cbor`; expose byte-array and stream-first binary serializer entry points; preserve schema URIs and extension members through the binary mapping; keep the contained qlog file schema URI while selecting `application/cbor` and `.qlog.cbor` as the first local artifact policy; and add requirement-homed verification without coupling the slice to built-in sink adapters.",
+  "out_of_scope": [
+    "Sequential or append-oriented CBOR streaming contracts.",
+    "Built-in file or stream sink integration for CBOR output.",
+    "HTTP/3 event mapping or new protocol vocabularies.",
+    "Viewer, CLI, or UI tooling."
+  ],
+  "verification_plan": "Run SpecTrace validation, requirement-home coverage for `REQ-QLOG-CBOR`, contained CBOR serializer tests for artifact output and Stream entry points, extension and schema-URI preservation checks against the retained model, and the existing JSON serializer regression coverage."
+}

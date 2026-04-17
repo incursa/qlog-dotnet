@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "ARC-QLOG-SINKS-0001",
+  "artifact_type": "architecture",
+  "title": "Qlog Built-In Sink Adapter Architecture",
+  "domain": "qlog",
+  "status": "draft",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-CAPTURE",
+    "SPEC-QLOG-CBOR",
+    "SPEC-QLOG-SINKS",
+    "ARC-QLOG-CAPTURE-0001",
+    "ARC-QLOG-CBOR-0001",
+    "WI-QLOG-SINKS-0001",
+    "VER-QLOG-SINKS-0001"
+  ],
+  "satisfies": [
+    "REQ-QLOG-SINKS-S1-0001",
+    "REQ-QLOG-SINKS-S1-0002",
+    "REQ-QLOG-SINKS-S1-0003",
+    "REQ-QLOG-SINKS-S1-0004",
+    "REQ-QLOG-SINKS-S1-0005",
+    "REQ-QLOG-SINKS-S1-0006",
+    "REQ-QLOG-SINKS-S1-0007",
+    "REQ-QLOG-SINKS-S1-0008",
+    "REQ-QLOG-SINKS-S1-0009"
+  ],
+  "purpose": "Describe how the first built-in qlog file and stream sinks plug into the internal capture pipeline without widening the unstable capture surface.",
+  "design_summary": "Implement file and stream sink adapters over the internal frozen-snapshot capture pipeline, with selectable contained JSON or sequential JSON Text Sequences output in the core package and contained CBOR output in the sibling `Incursa.Qlog.Cbor` package, bounded completion semantics for accepted events, and failure isolation so one slow or broken sink does not force synchronous work back onto the transport callback path. Contained sinks may serialize all writes through one sink-owned writer and rewrite the shared artifact as completed sessions arrive, while sequential sinks can continue to append session-complete output. Keep the sink boundary separate from the core capture coordinator so future sink packaging can evolve without reshaping the append-oriented capture contract or creating package cycles.",
+  "key_components": [
+    "frozen snapshot sink contract",
+    "file sink adapter",
+    "stream sink adapter",
+    "sink output format selection boundary",
+    "sibling CBOR sink adapter package boundary",
+    "per-sink writer lifecycle and completion handling",
+    "failure isolation around sink execution",
+    "capture-to-sink registration boundary"
+  ],
+  "data_and_state_considerations": "Sink adapters should observe only immutable snapshots, never mutable live `QlogEvent` instances. File and stream sinks both need explicit completion or flush behavior for already accepted events, clear ownership over destination lifetime so disposal does not race pending writes, and format selection that can target contained JSON, sequential JSON Text Sequences, or contained CBOR without widening the public capture contract. The current adapters may serialize accepted events in capture sequence order per session, but that ordering remains an internal implementation detail rather than a stable public guarantee. Contained aggregation routes through one serialized writer per sink instance and rewrites the artifact as sessions complete; seekable destinations can support multi-session contained aggregation directly, while non-seekable contained streams may reject a second completed session because they cannot be rewritten safely. Shared contained-envelope metadata follows a deterministic first-writer-wins policy: the first completed session keeps any non-empty file title or description it supplies, the first-seen value for each extension-member key remains authoritative, and later completed sessions only backfill file-level metadata that is still absent. The contained CBOR sinks live in the sibling package and implement the same internal capture observer contract through friend access so the core package does not need a reverse dependency on the CBOR serializer.",
+  "edge_cases_and_constraints": [
+    "The file sink should not assume the destination directory already exists.",
+    "The stream sink should honor non-seekable and caller-owned streams.",
+    "One sink failing should not prevent other sinks from observing later frozen events unless the caller explicitly stops capture.",
+    "Sink completion should make the fate of already accepted events observable to callers."
+  ],
+  "alternatives_considered": [
+    "Embedding file or stream writing directly inside the capture coordinator.",
+    "Giving sink implementations mutable access to live `QlogEvent` graphs.",
+    "Exposing queueing primitives as the stable public sink contract."
+  ],
+  "risks": [
+    "File I/O can amplify backlog if the destination is slow or unavailable.",
+    "Ownership confusion around caller-supplied streams can cause premature disposal or data loss.",
+    "Overly narrow initial sink contracts could make later durable sink variants awkward to add."
+  ]
+}

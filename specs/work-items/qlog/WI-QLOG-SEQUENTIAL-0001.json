@@ -14,6 +14,7 @@
   ],
   "addresses": [
     "REQ-QLOG-MAIN-S5-0001",
+    "REQ-QLOG-MAIN-S11P1-0001",
     "REQ-QLOG-MAIN-S11P2-0001"
   ],
   "design_links": [
@@ -23,13 +24,13 @@
     "VER-QLOG-SEQUENTIAL-0001"
   ],
   "summary": "Implement the sequential qlog envelope and JSON Text Sequences serializer boundary as a bounded slice.",
-  "planned_changes": "Add the sequential-file envelope, ordering rules, and lowercase JSON Text Sequences behavior as a separate writer boundary over the existing qlog core model.",
+  "planned_changes": "Add the sequential-file envelope, ordering rules, stream serializer entry points, and lowercase JSON Text Sequences behavior as a separate writer boundary over the existing qlog core model.",
   "out_of_scope": [
     "Contained core writer implementation.",
     "QUIC event vocabulary mapping.",
     "HTTP/3 event mapping.",
     "Viewer, CLI, or UI tooling."
   ],
-  "verification_plan": "Run requirement-homed sequential serializer tests alongside the contained JSON regression coverage."
+  "verification_plan": "Run requirement-homed sequential serializer tests, including string and Stream parity checks, alongside the contained JSON regression coverage."
 }
 

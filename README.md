@@ -8,6 +8,7 @@
 ## Packages
 
 - [`Incursa.Qlog`](src/Incursa.Qlog/README.md): core qlog models, common fields, value infrastructure, and JSON serializers for contained and sequential artifacts.
+- [`Incursa.Qlog.Cbor`](src/Incursa.Qlog.Cbor/README.md): sibling contained CBOR serializer package built on `Incursa.Qlog`.
 - [`Incursa.Qlog.Quic`](src/Incursa.Qlog.Quic/README.md): bounded QUIC vocabulary, payloads, schema registration, and event builders built on `Incursa.Qlog`.
 
 ## Scope
@@ -32,6 +33,12 @@ Add the QUIC package when you also need the scoped QUIC vocabulary:
 dotnet add package Incursa.Qlog.Quic
 ```
 
+Add the CBOR package when you need contained qlog CBOR serialization:
+
+```bash
+dotnet add package Incursa.Qlog.Cbor
+```
+
 ## Build
 
 ```bash
@@ -39,6 +46,7 @@ dotnet restore Incursa.Qlog.slnx
 dotnet build Incursa.Qlog.slnx -c Release
 dotnet test Incursa.Qlog.slnx -c Release
 dotnet pack src/Incursa.Qlog/Incursa.Qlog.csproj -c Release
+dotnet pack src/Incursa.Qlog.Cbor/Incursa.Qlog.Cbor.csproj -c Release
 dotnet pack src/Incursa.Qlog.Quic/Incursa.Qlog.Quic.csproj -c Release
 ```
 
@@ -51,6 +59,7 @@ dotnet run -c Release --project benchmarks/Incursa.Qlog.Benchmarks.csproj -- --j
 ## Start Here
 
 - Core package guide: [`src/Incursa.Qlog/README.md`](src/Incursa.Qlog/README.md)
+- CBOR package guide: [`src/Incursa.Qlog.Cbor/README.md`](src/Incursa.Qlog.Cbor/README.md)
 - QUIC package guide: [`src/Incursa.Qlog.Quic/README.md`](src/Incursa.Qlog.Quic/README.md)
 - Benchmark guide: [`benchmarks/README.md`](benchmarks/README.md)
 - Requirements workflow: [`docs/requirements-workflow.md`](docs/requirements-workflow.md)
@@ -60,6 +69,7 @@ dotnet run -c Release --project benchmarks/Incursa.Qlog.Benchmarks.csproj -- --j
 
 - `benchmarks`: BenchmarkDotNet suites for representative qlog overhead baselines
 - `src/Incursa.Qlog`: packable core library project
+- `src/Incursa.Qlog.Cbor`: packable sibling contained CBOR serializer project
 - `src/Incursa.Qlog.Quic`: packable QUIC vocabulary and event-builder project
 - `tests/Incursa.Qlog.Tests`: requirement-homed tests for the core package
 - `tests/Incursa.Qlog.Quic.Tests`: requirement-homed tests for the QUIC package

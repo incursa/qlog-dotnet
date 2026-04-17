@@ -31,8 +31,8 @@ Thumbs.db
 # Tooling and local caches
 .dotnet/
 .codex-profile/
+.artifacts/qlog-autopilot/
 node_modules/
 
 # Generated content
 **/Generated/__codegen.marker
-

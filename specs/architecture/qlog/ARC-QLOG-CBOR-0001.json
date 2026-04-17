@@ -1,0 +1,54 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "ARC-QLOG-CBOR-0001",
+  "artifact_type": "architecture",
+  "title": "Qlog Contained CBOR Serialization Architecture",
+  "domain": "qlog",
+  "status": "draft",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-SINKS",
+    "SPEC-QLOG-CBOR",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-CBOR-0001",
+    "VER-QLOG-CBOR-0001"
+  ],
+  "satisfies": [
+    "REQ-QLOG-CBOR-S1-0001",
+    "REQ-QLOG-CBOR-S1-0002",
+    "REQ-QLOG-CBOR-S1-0003",
+    "REQ-QLOG-CBOR-S1-0004",
+    "REQ-QLOG-CBOR-S1-0005",
+    "REQ-QLOG-CBOR-S1-0006",
+    "REQ-QLOG-CBOR-S1-0007"
+  ],
+  "purpose": "Describe how the first qlog CBOR serializer is added as a sibling package over the retained qlog model without forcing unstable sink concerns back into the current public surface.",
+  "design_summary": "Add a contained-only CBOR writer boundary in a sibling `Incursa.Qlog.Cbor` package so the repository gains a first binary format without reshaping the core JSON serializer contracts or the still-internal capture pipeline. The architecture preserves the same file, trace, event, schema-URI, and extension semantics already owned by the main qlog model, exposes stream-first byte output, reuses the contained qlog file schema URI, records `application/cbor` as the serialization_format media type, and uses `.qlog.cbor` as the canonical file extension.",
+  "key_components": [
+    "retained qlog file and trace model reuse",
+    "Incursa.Qlog.Cbor sibling package boundary",
+    "contained CBOR writer boundary",
+    "stream-first binary output surface",
+    "extension-member preservation path",
+    "future sink integration boundary"
+  ],
+  "data_and_state_considerations": "The CBOR slice reuses the same contained qlog file semantics as the JSON writer rather than introducing a second domain model. File-envelope metadata, trace metadata, event payloads, schema URIs, common fields, and unknown extension members all need to survive binary serialization without collapsing into JSON-specific assumptions. The contained file schema URI remains `urn:ietf:params:qlog:file:contained` because file schema and serialization format are separate concerns in the qlog model. The first architecture deliberately avoids a sequential or append-oriented CBOR stream contract. Built-in sinks remain a separate concern even after the serializer package and artifact metadata policy are closed.",
+  "edge_cases_and_constraints": [
+    "The first CBOR slice should preserve private and extension schema URIs as opaque identifiers.",
+    "The upstream draft does not currently define a qlog-specific CBOR media type or file-extension policy, so the repository uses `application/cbor` and `.qlog.cbor` as the first local policy.",
+    "Field ordering should not become a cross-format semantic requirement unless the CBOR mapping explicitly defines one.",
+    "The first CBOR slice should not widen the current non-public capture or sink contracts."
+  ],
+  "alternatives_considered": [
+    "Transcoding through the JSON serializer instead of writing CBOR from the retained model.",
+    "Introducing a broad multi-format abstraction before the first binary format exists.",
+    "Bundling the first CBOR serializer directly into the built-in sink lane.",
+    "Deferring CBOR entirely until a future protocol vocabulary forces it."
+  ],
+  "risks": [
+    "The first local media-type and file-extension policy could still diverge from a future upstream standard.",
+    "Binary-format-specific shortcuts could diverge from the contained JSON semantics that the retained model already owns.",
+    "Mixing CBOR planning into the sink lane too early could blur the boundary between serializer and publication behavior."
+  ]
+}

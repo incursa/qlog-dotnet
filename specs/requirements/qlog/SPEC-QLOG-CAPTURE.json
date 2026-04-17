@@ -1,0 +1,269 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "ARC-QLOG-CAPTURE-0001",
+    "WI-QLOG-CAPTURE-0001",
+    "VER-QLOG-CAPTURE-0001"
+  ],
+  "artifact_id": "SPEC-QLOG-CAPTURE",
+  "artifact_type": "specification",
+  "title": "Qlog Internal Capture And Dispatch",
+  "domain": "qlog",
+  "capability": "internal-capture",
+  "status": "draft",
+  "owner": "qlog-maintainers",
+  "tags": [
+    "qlog",
+    "capture",
+    "dispatch",
+    "internal"
+  ],
+  "purpose": "Define the repository-local capture behavior that lifts qlog events out of transport callbacks through a non-public asynchronous dispatch boundary without making queueing or sink selection part of the public API.",
+  "scope": "This specification covers session-scoped and process-wide capture registration, asynchronous off-thread dispatch handoff, immutable event snapshots, bounded default backlog behavior with an internal unbounded override, and the separation between capture coordination and sink adapters. It intentionally excludes public sink contracts, file or stream publishing APIs, and external streaming integrations.",
+  "context": "This is a repository-local design slice rather than an upstream qlog draft requirement. It exists because the public qlog event model is mutable and transport-facing code needs a constrained way to hand work to background dispatch without blocking on sink behavior or exposing unstable queue controls as public API.",
+  "requirements": [
+    {
+      "id": "REQ-QLOG-CAPTURE-S1-0001",
+      "title": "Provide session-scoped capture registration",
+      "statement": "A qlog capture implementation MUST provide a session-scoped capture registration path so one connection or session can be observed without enabling process-wide capture.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CAPTURE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CAPTURE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CAPTURE-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-CAPTURE-S1-0002",
+      "title": "Provide process-wide capture registration",
+      "statement": "A qlog capture implementation MUST provide a process-wide capture registration path so multiple sessions can be observed through a shared capture pipeline.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CAPTURE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CAPTURE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CAPTURE-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-CAPTURE-S1-0003",
+      "title": "Freeze events before dispatch",
+      "statement": "A captured qlog event MUST be frozen into an immutable snapshot before it crosses the asynchronous dispatch boundary.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CAPTURE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CAPTURE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CAPTURE-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-CAPTURE-S1-0004",
+      "title": "Preserve per-session order across handoff",
+      "statement": "A qlog capture implementation SHOULD preserve per-session event order across the current dispatch handoff while moving sink work off the transport callback path.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CAPTURE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CAPTURE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CAPTURE-0001"
+        ]
+      },
+      "notes": [
+        "This requirement does not impose a total ordering across unrelated sessions.",
+        "Internal implementations may change sink concurrency or write serialization later without widening the public contract."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-CAPTURE-S1-0005",
+      "title": "Keep sink behaviors separate from capture coordination",
+      "statement": "A qlog capture implementation MUST keep file, stream, and other publication behaviors in separate sink adapters instead of embedding them in the core capture coordinator.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CAPTURE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CAPTURE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CAPTURE-0001"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-CAPTURE-S1-0006",
+      "title": "Keep the capture pipeline non-public while unstable",
+      "statement": "The qlog capture pipeline MUST remain a non-public implementation surface until the dispatcher and sink contracts stabilize.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CAPTURE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CAPTURE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CAPTURE-0001"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-CAPTURE-S1-0007",
+      "title": "Keep the public write surface retained-model only",
+      "statement": "The public Incursa.Qlog write surface MUST continue to expose retained qlog model types and serializer entry points only.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CAPTURE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CAPTURE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CAPTURE-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-CAPTURE-S1-0008",
+      "title": "Default to bounded non-blocking backlog behavior",
+      "statement": "The internal qlog dispatcher MUST default to a bounded queue that drops newly captured events rather than blocking transport callbacks when a sink falls behind.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CAPTURE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CAPTURE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CAPTURE-0001"
+        ]
+      },
+      "notes": [
+        "Completion and flush behavior still apply to work already accepted into a sink queue."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-CAPTURE-S1-0009",
+      "title": "Scale the default bounded capacity from available memory",
+      "statement": "The default bounded capture queue capacity SHOULD scale from available memory instead of relying on a single fixed entry count.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CAPTURE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CAPTURE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CAPTURE-0001"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-CAPTURE-S1-0010",
+      "title": "Allow an internal unbounded override",
+      "statement": "The internal qlog dispatcher MAY offer an opt-in unbounded mode for callers that explicitly accept the memory trade-off.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-CAPTURE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CAPTURE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CAPTURE-0001"
+        ]
+      },
+      "notes": [
+        "The unbounded override remains an internal configuration escape hatch rather than a public promise."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "VER-QLOG-SINKS-0001",
+  "artifact_type": "verification",
+  "title": "Qlog Built-In Sink Adapter Verification",
+  "domain": "qlog",
+  "status": "passed",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-CAPTURE",
+    "SPEC-QLOG-CBOR",
+    "SPEC-QLOG-SINKS",
+    "ARC-QLOG-SINKS-0001",
+    "WI-QLOG-SINKS-0001"
+  ],
+  "verifies": [
+    "REQ-QLOG-SINKS-S1-0001",
+    "REQ-QLOG-SINKS-S1-0002",
+    "REQ-QLOG-SINKS-S1-0003",
+    "REQ-QLOG-SINKS-S1-0004",
+    "REQ-QLOG-SINKS-S1-0005",
+    "REQ-QLOG-SINKS-S1-0006",
+    "REQ-QLOG-SINKS-S1-0007",
+    "REQ-QLOG-SINKS-S1-0008",
+    "REQ-QLOG-SINKS-S1-0009"
+  ],
+  "scope": "Verify built-in qlog file and stream sink adapters, including frozen snapshot consumption, both JSON qlog output formats, contained CBOR output through the sibling package, deterministic contained-envelope metadata behavior during aggregation, bounded completion behavior, and isolation from other sinks when one sink slows or fails.",
+  "verification_method": "Specification conformance checks, requirement-home coverage audit, targeted unit tests, and bounded benchmark verification for sink overhead.",
+  "preconditions": [
+    "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
+    "The built-in sink adapter implementation exists.",
+    "Test doubles or temporary file/stream destinations are available to observe ordering, format selection, completion, and failure isolation."
+  ],
+  "procedure": [
+    "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
+    "Run scripts/Test-RequirementHomeCoverage.ps1 for the `REQ-QLOG-SINKS` family.",
+    "Run sink adapter unit tests covering contained and sequential JSON file output, contained and sequential JSON stream output, and contained CBOR file and stream output.",
+    "Run negative and edge tests for invalid destinations, closed streams, partial-failure cases, contained multi-session aggregation, conflicting shared-envelope metadata with backfill, and non-seekable contained-stream rejection across the implemented sink surfaces.",
+    "Run the bounded qlog benchmark dry run if sink work changes the capture hot path."
+  ],
+  "expected_result": "The built-in file and stream sinks consume frozen snapshots, support both JSON qlog formats plus contained CBOR output through the sibling package, preserve deterministic first-writer-wins shared-envelope metadata while backfilling missing values during contained aggregation, complete accepted work predictably, and isolate sink-specific failures without collapsing the capture pipeline back onto transport callbacks or promising more ordering behavior than the internal capture implementation currently owns."
+}

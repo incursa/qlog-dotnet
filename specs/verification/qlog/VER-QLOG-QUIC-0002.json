@@ -4,7 +4,7 @@
   "artifact_type": "verification",
   "title": "Qlog QUIC Transport Activity Verification",
   "domain": "qlog",
-  "status": "planned",
+  "status": "passed",
   "owner": "qlog-maintainers",
   "related_artifacts": [
     "SPEC-QLOG-MAIN",

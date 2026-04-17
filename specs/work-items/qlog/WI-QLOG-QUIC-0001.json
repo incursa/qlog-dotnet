@@ -4,7 +4,7 @@
   "artifact_type": "work_item",
   "title": "Qlog QUIC Vocabulary Foundation Work Item",
   "domain": "qlog",
-  "status": "planned",
+  "status": "complete",
   "owner": "qlog-maintainers",
   "related_artifacts": [
     "SPEC-QLOG-MAIN",

@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "VER-QLOG-CBOR-0001",
+  "artifact_type": "verification",
+  "title": "Qlog Contained CBOR Serialization Verification",
+  "domain": "qlog",
+  "status": "passed",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-SINKS",
+    "SPEC-QLOG-CBOR",
+    "ARC-QLOG-CBOR-0001",
+    "WI-QLOG-CBOR-0001"
+  ],
+  "verifies": [
+    "REQ-QLOG-CBOR-S1-0001",
+    "REQ-QLOG-CBOR-S1-0002",
+    "REQ-QLOG-CBOR-S1-0003",
+    "REQ-QLOG-CBOR-S1-0004",
+    "REQ-QLOG-CBOR-S1-0005",
+    "REQ-QLOG-CBOR-S1-0006",
+    "REQ-QLOG-CBOR-S1-0007"
+  ],
+  "scope": "Verify the first contained qlog CBOR serializer slice, including its sibling-package boundary, retained-model reuse, stream-first binary writer boundary, contained artifact identity policy, and preservation of contained qlog semantics and extension members.",
+  "verification_method": "Specification conformance checks, requirement-homed unit tests, structural assertions over contained CBOR artifacts, and regression comparison against the existing JSON serializer surfaces.",
+  "preconditions": [
+    "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
+    "The contained qlog CBOR serializer implementation exists in a sibling package.",
+    "The qlog artifact metadata policy for the CBOR surface is explicit enough to verify."
+  ],
+  "procedure": [
+    "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
+    "Run requirement-homed tests for the `REQ-QLOG-CBOR` family.",
+    "Confirm that the CBOR serializer lives in the sibling package and that its Stream entry points emit binary output without going through intermediate JSON text.",
+    "Verify that contained file metadata, trace metadata, common fields, schema URIs, extension members, and the selected artifact identity policy survive the CBOR mapping.",
+    "Run the existing JSON serializer and qlog model regression tests to confirm the CBOR slice did not reshape the retained model."
+  ],
+  "expected_result": "The first contained qlog CBOR serializer is verified as a sibling package over the retained model, preserves the same contained qlog semantics as the JSON baseline, uses the selected `application/cbor` and `.qlog.cbor` artifact policy, and adds stream-first binary output without widening the unstable capture and sink contracts."
+}

@@ -13,16 +13,18 @@
   ],
   "verifies": [
     "REQ-QLOG-MAIN-S5-0001",
+    "REQ-QLOG-MAIN-S11P1-0001",
     "REQ-QLOG-MAIN-S11P2-0001"
   ],
-  "scope": "Verify the sequential qlog envelope and JSON Text Sequences serializer boundary over the existing qlog core model. The slice covers a single trace header, RS/LF framing, lowercase qlog field names, and sequential-specific rejection of trace errors or extra trace components.",
-  "verification_method": "Requirement-homed unit tests and contained JSON regression coverage.",
+  "scope": "Verify the sequential qlog envelope and JSON Text Sequences serializer boundary over the existing qlog core model. The slice covers a single trace header, RS/LF framing, lowercase qlog field names, sequential serializer string and Stream entry points, and sequential-specific rejection of trace errors or extra trace components.",
+  "verification_method": "Requirement-homed unit tests and sequential JSON Text Sequences regression coverage across string and Stream targets.",
   "preconditions": [
     "The sequential serializer implementation exists.",
     "The contained JSON serializer remains available for regression comparison."
   ],
   "procedure": [
     "Run the core and QUIC test projects.",
+    "Confirm that the sequential serializer string and Stream overloads emit equivalent RS-delimited output.",
     "Verify that sequential JSON Text Sequences output is emitted as RS-delimited records with lowercase qlog field names.",
     "Confirm that contained JSON round-tripping still passes."
   ],

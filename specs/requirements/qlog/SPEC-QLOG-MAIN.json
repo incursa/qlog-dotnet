@@ -1,10 +1,14 @@
 {
   "$schema": "../../../scripts/spec-trace/model.schema.json",
   "related_artifacts": [
+    "SPEC-QLOG-CBOR",
     "SPEC-QLOG-QUIC",
     "ARC-QLOG-BASELINE-0001",
+    "ARC-QLOG-CBOR-0001",
     "WI-QLOG-BASELINE-0001",
-    "VER-QLOG-BASELINE-0001"
+    "WI-QLOG-CBOR-0001",
+    "VER-QLOG-BASELINE-0001",
+    "VER-QLOG-CBOR-0001"
   ],
   "artifact_id": "SPEC-QLOG-MAIN",
   "artifact_type": "specification",
@@ -22,8 +26,7 @@
   "scope": "This specification covers the qlog file envelope, trace and trace-sequence metadata, event identity, common fields, schema-URI rules, and JSON or JSON Text Sequences serialization behavior needed for a stable core library baseline. It intentionally leaves HTTP/3 and other application-specific adapters to later work.",
   "context": "Source material is draft-ietf-quic-qlog-main-schema v13, which is still a work-in-progress document. The requirements below preserve draft provenance and should be revisited if the draft changes.",
   "open_questions": [
-    "Should non-JSON sinks be added only after the core model and QUIC adapter stabilize?",
-    "Should JSON Text Sequences gain a separate follow-on spec if the serialization surface expands?"
+    "Should future protocol vocabularies continue to share the core qlog model package boundary or follow the sibling-package pattern used for QUIC and CBOR?"
   ],
   "requirements": [
     {
@@ -257,6 +260,74 @@
         "upstream_refs": [
           "draft-ietf-quic-qlog-main-schema-13 §§7.5, 8.1",
           "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-7.5"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S8P2-0003",
+      "title": "Preserve private and extension event schema URIs",
+      "statement": "A qlog implementation MUST accept and preserve absolute private or extension event schema URIs as opaque identifiers during serialize and deserialize round trips, even when the URI is not part of the built-in schema registry.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-BASELINE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-BASELINE-0001"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S9-0001",
+      "title": "Expose contained JSON stream serializer entry points",
+      "statement": "The contained qlog serializer MUST expose string and Stream serialization entry points so callers can write contained qlog output directly to files, network streams, or memory buffers without materializing intermediate text.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-CORE-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-CORE-0001",
+          "VER-QLOG-BASELINE-0001"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S11P1-0001",
+      "title": "Expose sequential JSON stream serializer entry points",
+      "statement": "The sequential qlog serializer MUST expose string and Stream serialization entry points so callers can write sequential qlog output directly to files, network streams, or memory buffers without materializing intermediate text.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-BASELINE-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-SEQUENTIAL-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-SEQUENTIAL-0001",
+          "VER-QLOG-BASELINE-0001"
         ]
       }
     },

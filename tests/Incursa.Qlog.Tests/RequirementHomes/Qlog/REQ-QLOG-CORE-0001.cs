@@ -1,3 +1,5 @@
+using System.IO;
+using System.Text;
 using System.Text.Json.Nodes;
 using Incursa.Qlog.Serialization.Json;
 using Xunit;
@@ -8,6 +10,9 @@ public sealed class REQ_QLOG_CORE_0001
 {
     [Fact]
     [Trait("Requirement", "REQ-QLOG-MAIN-S3-0001")]
+    [Trait("Requirement", "REQ-QLOG-MAIN-S7-0001")]
+    [Trait("Requirement", "REQ-QLOG-MAIN-S8P1-0001")]
+    [Trait("Requirement", "REQ-QLOG-MAIN-S8P1-0002")]
     [Trait("CoverageType", "Positive")]
     public void Serialize_WritesContainedRootMetadataAndRoundTripsTheDraftShape()
     {
@@ -73,6 +78,70 @@ public sealed class REQ_QLOG_CORE_0001
         QlogFile file = new();
 
         Assert.Throws<InvalidOperationException>(() => QlogJsonSerializer.Serialize(file));
+    }
+
+    [Fact]
+    [Trait("Requirement", "REQ-QLOG-MAIN-S8P2-0003")]
+    [Trait("CoverageType", "Positive")]
+    public void Serialize_PreservesPrivateEventSchemaUrisAndRoundTripsTheDraftShape()
+    {
+        QlogFile file = new()
+        {
+            FileSchema = QlogKnownValues.ContainedFileSchemaUri,
+            SerializationFormat = QlogKnownValues.ContainedJsonSerializationFormat,
+        };
+
+        QlogTrace trace = new();
+        trace.EventSchemas.Add(new Uri("urn:example:qlog:events:private-foo"));
+
+        QlogEvent qlogEvent = new()
+        {
+            Time = 1,
+            Name = "custom:event",
+        };
+        qlogEvent.Data["marker"] = QlogValue.FromString("kept");
+        trace.Events.Add(qlogEvent);
+        file.Traces.Add(trace);
+
+        string json = QlogJsonSerializer.Serialize(file);
+        QlogFile parsed = QlogJsonSerializer.Deserialize(json);
+
+        Assert.Single(parsed.Traces);
+        QlogTrace parsedTrace = Assert.IsType<QlogTrace>(parsed.Traces[0]);
+        Assert.Equal(new Uri("urn:example:qlog:events:private-foo"), Assert.Single(parsedTrace.EventSchemas));
+        Assert.Equal(QlogValue.FromString("kept"), Assert.Single(parsedTrace.Events).Data["marker"]);
+        Assert.Equal(json, QlogJsonSerializer.Serialize(parsed));
+    }
+
+    [Fact]
+    [Trait("Requirement", "REQ-QLOG-MAIN-S9-0001")]
+    [Trait("CoverageType", "Positive")]
+    public void Serialize_StreamOverload_WritesContainedJsonEquivalentToStringOverload()
+    {
+        QlogFile file = new();
+        QlogTrace trace = new()
+        {
+            Title = "stream-contained-trace",
+        };
+        trace.EventSchemas.Add(new Uri("urn:ietf:params:qlog:events:example"));
+        trace.Events.Add(new QlogEvent
+        {
+            Time = 0,
+            Name = "example:stream_write",
+        });
+        file.Traces.Add(trace);
+
+        string expected = QlogJsonSerializer.Serialize(file, indented: false);
+
+        string actual;
+        using (MemoryStream stream = new())
+        {
+            QlogJsonSerializer.Serialize(stream, file, indented: false);
+            actual = Encoding.UTF8.GetString(stream.ToArray());
+        }
+
+        Assert.Equal(expected, actual);
+        Assert.StartsWith("{\"file_schema\":\"urn:ietf:params:qlog:file:contained\"", actual, StringComparison.Ordinal);
     }
 
     [Fact]

@@ -4,7 +4,7 @@
   "artifact_type": "work_item",
   "title": "Qlog Baseline Implementation Lane",
   "domain": "qlog",
-  "status": "planned",
+  "status": "complete",
   "owner": "qlog-maintainers",
   "related_artifacts": [
     "SPEC-QLOG-MAIN",
@@ -32,6 +32,9 @@
     "REQ-QLOG-MAIN-S8P1-0002",
     "REQ-QLOG-MAIN-S8P2-0001",
     "REQ-QLOG-MAIN-S8P2-0002",
+    "REQ-QLOG-MAIN-S8P2-0003",
+    "REQ-QLOG-MAIN-S9-0001",
+    "REQ-QLOG-MAIN-S11P1-0001",
     "REQ-QLOG-MAIN-S11P2-0001",
     "REQ-QLOG-QUIC-S2-0001",
     "REQ-QLOG-QUIC-S4-0001",
@@ -52,15 +55,15 @@
     "VER-QLOG-QUIC-0003",
     "VER-QLOG-SEQUENTIAL-0001"
   ],
-  "summary": "Coordinate the qlog v1 implementation baseline and keep the contained JSON core, QUIC vocabulary slices, and sequential follow-on aligned to the requirement corpus.",
-  "planned_changes": "Stand up the `Incursa.Qlog` core types and `Incursa.Qlog.Serialization.Json` writer boundary, keep protocol-specific QUIC vocabulary in `Incursa.Qlog.Quic`, add the three QUIC event-family slices there, and leave sequential JSON Text Sequences as a follow-on lane so the first release stays bounded.",
+  "summary": "Coordinate the qlog v1 implementation baseline and keep the contained JSON core, sequential JSON Text Sequences writer, and QUIC vocabulary slices aligned to the requirement corpus.",
+  "planned_changes": "Stand up the `Incursa.Qlog` core types and `Incursa.Qlog.Serialization.Json` writer boundaries, keep protocol-specific QUIC vocabulary in `Incursa.Qlog.Quic`, expose the contained and sequential serializer string and Stream entry points, and add the three QUIC event-family slices there while keeping non-JSON formats outside the current baseline.",
   "out_of_scope": [
     "HTTP/3 adapters in the first baseline.",
     "Non-JSON sinks or transport layers that are not required by the draft source material.",
-    "Sequential JSON Text Sequences in the first implementation pass.",
+    "Additional non-JSON serialization formats beyond contained JSON and sequential JSON Text Sequences.",
     "Large work-item backlogs, phase prompts, or chunk-manifest machinery.",
     "Fake completeness or fabricated verification evidence."
   ],
-  "verification_plan": "Use slice-specific unit, contract, and snapshot tests for the core model and QUIC vocabulary families, keep the umbrella SpecTrace validation script in the loop, and leave the sequential follow-on as a placeholder until it is intentionally scheduled."
+  "verification_plan": "Use slice-specific unit, contract, and snapshot tests for the core model, sequential serializer, and QUIC vocabulary families, and keep the umbrella SpecTrace validation script in the loop."
 }
 

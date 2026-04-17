@@ -1,0 +1,59 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "ARC-QLOG-CAPTURE-0001",
+  "artifact_type": "architecture",
+  "title": "Qlog Internal Capture Architecture",
+  "domain": "qlog",
+  "status": "draft",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-CAPTURE",
+    "SPEC-QLOG-MAIN",
+    "ARC-QLOG-BASELINE-0001",
+    "WI-QLOG-CAPTURE-0001",
+    "VER-QLOG-CAPTURE-0001"
+  ],
+  "satisfies": [
+    "REQ-QLOG-CAPTURE-S1-0001",
+    "REQ-QLOG-CAPTURE-S1-0002",
+    "REQ-QLOG-CAPTURE-S1-0003",
+    "REQ-QLOG-CAPTURE-S1-0004",
+    "REQ-QLOG-CAPTURE-S1-0005",
+    "REQ-QLOG-CAPTURE-S1-0006",
+    "REQ-QLOG-CAPTURE-S1-0007",
+    "REQ-QLOG-CAPTURE-S1-0008",
+    "REQ-QLOG-CAPTURE-S1-0009",
+    "REQ-QLOG-CAPTURE-S1-0010"
+  ],
+  "purpose": "Describe an internal capture architecture that takes qlog event dispatch off transport callbacks without turning queueing or sink behavior into stable public API.",
+  "design_summary": "Use a small internal capture coordinator in `Incursa.Qlog` that can register session-scoped and process-wide observers, freeze mutable `QlogEvent` state into immutable snapshots, and hand those snapshots to per-observer dispatch queues running away from transport callbacks. Keep queueing primitives hidden inside the coordinator, default each observer to a bounded drop-on-full queue sized from available memory, allow an internal opt-in unbounded mode for exceptional cases, and keep file, streaming, or other publication concerns behind separate sink adapters.",
+  "key_components": [
+    "session-scoped capture registry",
+    "process-wide capture registry",
+    "immutable qlog event snapshot builder",
+    "per-observer internal dispatcher queue or channel",
+    "capture coordinator lifetime management",
+    "separate sink adapter boundary"
+  ],
+  "data_and_state_considerations": "The current qlog event model exposes mutable properties and dictionaries, so the capture boundary should snapshot event identity, payload members, system information, and extension data before asynchronous dispatch begins. The default bounded queue should derive its capacity from available memory using a conservative heuristic rather than one hard-coded entry count, newly captured events should be dropped instead of blocking transport callbacks when the queue is saturated, and completion or flush control commands may still await queue space off the hot path. The current implementation may preserve per-session enqueue order, but ordering remains an internal behavior rather than a stable public guarantee, and downstream sinks should only observe frozen data so their work cannot race transport callbacks.",
+  "edge_cases_and_constraints": [
+    "Transport-facing code should not block on sink work or sink selection.",
+    "One frozen event snapshot may need to fan out to both session-scoped and process-wide observers.",
+    "Per-session ordering may be preserved today, but no public contract promises ordering across or within sessions.",
+    "Accepted work must remain flushable or completable even if later capture attempts are dropped because a bounded queue is full.",
+    "Session registration lifetime should not leak disposed or completed sessions.",
+    "Sink failures should be isolated from transport state even when dispatch continues asynchronously."
+  ],
+  "alternatives_considered": [
+    "Direct synchronous sink invocation from transport callbacks.",
+    "A public dispatcher or channel abstraction exposed as part of the library contract.",
+    "Embedding file or stream output directly in the core capture coordinator.",
+    "Sharing mutable `QlogEvent` instances across threads instead of freezing them at capture time."
+  ],
+  "risks": [
+    "Default capacity heuristics can still mis-size backlog limits under atypical event sizes or extreme sink latency.",
+    "Freezing full event payloads adds allocation cost on hot paths.",
+    "Process-wide capture could widen data exposure if registration is not carefully controlled.",
+    "Keeping the surface internal could calcify the wrong sink contract if the first adapters are not exercised early."
+  ]
+}

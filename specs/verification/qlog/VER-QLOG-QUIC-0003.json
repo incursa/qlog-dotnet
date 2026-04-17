@@ -4,7 +4,7 @@
   "artifact_type": "verification",
   "title": "Qlog QUIC Migration And Recovery Verification",
   "domain": "qlog",
-  "status": "planned",
+  "status": "passed",
   "owner": "qlog-maintainers",
   "related_artifacts": [
     "SPEC-QLOG-MAIN",
@@ -27,7 +27,7 @@
     "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
     "Run migration, key lifecycle, and recovery contract tests.",
     "Compare emitted snapshots for migration and congestion state events.",
-    "Review any failures before the sequential follow-on is considered."
+    "Review any failures before widening beyond the current JSON serialization surfaces."
   ],
   "expected_result": "Migration, key lifecycle, recovery, and congestion payloads match the draft requirements and remain separate from packet and stream slices."
 }

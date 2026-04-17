@@ -1,0 +1,46 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "VER-QLOG-CAPTURE-0001",
+  "artifact_type": "verification",
+  "title": "Qlog Internal Capture Verification",
+  "domain": "qlog",
+  "status": "passed",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-CAPTURE",
+    "SPEC-QLOG-MAIN",
+    "ARC-QLOG-CAPTURE-0001",
+    "WI-QLOG-CAPTURE-0001"
+  ],
+  "verifies": [
+    "REQ-QLOG-CAPTURE-S1-0001",
+    "REQ-QLOG-CAPTURE-S1-0002",
+    "REQ-QLOG-CAPTURE-S1-0003",
+    "REQ-QLOG-CAPTURE-S1-0004",
+    "REQ-QLOG-CAPTURE-S1-0005",
+    "REQ-QLOG-CAPTURE-S1-0006",
+    "REQ-QLOG-CAPTURE-S1-0007",
+    "REQ-QLOG-CAPTURE-S1-0008",
+    "REQ-QLOG-CAPTURE-S1-0009",
+    "REQ-QLOG-CAPTURE-S1-0010"
+  ],
+  "scope": "Verify the internal qlog capture coordinator, session-scoped and process-wide registration, immutable snapshot creation, non-blocking off-thread dispatch, and the bounded-by-default backlog policy. This slice deliberately excludes concrete file or streaming sink implementations.",
+  "verification_method": "Specification conformance checks and focused unit tests with concurrency and ordering assertions.",
+  "preconditions": [
+    "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
+    "The internal capture implementation exists in `Incursa.Qlog`.",
+    "A test double observer or sink is available to inspect ordering and frozen payload behavior."
+  ],
+  "procedure": [
+    "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
+    "Confirm the public API baseline keeps capture and sink coordination internal while exposing the retained qlog model and serializer entry points.",
+    "Run capture pipeline unit tests.",
+    "Confirm that mutating a source `QlogEvent` after capture does not alter dispatched snapshots.",
+    "Confirm that session-scoped and process-wide observers both receive the expected frozen events.",
+    "Confirm that the current implementation preserves per-session ordering while dispatch work stays off the transport callback path without turning ordering into a public guarantee.",
+    "Confirm that the default dispatch options stay bounded and compute a recommended capacity from available memory heuristics.",
+    "Confirm that a bounded queue drops newly captured events instead of blocking when an observer falls behind.",
+    "Confirm that the internal unbounded override accepts the same workload without bounded-queue drops."
+  ],
+  "expected_result": "The capture pipeline dispatches frozen qlog event snapshots through the internal coordinator without exposing public sink contracts, defaults to a bounded non-blocking backlog policy, and still allows an internal unbounded override for explicit high-memory scenarios."
+}

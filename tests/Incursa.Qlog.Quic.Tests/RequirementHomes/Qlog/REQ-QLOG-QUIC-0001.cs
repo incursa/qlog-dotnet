@@ -25,6 +25,7 @@ public sealed class REQ_QLOG_QUIC_0001
     [Fact]
     [Trait("Requirement", "REQ-QLOG-QUIC-S2-0001")]
     [Trait("Requirement", "REQ-QLOG-QUIC-S4-0001")]
+    [Trait("Requirement", "REQ-QLOG-MAIN-S8P2-0001")]
     [Trait("CoverageType", "Positive")]
     public void Serialize_WritesQuicLifecycleEventsAndRoundTripsTheDraftShape()
     {

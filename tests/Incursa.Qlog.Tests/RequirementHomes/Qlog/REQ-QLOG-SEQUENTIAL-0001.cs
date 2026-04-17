@@ -1,3 +1,5 @@
+using System.IO;
+using System.Text;
 using System.Text.Json;
 using Incursa.Qlog.Serialization.Json;
 using Xunit;
@@ -94,6 +96,27 @@ public sealed class REQ_QLOG_SEQUENTIAL_0001
 
         JsonElement trace = headerDocument.RootElement.GetProperty("trace");
         Assert.False(trace.TryGetProperty("events", out _));
+    }
+
+    [Fact]
+    [Trait("Requirement", "REQ-QLOG-MAIN-S11P1-0001")]
+    [Trait("CoverageType", "Positive")]
+    public void Serialize_StreamOverload_WritesSequentialJsonEquivalentToStringOverload()
+    {
+        QlogFile file = CreateSequentialDraftFile(includeEvents: true);
+
+        string expected = QlogJsonTextSequenceSerializer.Serialize(file, indented: false);
+
+        string actual;
+        using (MemoryStream stream = new())
+        {
+            QlogJsonTextSequenceSerializer.Serialize(stream, file, indented: false);
+            actual = Encoding.UTF8.GetString(stream.ToArray());
+        }
+
+        Assert.Equal(expected, actual);
+        Assert.StartsWith("\u001e", actual, StringComparison.Ordinal);
+        Assert.EndsWith("\n", actual, StringComparison.Ordinal);
     }
 
     [Fact]

@@ -13,13 +13,24 @@ internal static class QlogSerializationCore
     /// <param name="file">The file to validate.</param>
     public static void ValidateContainedFile(QlogFile file)
     {
+        ValidateContainedFile(file, QlogKnownValues.ContainedJsonSerializationFormat, "contained JSON serializer");
+    }
+
+    /// <summary>
+    /// Validates a contained qlog file envelope for serialization with a caller-selected serialization format.
+    /// </summary>
+    /// <param name="file">The file to validate.</param>
+    /// <param name="expectedSerializationFormat">The expected serialization format media type.</param>
+    /// <param name="serializerLabel">The serializer label used in diagnostics.</param>
+    internal static void ValidateContainedFile(QlogFile file, string expectedSerializationFormat, string serializerLabel)
+    {
         ArgumentNullException.ThrowIfNull(file);
 
         ValidateFileEnvelope(
             file,
             QlogKnownValues.ContainedFileSchemaUri,
-            QlogKnownValues.ContainedJsonSerializationFormat,
-            "contained JSON serializer");
+            expectedSerializationFormat,
+            serializerLabel);
 
         if (file.Traces.Count == 0)
         {

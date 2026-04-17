@@ -1,0 +1,43 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "WI-QLOG-CAPTURE-0001",
+  "artifact_type": "work_item",
+  "title": "Qlog Internal Capture And Dispatch Work Item",
+  "domain": "qlog",
+  "status": "complete",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-CAPTURE",
+    "SPEC-QLOG-MAIN",
+    "ARC-QLOG-CAPTURE-0001",
+    "ARC-QLOG-BASELINE-0001",
+    "VER-QLOG-CAPTURE-0001"
+  ],
+  "addresses": [
+    "REQ-QLOG-CAPTURE-S1-0001",
+    "REQ-QLOG-CAPTURE-S1-0002",
+    "REQ-QLOG-CAPTURE-S1-0003",
+    "REQ-QLOG-CAPTURE-S1-0004",
+    "REQ-QLOG-CAPTURE-S1-0005",
+    "REQ-QLOG-CAPTURE-S1-0006",
+    "REQ-QLOG-CAPTURE-S1-0007",
+    "REQ-QLOG-CAPTURE-S1-0008",
+    "REQ-QLOG-CAPTURE-S1-0009",
+    "REQ-QLOG-CAPTURE-S1-0010"
+  ],
+  "design_links": [
+    "ARC-QLOG-CAPTURE-0001"
+  ],
+  "verification_links": [
+    "VER-QLOG-CAPTURE-0001"
+  ],
+  "summary": "Implement an internal qlog capture coordinator with session-scoped and process-wide registration, frozen event snapshots, and a non-blocking off-thread dispatch boundary.",
+  "planned_changes": "Add internal capture registration and dispatch types to `Incursa.Qlog`, freeze mutable `QlogEvent` state before asynchronous handoff, default each observer to a bounded drop-on-full queue sized from available memory, preserve an internal unbounded override for callers that explicitly accept the memory trade-off, and keep file or streaming publication in separate sink adapters without reshaping the core coordinator.",
+  "out_of_scope": [
+    "Public capture or sink contracts.",
+    "Built-in file or streaming sink implementations.",
+    "Cross-process transport or network fan-out.",
+    "Viewer, CLI, or UI tooling."
+  ],
+  "verification_plan": "Run SpecTrace validation plus targeted unit tests for session and process-wide registration, freeze semantics, current per-session ordering behavior, default bounded queue sizing, bounded drop-on-full behavior, the explicit unbounded override, and non-blocking dispatch behavior."
+}

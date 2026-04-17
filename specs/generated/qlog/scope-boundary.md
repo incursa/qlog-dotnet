@@ -20,7 +20,7 @@ start implementation work without absorbing a QUIC-sized backlog.
 - HTTP/3 event mapping
 - advanced viewer, CLI, or UI tooling
 - broad runtime diagnostics integration or machine-wide tracing control
-- non-JSON sinks such as CBOR, CSV, protobuf, or flatbuffers until the corpus defines explicit requirements
+- non-JSON sinks such as CSV, protobuf, or flatbuffers, and any CBOR publication path beyond the implemented contained serializer sibling package
 - additional protocol vocabularies beyond the recorded QUIC draft
 - large backlog automation, chunk manifests, or proof-generation machinery
 - any behavior not covered by the two draft source documents listed in the provenance note
@@ -30,7 +30,7 @@ start implementation work without absorbing a QUIC-sized backlog.
 - The source material is draft-state and still moving.
 - The repository needs a stable implementation plan before code starts.
 - Keeping the first pass small enough to reason about makes later requirement-by-requirement work tractable.
-- The recorded corpus only justifies JSON and JSON Text Sequences, so a general multi-format serializer abstraction would add complexity before there is a second format to exercise it.
+- The v1 implementation boundary only justified JSON and JSON Text Sequences at the outset. The contained CBOR follow-on now exists as a sibling package, so a general multi-format serializer abstraction would still add complexity beyond the implemented slices.
 
 ## Slice Order
 

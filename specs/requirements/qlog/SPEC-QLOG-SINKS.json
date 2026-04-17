@@ -1,0 +1,271 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "related_artifacts": [
+    "SPEC-QLOG-CAPTURE",
+    "SPEC-QLOG-CBOR",
+    "ARC-QLOG-SINKS-0001",
+    "WI-QLOG-SINKS-0001",
+    "VER-QLOG-SINKS-0001"
+  ],
+  "artifact_id": "SPEC-QLOG-SINKS",
+  "artifact_type": "specification",
+  "title": "Qlog Built-In Sink Adapters",
+  "domain": "qlog",
+  "capability": "sinks",
+  "status": "draft",
+  "owner": "qlog-maintainers",
+  "tags": [
+    "qlog",
+    "sinks",
+    "file",
+    "stream"
+  ],
+  "purpose": "Define the first out-of-the-box qlog sink adapters that sit behind the internal capture pipeline.",
+  "scope": "This specification covers built-in file and stream sink adapters, frozen snapshot consumption, contained and sequential JSON output support, contained CBOR output through the sibling CBOR package, sink lifetime and flush behavior, and failure isolation between sinks. It intentionally excludes remote collectors, transport-specific upload protocols, viewer tooling, and public append/session APIs.",
+  "context": "The qlog drafts describe event shape and serialization, but they do not define how a .NET library should package durable or streaming publication behavior. This repository-local slice anchors the first built-in sinks so capture and proof work can advance without inventing sink semantics ad hoc. Sink backlog behavior inherits the internal capture queue policy rather than establishing a separate public stream backpressure contract. The initial stable sink surface covered both JSON formats in the core package, and the next built-in expansion adds contained CBOR output through the sibling `Incursa.Qlog.Cbor` package rather than pulling non-JSON dependencies back into the core JSON assembly.",
+  "requirements": [
+    {
+      "id": "REQ-QLOG-SINKS-S1-0001",
+      "title": "Provide an out-of-the-box file sink adapter",
+      "statement": "The library MUST provide an out-of-the-box file sink adapter that can persist frozen qlog capture output to a file target without requiring callers to implement custom sink plumbing.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-SINKS-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-SINKS-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-SINKS-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-CAPTURE"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-SINKS-S1-0002",
+      "title": "Provide an out-of-the-box stream sink adapter",
+      "statement": "The library MUST provide an out-of-the-box stream sink adapter that can write qlog capture output to a caller-supplied stream target without requiring callers to reimplement capture dispatch.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-SINKS-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-SINKS-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-SINKS-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-CAPTURE"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-SINKS-S1-0003",
+      "title": "Consume frozen snapshots at the sink boundary",
+      "statement": "Built-in qlog sink adapters MUST consume frozen capture snapshots rather than mutable live `QlogEvent` instances.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-SINKS-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-SINKS-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-SINKS-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-CAPTURE"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-SINKS-S1-0004",
+      "title": "Isolate sink failures from other observers",
+      "statement": "Failure or backpressure in one built-in qlog sink adapter SHOULD be isolated so it does not corrupt other registered sinks or force synchronous sink work back onto the transport callback path.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-SINKS-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-SINKS-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-SINKS-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-CAPTURE"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-SINKS-S1-0005",
+      "title": "Expose bounded completion behavior for accepted events",
+      "statement": "Built-in qlog file and stream sinks MUST provide bounded completion or flush behavior so a capture session can finish without silently dropping events already accepted by the sink.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-SINKS-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-SINKS-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-SINKS-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-CAPTURE"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-SINKS-S1-0006",
+      "title": "Support both JSON qlog serialization formats",
+      "statement": "Built-in qlog file and stream sinks MUST support both contained JSON and sequential JSON Text Sequences output.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-SINKS-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-SINKS-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-SINKS-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-CAPTURE",
+          "SPEC-QLOG-MAIN"
+        ]
+      },
+      "notes": [
+        "The current contained sink behavior may use serialized rewrites to maintain one writer per sink instance or destination."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-SINKS-S1-0007",
+      "title": "Aggregate contained output when serialized rewrites are available",
+      "statement": "Contained built-in qlog sinks SHOULD aggregate multiple completed sessions into one contained qlog artifact when the destination supports serialized rewrites.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-SINKS-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-SINKS-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-SINKS-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-CAPTURE",
+          "SPEC-QLOG-MAIN"
+        ]
+      },
+      "notes": [
+        "Non-seekable contained destinations may reject multi-session aggregation because they cannot be rewritten safely.",
+        "One serialized writer per sink instance is acceptable for contained aggregation even when it introduces extra rewrite cost."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-SINKS-S1-0008",
+      "title": "Support contained CBOR output through the sibling package",
+      "statement": "Built-in qlog file and stream sinks MUST support contained CBOR output through the sibling `Incursa.Qlog.Cbor` package without creating a package cycle back into the core JSON assembly.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-SINKS-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-SINKS-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-SINKS-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-CAPTURE",
+          "SPEC-QLOG-CBOR"
+        ]
+      },
+      "notes": [
+        "The contained CBOR sink surface can live in the sibling package even though it attaches to the same internal capture pipeline."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-SINKS-S1-0009",
+      "title": "Keep contained shared envelope metadata deterministic",
+      "statement": "Contained built-in qlog sinks MUST preserve the first completed session's non-empty file title and description and the first-seen value for each file extension member key, while allowing later completed sessions to backfill shared file-level metadata that is still absent.",
+      "coverage": {
+        "positive": "required",
+        "negative": "deferred",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-SINKS-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-SINKS-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-SINKS-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-CAPTURE",
+          "SPEC-QLOG-MAIN",
+          "SPEC-QLOG-CBOR"
+        ]
+      },
+      "notes": [
+        "This policy keeps contained multi-session aggregation deterministic without requiring later completed sessions to overwrite earlier shared envelope metadata."
+      ]
+    }
+  ]
+}

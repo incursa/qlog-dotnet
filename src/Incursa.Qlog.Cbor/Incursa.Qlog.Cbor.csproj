@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>true</IsPackable>
+    <IsTrimmable>true</IsTrimmable>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PackageId>Incursa.Qlog.Cbor</PackageId>
+    <AssemblyName>Incursa.Qlog.Cbor</AssemblyName>
+    <RootNamespace>Incursa.Qlog.Cbor</RootNamespace>
+    <Description>Contained qlog CBOR serializer built on Incursa.Qlog.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>qlog;cbor;serialization;diagnostics;telemetry;networking</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Incursa.Qlog\Incursa.Qlog.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" PrivateAssets="all" />
+    <PackageReference Include="System.Formats.Cbor" />
+  </ItemGroup>
+
+</Project>
