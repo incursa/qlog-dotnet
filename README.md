@@ -3,12 +3,13 @@
 [![CI](https://github.com/incursa/qlog-dotnet/actions/workflows/ci.yml/badge.svg)](https://github.com/incursa/qlog-dotnet/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/incursa/qlog-dotnet)](LICENSE)
 
-`Incursa.Qlog` is a .NET qlog library set with a requirements-driven repository. It includes the packable core qlog package, the bounded QUIC companion package, and the SpecTrace corpus that defines the repository scope.
+`Incursa.Qlog` is a .NET qlog library set with a requirements-driven repository. It includes the packable core qlog package, the sibling import package, the bounded QUIC companion package, and the SpecTrace corpus that defines the repository scope.
 
 ## Packages
 
 - [`Incursa.Qlog`](src/Incursa.Qlog/README.md): core qlog models, common fields, value infrastructure, and JSON serializers for contained and sequential artifacts.
 - [`Incursa.Qlog.Cbor`](src/Incursa.Qlog.Cbor/README.md): sibling contained CBOR serializer package built on `Incursa.Qlog`.
+- [`Incursa.Qlog.Import`](src/Incursa.Qlog.Import/README.md): sibling import and rehydration package for contained JSON, sequential JSON Text Sequences, and contained CBOR artifacts.
 - [`Incursa.Qlog.Quic`](src/Incursa.Qlog.Quic/README.md): bounded QUIC vocabulary, payloads, schema registration, and event builders built on `Incursa.Qlog`.
 
 ## Scope
@@ -39,6 +40,12 @@ Add the CBOR package when you need contained qlog CBOR serialization:
 dotnet add package Incursa.Qlog.Cbor
 ```
 
+Add the import package when you need qlog rehydration and fixture parsing:
+
+```bash
+dotnet add package Incursa.Qlog.Import
+```
+
 ## Build
 
 ```bash
@@ -47,6 +54,7 @@ dotnet build Incursa.Qlog.slnx -c Release
 dotnet test Incursa.Qlog.slnx -c Release
 dotnet pack src/Incursa.Qlog/Incursa.Qlog.csproj -c Release
 dotnet pack src/Incursa.Qlog.Cbor/Incursa.Qlog.Cbor.csproj -c Release
+dotnet pack src/Incursa.Qlog.Import/Incursa.Qlog.Import.csproj -c Release
 dotnet pack src/Incursa.Qlog.Quic/Incursa.Qlog.Quic.csproj -c Release
 ```
 
@@ -60,6 +68,7 @@ dotnet run -c Release --project benchmarks/Incursa.Qlog.Benchmarks.csproj -- --j
 
 - Core package guide: [`src/Incursa.Qlog/README.md`](src/Incursa.Qlog/README.md)
 - CBOR package guide: [`src/Incursa.Qlog.Cbor/README.md`](src/Incursa.Qlog.Cbor/README.md)
+- Import package guide: [`src/Incursa.Qlog.Import/README.md`](src/Incursa.Qlog.Import/README.md)
 - QUIC package guide: [`src/Incursa.Qlog.Quic/README.md`](src/Incursa.Qlog.Quic/README.md)
 - Benchmark guide: [`benchmarks/README.md`](benchmarks/README.md)
 - Requirements workflow: [`docs/requirements-workflow.md`](docs/requirements-workflow.md)
@@ -70,6 +79,7 @@ dotnet run -c Release --project benchmarks/Incursa.Qlog.Benchmarks.csproj -- --j
 - `benchmarks`: BenchmarkDotNet suites for representative qlog overhead baselines
 - `src/Incursa.Qlog`: packable core library project
 - `src/Incursa.Qlog.Cbor`: packable sibling contained CBOR serializer project
+- `src/Incursa.Qlog.Import`: packable sibling import and rehydration project
 - `src/Incursa.Qlog.Quic`: packable QUIC vocabulary and event-builder project
 - `tests/Incursa.Qlog.Tests`: requirement-homed tests for the core package
 - `tests/Incursa.Qlog.Quic.Tests`: requirement-homed tests for the QUIC package
