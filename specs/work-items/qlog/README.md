@@ -17,6 +17,8 @@ Each canonical artifact is authored in `.json`.
 - [`WI-QLOG-BASELINE-0001.json`](WI-QLOG-BASELINE-0001.json): umbrella qlog v1 implementation plan
 - [`WI-QLOG-CBOR-0001.json`](WI-QLOG-CBOR-0001.json): contained CBOR serialization work item
 - [`WI-QLOG-CAPTURE-0001.json`](WI-QLOG-CAPTURE-0001.json): internal capture and dispatch work item
+- [`WI-QLOG-IMPORT-0001.json`](WI-QLOG-IMPORT-0001.json): sibling import and rehydration work item
+- [`WI-QLOG-IMPORT-0002.json`](WI-QLOG-IMPORT-0002.json): contained CBOR import work item
 - [`WI-QLOG-CORE-0001.json`](WI-QLOG-CORE-0001.json): contained core model and JSON writer work item
 - [`WI-QLOG-QUIC-0001.json`](WI-QLOG-QUIC-0001.json): QUIC vocabulary foundation work item
 - [`WI-QLOG-QUIC-0002.json`](WI-QLOG-QUIC-0002.json): QUIC transport activity work item
@@ -29,3 +31,4 @@ Each canonical artifact is authored in `.json`.
 - Keep work items descriptive of delivery work, not of the normative requirement text itself.
 - The sequential qlog slice uses a bounded serializer and envelope boundary over the contained JSON model.
 - The CBOR work item records the implemented sibling package and contained artifact policy.
+- The import work items record the sibling reader package that hydrates the repository's own serialized output.

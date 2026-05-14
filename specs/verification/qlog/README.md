@@ -17,6 +17,8 @@ Each canonical artifact is authored in `.json`.
 - [`VER-QLOG-BASELINE-0001.json`](VER-QLOG-BASELINE-0001.json): umbrella qlog v1 verification plan
 - [`VER-QLOG-CBOR-0001.json`](VER-QLOG-CBOR-0001.json): contained CBOR serialization verification plan
 - [`VER-QLOG-CAPTURE-0001.json`](VER-QLOG-CAPTURE-0001.json): internal capture and dispatch verification shell
+- [`VER-QLOG-IMPORT-0001.json`](VER-QLOG-IMPORT-0001.json): sibling import and rehydration verification shell
+- [`VER-QLOG-IMPORT-0002.json`](VER-QLOG-IMPORT-0002.json): contained CBOR import verification shell
 - [`VER-QLOG-CORE-0001.json`](VER-QLOG-CORE-0001.json): contained core model verification shell
 - [`VER-QLOG-QUIC-0001.json`](VER-QLOG-QUIC-0001.json): QUIC vocabulary foundation verification shell
 - [`VER-QLOG-QUIC-0002.json`](VER-QLOG-QUIC-0002.json): QUIC transport activity verification shell
@@ -30,3 +32,4 @@ Each canonical artifact is authored in `.json`.
 - Split artifacts when the requirements they cover do not share the same outcome.
 - The sequential verification artifact tracks the serializer boundary for the sequential format.
 - The CBOR verification artifact tracks the implemented sibling serializer boundary and the selected artifact-metadata policy.
+- The import verification artifacts track the sibling reader boundary and hydration behavior for the repository's standard output.

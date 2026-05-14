@@ -1,0 +1,2 @@
+#nullable enable
+static Incursa.Qlog.Import.QlogImportSerializer.DeserializeContainedCbor(System.IO.Stream! stream) -> Incursa.Qlog.QlogFile!

@@ -1,0 +1,8 @@
+#nullable enable
+Incursa.Qlog.Import.QlogImportSerializer
+static Incursa.Qlog.Import.QlogImportSerializer.Deserialize(string! content) -> Incursa.Qlog.QlogFile!
+static Incursa.Qlog.Import.QlogImportSerializer.Deserialize(System.IO.Stream! stream) -> Incursa.Qlog.QlogFile!
+static Incursa.Qlog.Import.QlogImportSerializer.DeserializeContainedJson(string! json) -> Incursa.Qlog.QlogFile!
+static Incursa.Qlog.Import.QlogImportSerializer.DeserializeContainedJson(System.IO.Stream! stream) -> Incursa.Qlog.QlogFile!
+static Incursa.Qlog.Import.QlogImportSerializer.DeserializeSequentialJsonTextSequences(string! text) -> Incursa.Qlog.QlogFile!
+static Incursa.Qlog.Import.QlogImportSerializer.DeserializeSequentialJsonTextSequences(System.IO.Stream! stream) -> Incursa.Qlog.QlogFile!

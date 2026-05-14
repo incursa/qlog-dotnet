@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "WI-QLOG-IMPORT-0002",
+  "artifact_type": "work_item",
+  "title": "Qlog Contained CBOR Import Implementation Lane",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-IMPORT",
+    "ARC-QLOG-IMPORT-0002",
+    "VER-QLOG-IMPORT-0002"
+  ],
+  "addresses": [
+    "REQ-QLOG-IMPORT-S1-0006"
+  ],
+  "design_links": [
+    "ARC-QLOG-IMPORT-0002"
+  ],
+  "verification_links": [
+    "VER-QLOG-IMPORT-0002"
+  ],
+  "summary": "Extend the sibling qlog import package so it can hydrate the repository's contained CBOR output back into the retained model.",
+  "planned_changes": "Add contained CBOR reader helpers and CBOR-specific import entry points to `Incursa.Qlog.Import`, keep the work out of `Incursa.Qlog` core, preserve the retained qlog model and extension data, and add requirement-homed tests that round-trip serializer-produced CBOR payloads through the new importer.",
+  "out_of_scope": [
+    "Replay execution or transport simulation.",
+    "Changing the existing CBOR serializer output format.",
+    "Sequential CBOR framing or any new append-oriented binary protocol.",
+    "Any replay-specific object model."
+  ],
+  "verification_plan": "Run SpecTrace validation, then add requirement-homed tests covering contained CBOR import, stream auto-detection, retained-model preservation, and invalid-input rejection with serializer-produced CBOR payloads."
+}

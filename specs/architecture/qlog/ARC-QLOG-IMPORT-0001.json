@@ -1,0 +1,56 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "ARC-QLOG-IMPORT-0001",
+  "artifact_type": "architecture",
+  "title": "Qlog Import And Rehydration Architecture",
+  "domain": "qlog",
+  "status": "draft",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-IMPORT",
+    "WI-QLOG-IMPORT-0001",
+    "VER-QLOG-IMPORT-0001"
+  ],
+  "satisfies": [
+    "REQ-QLOG-IMPORT-S1-0001",
+    "REQ-QLOG-IMPORT-S1-0002",
+    "REQ-QLOG-IMPORT-S1-0003",
+    "REQ-QLOG-IMPORT-S1-0004",
+    "REQ-QLOG-IMPORT-S1-0005"
+  ],
+  "purpose": "Describe how the qlog import package satisfies the repository's hydration requirements without turning the core logging package into a parser bundle.",
+  "design_summary": "Keep parsing and hydration in a sibling `Incursa.Qlog.Import` package so `Incursa.Qlog` stays writer-first and small. The importer can expose string and Stream entry points that recognize the repository's contained JSON and sequential JSON Text Sequences output, then materialize a `QlogFile` graph over the retained model rather than inventing a replay-specific object model. Contained input should hydrate directly from the object envelope, while sequential input should normalize the single trace header plus appended event records into the same retained file model. Unknown members, opaque URIs, and extension data should flow through the same retained fields used by the serializers.",
+  "key_components": [
+    "Incursa.Qlog.Import sibling reader package",
+    "contained JSON reader boundary",
+    "sequential JSON Text Sequences reader boundary",
+    "file and stream import entry points",
+    "format dispatch and normalization",
+    "retained model hydration and extension preservation",
+    "SpecTrace verification support"
+  ],
+  "data_and_state_considerations": "The importer should keep only per-document parse state and a small amount of framing state for sequential records. It should not retain transport timeline state, replay buffers, or sink coordination state. Contained JSON can be parsed from a single envelope, while sequential JSON Text Sequences should be assembled into one file model with one trace header and appended events. Any compatibility path in the core package should stay thin and should not become the long-term parser home.",
+  "edge_cases_and_constraints": [
+    "Malformed JSON should fail before any retained-model object is exposed.",
+    "Sequential RS-delimited records must reject malformed framing and unsupported extra trace components.",
+    "Contained trace errors should hydrate into trace-error model objects rather than being flattened away.",
+    "Unknown members and opaque schema identifiers must round-trip through the retained model.",
+    "Non-JSON inputs and future CBOR import stay outside the first slice."
+  ],
+  "alternatives_considered": [
+    "Adding parser logic to `Incursa.Qlog` core.",
+    "Exposing a replay-specific domain model instead of hydrating the retained qlog model.",
+    "Forcing callers to preselect the format on every import call.",
+    "Waiting for CBOR import before shipping any reader surface."
+  ],
+  "risks": [
+    "Draft churn could alter the supported envelope shape or sequential field expectations.",
+    "Format dispatch ambiguity could cause the importer to accept an unsupported shape too late or reject a valid one too early.",
+    "Keeping a compatibility `Deserialize` path in the core package could blur the intended package boundary if it is not explicitly limited.",
+    "Overfitting the importer to replay semantics could pull transport execution concerns into the parser layer."
+  ],
+  "open_questions": [
+    "Should the current contained JSON `Deserialize` entry points remain as compatibility shims or be retired once the sibling package lands?"
+  ]
+}

@@ -16,6 +16,7 @@ Each canonical artifact is authored in `.json`.
 
 - [`SPEC-QLOG-CBOR.json`](SPEC-QLOG-CBOR.json): planned contained CBOR serialization requirement source
 - [`SPEC-QLOG-CAPTURE.json`](SPEC-QLOG-CAPTURE.json): internal capture and dispatch requirement source
+- [`SPEC-QLOG-IMPORT.json`](SPEC-QLOG-IMPORT.json): planned sibling import and rehydration requirement source, including contained CBOR hydration
 - [`SPEC-QLOG-MAIN.json`](SPEC-QLOG-MAIN.json): canonical draft main-schema requirement source
 - [`SPEC-QLOG-QUIC.json`](SPEC-QLOG-QUIC.json): canonical draft QUIC event requirement source
 - [`SPEC-QLOG-SINKS.json`](SPEC-QLOG-SINKS.json): built-in file and stream sink requirement source
@@ -25,6 +26,7 @@ Each canonical artifact is authored in `.json`.
 
 - The draft source material is split between the qlog main-schema draft and the QUIC event draft.
 - The first non-JSON serializer now lives in the sibling [`SPEC-QLOG-CBOR.json`](SPEC-QLOG-CBOR.json) slice and resolves the initial package and artifact-metadata policy.
+- The import package is planned as a sibling reader surface over the retained model and the repository's own serialized output, including contained CBOR.
 - Provenance and the first-scope boundary live in [`../../generated/qlog/source-provenance.md`](../../generated/qlog/source-provenance.md) and [`../../generated/qlog/scope-boundary.md`](../../generated/qlog/scope-boundary.md).
 - The v1 implementation sequence is summarized in [`../../generated/qlog/implementation-slices.md`](../../generated/qlog/implementation-slices.md).
 - Keep future qlog work traceable to one of the `SPEC-...` files before implementation.

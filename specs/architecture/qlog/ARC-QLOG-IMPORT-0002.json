@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "ARC-QLOG-IMPORT-0002",
+  "artifact_type": "architecture",
+  "title": "Qlog Contained CBOR Import Architecture",
+  "domain": "qlog",
+  "status": "draft",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-IMPORT",
+    "WI-QLOG-IMPORT-0002",
+    "VER-QLOG-IMPORT-0002"
+  ],
+  "satisfies": [
+    "REQ-QLOG-IMPORT-S1-0006"
+  ],
+  "purpose": "Describe how the qlog import package can hydrate contained CBOR output back into the retained model without moving parser dependencies into the core package.",
+  "design_summary": "Keep the contained CBOR reader in the sibling `Incursa.Qlog.Import` package so `Incursa.Qlog` stays writer-first and small. The CBOR path should decode repository-produced contained CBOR output into the same `QlogFile` graph used by the JSON importers, preserving file metadata, trace errors, trace data, event data, and unknown members. The reader may buffer the binary payload in memory, classify trace components from their contained map shape, and translate nested CBOR maps and arrays into the retained `QlogValue` representation that the serializers already understand.",
+  "key_components": [
+    "contained CBOR reader boundary",
+    "binary payload dispatch and buffering",
+    "retained model hydration and extension preservation",
+    "trace component classification for trace and trace-error entries",
+    "qlog value conversion from CBOR maps, arrays, strings, numbers, booleans, and nulls",
+    "SpecTrace verification support"
+  ],
+  "data_and_state_considerations": "The importer should keep only per-document parse state and a small amount of framing state for the binary reader. It should not retain replay buffers or transport coordination state. The CBOR path should only accept the repository's contained artifact policy and should fail fast on unsupported CBOR types, conflicting trace-component shapes, or malformed root envelopes.",
+  "edge_cases_and_constraints": [
+    "The root CBOR payload must decode to a qlog file map.",
+    "Contained CBOR output must carry the repository-selected contained file schema URI and CBOR serialization format.",
+    "Trace components must classify cleanly as trace or trace-error entries; ambiguous maps should fail.",
+    "Unsupported CBOR byte strings, tags, and simple values should fail instead of being silently reshaped into the retained model.",
+    "Unknown members and nested extension data must round-trip through the retained `QlogValue` graph."
+  ],
+  "alternatives_considered": [
+    "Creating a separate `Incursa.Qlog.Cbor.Import` package.",
+    "Moving CBOR hydration into `Incursa.Qlog` core.",
+    "Transcoding CBOR to JSON text before hydration.",
+    "Inventing a replay-specific model instead of hydrating the retained qlog graph."
+  ],
+  "risks": [
+    "Binary format dispatch could accept an unsupported shape too late or reject a valid one too early.",
+    "The retained `QlogValue` representation is JSON-centric, so CBOR-specific types need explicit rejection or normalization rules.",
+    "Keeping the reader in the sibling package still requires careful API and documentation discipline so the core package boundary stays obvious."
+  ]
+}

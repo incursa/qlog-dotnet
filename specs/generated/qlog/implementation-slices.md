@@ -92,6 +92,36 @@ slice boundaries are planning guidance rather than frozen protocol truth.
 - Planned verification:
   - `VER-QLOG-CBOR-0001`
 
+## Slice 7: Import And Rehydration
+
+- Requirements:
+  - `REQ-QLOG-IMPORT-S1-0001`
+  - `REQ-QLOG-IMPORT-S1-0002`
+  - `REQ-QLOG-IMPORT-S1-0003`
+  - `REQ-QLOG-IMPORT-S1-0004`
+  - `REQ-QLOG-IMPORT-S1-0005`
+- Implementation focus:
+  - sibling `Incursa.Qlog.Import` package boundary
+  - contained JSON hydration into the retained qlog model
+  - sequential JSON Text Sequences hydration into the retained qlog model
+  - string and Stream import entry points with format dispatch
+  - unknown-member and opaque-identifier preservation
+- Planned verification:
+  - `VER-QLOG-IMPORT-0001`
+
+## Slice 8: Contained CBOR Import
+
+- Requirements:
+  - `REQ-QLOG-IMPORT-S1-0006`
+- Implementation focus:
+  - contained CBOR hydration inside the sibling `Incursa.Qlog.Import` package
+  - binary payload dispatch and retained-model conversion
+  - CBOR trace component classification and opaque-value preservation
+- Planned verification:
+  - `VER-QLOG-IMPORT-0002`
+
 ## Review Items
 
 - The qlog drafts remain draft-state, so event names, section references, and schema URIs may drift.
+- Import and replay stay separate concerns; the reader package should hydrate retained qlog models without absorbing transport execution logic.
+- The import package now covers contained JSON, sequential JSON Text Sequences, and contained CBOR hydration in the sibling library.

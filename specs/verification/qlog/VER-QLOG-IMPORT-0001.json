@@ -1,0 +1,38 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "VER-QLOG-IMPORT-0001",
+  "artifact_type": "verification",
+  "title": "Qlog Import And Rehydration Verification",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-IMPORT",
+    "ARC-QLOG-IMPORT-0001",
+    "WI-QLOG-IMPORT-0001"
+  ],
+  "verifies": [
+    "REQ-QLOG-IMPORT-S1-0001",
+    "REQ-QLOG-IMPORT-S1-0002",
+    "REQ-QLOG-IMPORT-S1-0003",
+    "REQ-QLOG-IMPORT-S1-0004",
+    "REQ-QLOG-IMPORT-S1-0005"
+  ],
+  "scope": "Verify the sibling qlog import package, contained JSON hydration, sequential JSON Text Sequences hydration, retained-model preservation, string and Stream entry points, and rejection of unsupported or malformed input. The slice does not include replay execution or transport simulation.",
+  "verification_method": "Requirement-homed unit tests, round-trip comparisons against repository-produced serializer output, and negative tests for malformed and unsupported inputs.",
+  "preconditions": [
+    "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
+    "The contained JSON and sequential serializer outputs are available for round-trip comparison.",
+    "The sibling import package exists and exposes the planned import entry points."
+  ],
+  "procedure": [
+    "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
+    "Generate contained qlog JSON output from the existing serializer and hydrate it through the import surface.",
+    "Generate sequential JSON Text Sequences output from the existing serializer and hydrate it through the import surface.",
+    "Compare the hydrated models against the source models for file metadata, traces, events, common fields, vantage points, trace errors, and extension members.",
+    "Exercise invalid JSON, malformed sequential framing, and unsupported input shapes to confirm the importer fails cleanly.",
+    "Compare string and Stream import paths where both are exposed."
+  ],
+  "expected_result": "The import package hydrates repository-produced qlog output back into the retained model without losing opaque data, and invalid or unsupported input is rejected clearly instead of being silently reshaped."
+}

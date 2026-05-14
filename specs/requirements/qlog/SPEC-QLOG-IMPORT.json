@@ -1,0 +1,238 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "ARC-QLOG-IMPORT-0001",
+    "ARC-QLOG-IMPORT-0002",
+    "WI-QLOG-IMPORT-0001",
+    "WI-QLOG-IMPORT-0002",
+    "VER-QLOG-IMPORT-0001",
+    "VER-QLOG-IMPORT-0002"
+  ],
+  "artifact_id": "SPEC-QLOG-IMPORT",
+  "artifact_type": "specification",
+  "title": "Qlog Import And Rehydration Surface",
+  "domain": "qlog",
+  "capability": "import-rehydration",
+  "status": "draft",
+  "owner": "qlog-maintainers",
+  "tags": [
+    "qlog",
+    "import",
+    "rehydration",
+    "reader",
+    "replay"
+  ],
+  "purpose": "Define the sibling qlog import package that can hydrate the repository's serialized qlog output back into retained model objects for replay-oriented consumers without inflating the high-performance core package.",
+  "scope": "This specification covers contained qlog JSON, sequential JSON Text Sequences, and contained qlog CBOR import into the retained `Incursa.Qlog` model, string and Stream entry points, format selection for the repository's standard output forms, and preservation of opaque qlog metadata during hydration. It intentionally excludes replay execution and transport simulation.",
+  "context": "The core package already exposes the retained qlog model and writer-side JSON serializers, and the sibling `Incursa.Qlog.Cbor` package already publishes the repository's contained CBOR output. Replay-oriented consumers need a separate import package so parser dependencies do not become part of the default high-performance logging surface. The import slices therefore target the repository's own contained JSON, sequential JSON Text Sequences, and contained CBOR output because those are the standard qlog artifacts the repository already produces.",
+  "requirements": [
+    {
+      "id": "REQ-QLOG-IMPORT-S1-0001",
+      "title": "Provide a sibling import package",
+      "statement": "The repository MUST provide qlog import and rehydration as a sibling package instead of expanding `Incursa.Qlog` with parser dependencies.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-IMPORT-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-IMPORT-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-IMPORT-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ]
+      },
+      "notes": [
+        "Keeping the parser out of the core package preserves the writer-first performance boundary."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-IMPORT-S1-0002",
+      "title": "Hydrate contained JSON output",
+      "statement": "The import surface MUST parse contained qlog JSON artifacts into the retained qlog model, including file metadata, traces, trace errors, events, common fields, vantage points, and extension members.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-IMPORT-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-IMPORT-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-IMPORT-0001"
+        ],
+        "derived_from": [
+          "REQ-QLOG-MAIN-S3-0001",
+          "REQ-QLOG-MAIN-S4-0001",
+          "REQ-QLOG-MAIN-S6-0001",
+          "REQ-QLOG-MAIN-S7-0001",
+          "REQ-QLOG-MAIN-S8P2-0002",
+          "REQ-QLOG-MAIN-S8P2-0003"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-13 §§3, 4.2, 6, 7, 8, 11",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-11"
+        ]
+      },
+      "notes": [
+        "Unknown members should survive hydration so later serialize/import cycles can retain unsupported qlog data."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-IMPORT-S1-0003",
+      "title": "Hydrate sequential JSON Text Sequences output",
+      "statement": "The import surface MUST parse sequential qlog JSON Text Sequences artifacts emitted by the repository into the retained qlog model, assembling the single trace header and appended event records into one qlog file and rejecting unsupported extra trace components or malformed framing.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-IMPORT-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-IMPORT-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-IMPORT-0001"
+        ],
+        "derived_from": [
+          "REQ-QLOG-MAIN-S5-0001",
+          "REQ-QLOG-MAIN-S11P1-0001",
+          "REQ-QLOG-MAIN-S11P2-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-13 §§5.1, 11.1-11.2",
+          "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-11.2"
+        ]
+      },
+      "notes": [
+        "Sequential import should preserve the repository's RS-delimited record shape but need not accept trace-error records."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-IMPORT-S1-0004",
+      "title": "Expose string and Stream import entry points",
+      "statement": "The import surface MUST expose string and Stream entry points so callers can hydrate qlog output directly from files, network streams, or memory buffers without materializing intermediate text first.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-IMPORT-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-IMPORT-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-IMPORT-0001"
+        ],
+        "derived_from": [
+          "REQ-QLOG-MAIN-S9-0001",
+          "REQ-QLOG-MAIN-S11P1-0001"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ]
+      },
+      "notes": [
+        "Buffer-oriented overloads can come later without changing the minimum import contract."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-IMPORT-S1-0005",
+      "title": "Preserve opaque identifiers and extension members",
+      "statement": "The import surface MUST preserve opaque file, trace, event, schema-URI, and extension members during hydration so unsupported qlog data can round-trip through the retained model.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-IMPORT-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-IMPORT-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-IMPORT-0001"
+        ],
+        "derived_from": [
+          "REQ-QLOG-MAIN-S8P1-0002",
+          "REQ-QLOG-MAIN-S8P2-0002",
+          "REQ-QLOG-MAIN-S8P2-0003"
+        ],
+        "related": [
+          "SPEC-QLOG-MAIN"
+        ]
+      },
+      "notes": [
+        "Import should keep unknown file-level, trace-level, and event-level members even when the consumer does not understand them."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-IMPORT-S1-0006",
+      "title": "Hydrate contained CBOR output",
+      "statement": "The import surface MUST parse contained qlog CBOR artifacts emitted by the repository into the retained qlog model, including file metadata, traces, trace errors, events, common fields, vantage points, and extension members.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-IMPORT-0002"
+        ],
+        "implemented_by": [
+          "WI-QLOG-IMPORT-0002"
+        ],
+        "verified_by": [
+          "VER-QLOG-IMPORT-0002"
+        ],
+        "derived_from": [
+          "REQ-QLOG-CBOR-S1-0001",
+          "REQ-QLOG-CBOR-S1-0002",
+          "REQ-QLOG-CBOR-S1-0003",
+          "REQ-QLOG-CBOR-S1-0004",
+          "REQ-QLOG-CBOR-S1-0005",
+          "REQ-QLOG-CBOR-S1-0006",
+          "REQ-QLOG-CBOR-S1-0007"
+        ],
+        "related": [
+          "SPEC-QLOG-CBOR"
+        ]
+      },
+      "notes": [
+        "Contained CBOR hydration should track the repository's sibling serializer output and preserve the same opaque data model used by the JSON readers."
+      ]
+    }
+  ]
+}

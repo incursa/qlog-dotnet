@@ -1,0 +1,37 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "WI-QLOG-IMPORT-0001",
+  "artifact_type": "work_item",
+  "title": "Qlog Import And Rehydration Implementation Lane",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-IMPORT",
+    "ARC-QLOG-IMPORT-0001",
+    "VER-QLOG-IMPORT-0001"
+  ],
+  "addresses": [
+    "REQ-QLOG-IMPORT-S1-0001",
+    "REQ-QLOG-IMPORT-S1-0002",
+    "REQ-QLOG-IMPORT-S1-0003",
+    "REQ-QLOG-IMPORT-S1-0004",
+    "REQ-QLOG-IMPORT-S1-0005"
+  ],
+  "design_links": [
+    "ARC-QLOG-IMPORT-0001"
+  ],
+  "verification_links": [
+    "VER-QLOG-IMPORT-0001"
+  ],
+  "summary": "Implement a sibling qlog import package that hydrates the repository's contained JSON and sequential JSON Text Sequences output back into the retained model for replay-oriented consumers.",
+  "planned_changes": "Add `src/Incursa.Qlog.Import` with reader entry points, format dispatch, retained-model hydration, and preservation of unknown members. Keep the work out of `Incursa.Qlog` core hot paths, and add requirement-homed tests that round-trip the repository's own serializer outputs through the new importer.",
+  "out_of_scope": [
+    "Replay execution or transport simulation.",
+    "Changing the existing serializer output formats.",
+    "CBOR import in the first slice.",
+    "Any new public replay-specific object model."
+  ],
+  "verification_plan": "Run SpecTrace validation, then add requirement-homed tests covering contained JSON import, sequential JSON Text Sequences import, extension-preservation round trips, and invalid-input rejection, with string and Stream parity checks where applicable."
+}

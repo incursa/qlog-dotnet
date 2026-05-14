@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "VER-QLOG-IMPORT-0002",
+  "artifact_type": "verification",
+  "title": "Qlog Contained CBOR Import Verification",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-IMPORT",
+    "ARC-QLOG-IMPORT-0002",
+    "WI-QLOG-IMPORT-0002"
+  ],
+  "verifies": [
+    "REQ-QLOG-IMPORT-S1-0006"
+  ],
+  "scope": "Verify the sibling qlog import package's contained CBOR hydration path, including file metadata, traces, trace errors, events, common fields, vantage points, extension members, and rejection of malformed or unsupported CBOR input. The slice does not include replay execution or any new CBOR framing format.",
+  "verification_method": "Requirement-homed unit tests, round-trip comparisons against repository-produced contained CBOR serializer output, and negative tests for malformed or unsupported CBOR payloads.",
+  "preconditions": [
+    "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
+    "The contained CBOR serializer output is available for round-trip comparison.",
+    "The sibling import package exists and exposes the contained CBOR import entry points."
+  ],
+  "procedure": [
+    "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
+    "Generate contained qlog CBOR output from the existing serializer and hydrate it through the import surface.",
+    "Compare the hydrated model against the source model for file metadata, traces, events, common fields, vantage points, trace errors, and extension members.",
+    "Exercise malformed CBOR, unsupported CBOR value types, and invalid contained artifact policies to confirm the importer fails cleanly.",
+    "Compare stream auto-detection against explicit contained CBOR import entry points where both are exposed."
+  ],
+  "expected_result": "The import package hydrates repository-produced contained CBOR output back into the retained model without losing opaque data, and invalid or unsupported CBOR input is rejected clearly instead of being silently reshaped."
+}
