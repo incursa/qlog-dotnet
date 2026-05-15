@@ -146,6 +146,7 @@ slice boundaries are planning guidance rather than frozen protocol truth.
 
 - The qlog drafts remain draft-state, so event names, section references, and schema URIs may drift.
 - The main-schema parity refresh references the QUICWG latest preview, while the local manifest remains pinned to the draft-13 source snapshot until a deliberate source refresh is performed.
+- The latest main-schema file-output slice now lands in the file sinks by honoring `QLOGDIR` for relative file names, with `QLOGFILE` as a fallback when no directory override is present, while the event-importance and explicit capture-control requirements remain intentionally separate follow-ups.
 - Import and replay stay separate concerns; the reader package should hydrate retained qlog models without absorbing transport execution logic.
 - The import package now covers contained JSON, sequential JSON Text Sequences, and contained CBOR hydration in the sibling library.
 - The QUIC fixture hydration tests consume the sibling importer from the QUIC test project, while the explicit serializer round-trip proof remains in `tests/Incursa.Qlog.Import.Tests`.

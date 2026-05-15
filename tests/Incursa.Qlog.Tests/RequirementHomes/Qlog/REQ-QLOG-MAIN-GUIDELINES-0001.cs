@@ -1,3 +1,4 @@
+using System.IO;
 using System.Text.Json;
 using Incursa.Qlog.Serialization.Json;
 using Xunit;
@@ -111,11 +112,41 @@ public sealed class REQ_QLOG_MAIN_GUIDELINES_0001
     {
     }
 
-    [Fact(Skip = "Requirement is captured for the next file-generation surface; low-level serializers intentionally do not read process environment variables.")]
+    [Fact]
     [Trait("Requirement", "REQ-QLOG-MAIN-S12P1-0001")]
     [Trait("CoverageType", "Positive")]
-    public void FileGenerationSurface_HonorsQlogDirDirectorySelection()
+    public async Task FileGenerationSurface_HonorsQlogDirDirectorySelection()
     {
+        string root = Path.Combine(Path.GetTempPath(), "incursa-qlog-tests", Guid.NewGuid().ToString("N"));
+        string qlogDirectory = Path.Combine(root, "qlogs");
+        string targetPath = Path.Combine(qlogDirectory, "generated.qlog");
+        string? previousQlogDir = Environment.GetEnvironmentVariable("QLOGDIR");
+        string? previousQlogFile = Environment.GetEnvironmentVariable("QLOGFILE");
+
+        try
+        {
+            Environment.SetEnvironmentVariable("QLOGDIR", qlogDirectory + Path.DirectorySeparatorChar);
+            Environment.SetEnvironmentVariable("QLOGFILE", null);
+
+            await using QlogCaptureCoordinator coordinator = new();
+            QlogCaptureSession session = CreateSession("qlogdir-session");
+
+            await using QlogCaptureSubscription subscription = coordinator.RegisterSessionObserver(
+                session,
+                new QlogFileCaptureSink("generated.qlog"));
+
+            coordinator.Capture(session, CreateEvent("example:qlogdir", 1));
+            await coordinator.CompleteSessionAsync(session);
+
+            string output = await File.ReadAllTextAsync(targetPath);
+            Assert.StartsWith("\u001e{\"file_schema\":\"urn:ietf:params:qlog:file:sequential\"", output, StringComparison.Ordinal);
+            Assert.Contains("\"name\":\"example:qlogdir\"", output, StringComparison.Ordinal);
+        }
+        finally
+        {
+            Environment.SetEnvironmentVariable("QLOGDIR", previousQlogDir);
+            Environment.SetEnvironmentVariable("QLOGFILE", previousQlogFile);
+        }
     }
 
     [Fact(Skip = "Requirement is captured for the next capture-policy surface; operator access control and retention remain outside the serializer boundary.")]
@@ -153,6 +184,28 @@ public sealed class REQ_QLOG_MAIN_GUIDELINES_0001
         QlogFile file = new();
         file.Traces.Add(trace);
         return file;
+    }
+
+    private static QlogCaptureSession CreateSession(string sessionId)
+    {
+        QlogTrace trace = new()
+        {
+            Title = "main-guidelines-trace",
+        };
+        trace.EventSchemas.Add(new Uri("urn:ietf:params:qlog:events:example"));
+
+        return new QlogCaptureSession(sessionId, trace, fileTitle: "main-guidelines-file");
+    }
+
+    private static QlogEvent CreateEvent(string name, int packetSize)
+    {
+        QlogEvent qlogEvent = new()
+        {
+            Time = packetSize,
+            Name = name,
+        };
+        qlogEvent.Data["packet_size"] = QlogValue.FromNumber(packetSize);
+        return qlogEvent;
     }
 
     private static void AssertAllPropertyNamesLowercase(JsonElement element)
