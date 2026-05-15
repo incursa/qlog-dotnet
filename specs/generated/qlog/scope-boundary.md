@@ -11,6 +11,7 @@ start implementation work without absorbing a QUIC-sized backlog.
 - serialization-neutral core qlog model contracts
 - first-class contained JSON and sequential JSON Text Sequences writer boundaries over the shared model
 - a small writer/sink boundary that can support contained JSON and qlog-compatible output
+- reusable qlog event-schema metadata catalogs for authored event definitions
 - the sibling `Incursa.Qlog.Quic` package for the recorded QUIC event vocabulary and mapping layer
 - QUIC event vocabulary registration and mapping for the recorded draft revision
 - extension handling that preserves unknown fields and draft-version drift
@@ -20,7 +21,7 @@ start implementation work without absorbing a QUIC-sized backlog.
 - HTTP/3 event mapping
 - advanced viewer, CLI, or UI tooling
 - broad runtime diagnostics integration or machine-wide tracing control
-- event-schema metadata publication, environment-driven qlog file generation, and operator capture-control policy until the planned main-schema parity surfaces are implemented
+- operator capture-control policy until the planned main-schema parity capture surface is implemented
 - non-JSON sinks such as CSV, protobuf, or flatbuffers, and any CBOR publication path beyond the implemented contained serializer sibling package
 - parser dependencies or replay-oriented hydration logic inside `Incursa.Qlog` core
 - additional protocol vocabularies beyond the recorded QUIC draft

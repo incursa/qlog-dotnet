@@ -25,7 +25,7 @@
     "REQ-QLOG-MAIN-S14-0001"
   ],
   "scope": "Verify the main-schema guidance added after comparing the repository baseline with the current official qlog main-schema draft page.",
-  "verification_method": "Requirement-homed tests for already-supported retained-model behavior and file-sink path resolution, skipped requirement-home placeholders for intentionally still-planned production surfaces, SpecTrace JSON validation, and the qlog requirement-home coverage audit.",
+  "verification_method": "Requirement-homed tests for already-supported retained-model behavior, reusable event-schema metadata catalogs, and file-sink path resolution, skipped requirement-home placeholders only for intentionally still-planned capture-control behavior, SpecTrace JSON validation, and the qlog requirement-home coverage audit.",
   "preconditions": [
     "The official qlog main-schema source used for the refresh is identified in the requirement upstream references.",
     "The repository has not yet promoted the QUICWG latest preview into the local source snapshot manifest."
@@ -34,8 +34,8 @@
     "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
     "Run scripts/Test-RequirementHomeCoverage.ps1 for REQ-QLOG.",
     "Run the core, import, and QUIC qlog test projects.",
-    "Review skipped requirement-home tests before claiming complete main-schema parity for the remaining planned surfaces.",
+    "Review skipped requirement-home tests before claiming complete main-schema parity for the remaining capture-control surface.",
     "Refresh the pinned source snapshot and repeat the comparison when the upstream draft advances."
   ],
-  "expected_result": "Implemented main-schema guidance has executable requirement-home proof, the file sinks honor QLOGDIR for relative file names, planned guidance remains visible as skipped requirement-home tests and planned work, and the canonical qlog SpecTrace corpus remains valid."
+  "expected_result": "Implemented main-schema guidance has executable requirement-home proof, the reusable event-schema catalogs preserve event importance metadata, the file sinks honor QLOGDIR for relative file names, the remaining capture-control guidance stays visible as planned work, and the canonical qlog SpecTrace corpus remains valid."
 }

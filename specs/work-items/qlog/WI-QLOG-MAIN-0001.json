@@ -31,7 +31,7 @@
     "VER-QLOG-MAIN-0001"
   ],
   "summary": "Bring the local main-schema requirements closer to the official qlog draft guidance without overstating implementation status.",
-  "planned_changes": "Add requirement-home coverage for behavior already present in the retained model, serializers, importer, and QUIC raw-info helpers; keep event-importance metadata and explicit capture-control policy as visible follow-up work until a production surface exists; implement QLOGDIR-compatible generation in the file sinks for relative file names, with QLOGFILE as a fallback; and refresh provenance when the repository chooses a new pinned draft snapshot.",
+  "planned_changes": "Add requirement-home coverage for behavior already present in the retained model, serializers, importer, QUIC raw-info helpers, and the reusable qlog event-schema metadata catalogs; keep explicit capture-control policy as visible follow-up work until a production surface exists; implement QLOGDIR-compatible generation in the file sinks for relative file names, with QLOGFILE as a fallback; and refresh provenance when the repository chooses a new pinned draft snapshot.",
   "out_of_scope": [
     "Adding HTTP/3 event vocabulary support.",
     "Adding viewer or analysis UI tooling.",

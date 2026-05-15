@@ -1,6 +1,7 @@
 using Incursa.Qlog;
 using Incursa.Qlog.Quic;
 using Incursa.Qlog.Serialization.Json;
+using System.Linq;
 using Xunit;
 
 namespace Incursa.Qlog.Quic.Tests;
@@ -19,6 +20,41 @@ public sealed class REQ_QLOG_QUIC_0001
 
         Assert.Single(trace.EventSchemas);
         Assert.Equal(QlogQuicKnownValues.DraftEventSchemaUri, trace.EventSchemas[0]);
+        Assert.Equal(QlogQuicKnownValues.DraftEventSchemaUri, QlogQuicKnownEventSchemas.Draft.SchemaUri);
+        Assert.Equal(
+            new[]
+            {
+                "quic:server_listening|Extra",
+                "quic:connection_started|Base",
+                "quic:connection_closed|Base",
+                "quic:connection_id_updated|Base",
+                "quic:connection_state_updated|Base",
+                "quic:tuple_assigned|Base",
+                "quic:version_information|Core",
+                "quic:alpn_information|Core",
+                "quic:parameters_set|Core",
+                "quic:parameters_restored|Base",
+                "quic:packet_sent|Core",
+                "quic:packet_received|Core",
+                "quic:packet_dropped|Base",
+                "quic:packet_buffered|Base",
+                "quic:packets_acked|Extra",
+                "quic:udp_datagrams_sent|Extra",
+                "quic:udp_datagrams_received|Extra",
+                "quic:udp_datagram_dropped|Extra",
+                "quic:stream_state_updated|Base",
+                "quic:stream_data_moved|Base",
+                "quic:datagram_data_moved|Base",
+                "quic:migration_state_updated|Extra",
+                "quic:key_updated|Base",
+                "quic:key_discarded|Base",
+                "quic:recovery_parameters_set|Base",
+                "quic:recovery_metrics_updated|Core",
+                "quic:congestion_state_updated|Base",
+                "quic:packet_lost|Core",
+            },
+            QlogQuicKnownEventSchemas.Draft.EventDefinitions.Select(static definition =>
+                $"{definition.Name}|{definition.ImportanceLevel}"));
         Assert.DoesNotContain(new Uri("urn:ietf:params:qlog:events:quic"), trace.EventSchemas);
     }
 

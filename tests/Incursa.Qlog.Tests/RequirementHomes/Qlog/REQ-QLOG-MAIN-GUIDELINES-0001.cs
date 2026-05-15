@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using Incursa.Qlog.Serialization.Json;
 using Xunit;
@@ -105,11 +106,37 @@ public sealed class REQ_QLOG_MAIN_GUIDELINES_0001
         Assert.Equal(QlogValue.FromString("kept"), qlogEvent.ExtensionData["event_unknown"]);
     }
 
-    [Fact(Skip = "Requirement is captured for the next schema-description surface; the current library has no public event-schema metadata model.")]
+    [Fact]
     [Trait("Requirement", "REQ-QLOG-MAIN-S8P3-0001")]
     [Trait("CoverageType", "Positive")]
     public void EventSchemaSurface_PreservesEventImportanceMetadata()
     {
+        Assert.Equal(
+            new Uri("urn:ietf:params:qlog:events:loglevel"),
+            QlogKnownEventSchemas.LogLevel.SchemaUri);
+        Assert.Equal(
+            new[]
+            {
+                "loglevel:error|Core",
+                "loglevel:warning|Base",
+                "loglevel:info|Extra",
+                "loglevel:debug|Extra",
+                "loglevel:verbose|Extra",
+            },
+            QlogKnownEventSchemas.LogLevel.EventDefinitions.Select(static definition =>
+                $"{definition.Name}|{definition.ImportanceLevel}"));
+
+        Assert.Equal(
+            new Uri("urn:ietf:params:qlog:events:simulation"),
+            QlogKnownEventSchemas.Simulation.SchemaUri);
+        Assert.Equal(
+            new[]
+            {
+                "simulation:scenario|Extra",
+                "simulation:marker|Extra",
+            },
+            QlogKnownEventSchemas.Simulation.EventDefinitions.Select(static definition =>
+                $"{definition.Name}|{definition.ImportanceLevel}"));
     }
 
     [Fact]
