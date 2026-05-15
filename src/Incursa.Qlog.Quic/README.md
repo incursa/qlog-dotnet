@@ -11,6 +11,7 @@ dotnet add package Incursa.Qlog.Quic
 ## What It Covers
 
 - draft QUIC schema registration for qlog traces
+- qlog event schema metadata for the recorded draft QUIC event definitions
 - bounded QUIC event builders for lifecycle, negotiation, packet activity, stream movement, and recovery
 - bounded payload types for the QUIC slices already implemented in this repository
 

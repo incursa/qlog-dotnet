@@ -1,2 +1,4 @@
 #nullable enable
 
+Incursa.Qlog.Quic.QlogQuicKnownEventSchemas
+static Incursa.Qlog.Quic.QlogQuicKnownEventSchemas.Draft.get -> Incursa.Qlog.QlogEventSchemaDefinition!

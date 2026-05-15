@@ -12,7 +12,7 @@ internal sealed class QlogFileCaptureSink : IQlogCaptureObserver
     public QlogFileCaptureSink(string filePath, QlogCaptureSinkFormat format = QlogCaptureSinkFormat.SequentialJsonTextSequences)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
-        this.filePath = filePath;
+        this.filePath = QlogCaptureOutputPathResolver.Resolve(filePath);
         this.format = format;
     }
 

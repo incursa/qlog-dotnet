@@ -9,7 +9,7 @@ internal sealed class QlogCborFileCaptureSink : IQlogCaptureObserver
     public QlogCborFileCaptureSink(string filePath)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
-        this.filePath = filePath;
+        this.filePath = QlogCaptureOutputPathResolver.Resolve(filePath);
     }
 
     public ValueTask OnCapturedAsync(QlogCapturedEvent capturedEvent, CancellationToken cancellationToken)

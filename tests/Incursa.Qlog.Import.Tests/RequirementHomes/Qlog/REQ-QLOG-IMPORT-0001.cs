@@ -61,6 +61,7 @@ public sealed class REQ_QLOG_IMPORT_0001
     }
 
     [Fact]
+    [Trait("Requirement", "REQ-QLOG-IMPORT-S1-0004")]
     public void ImportSerializerSupportsStringAndStreamAutoDetection()
     {
         QlogFile containedFile = CreateContainedFile();
@@ -91,6 +92,7 @@ public sealed class REQ_QLOG_IMPORT_0001
     }
 
     [Fact]
+    [Trait("Requirement", "REQ-QLOG-IMPORT-S1-0001")]
     public void ImportSerializerCanRoundTripExplicitFormats()
     {
         QlogFile containedFile = CreateContainedFile();

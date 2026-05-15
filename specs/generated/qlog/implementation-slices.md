@@ -120,8 +120,34 @@ slice boundaries are planning guidance rather than frozen protocol truth.
 - Planned verification:
   - `VER-QLOG-IMPORT-0002`
 
+## Slice 9: Main Schema Parity Refresh
+
+- Requirements:
+  - `REQ-QLOG-MAIN-S1P2-0001`
+  - `REQ-QLOG-MAIN-S3P1-0001`
+  - `REQ-QLOG-MAIN-S8P3-0001`
+  - `REQ-QLOG-MAIN-S9-0002`
+  - `REQ-QLOG-MAIN-S9-0003`
+  - `REQ-QLOG-MAIN-S10-0001`
+  - `REQ-QLOG-MAIN-S11P1-0002`
+  - `REQ-QLOG-MAIN-S11P3-0001`
+  - `REQ-QLOG-MAIN-S12P1-0001`
+  - `REQ-QLOG-MAIN-S13-0001`
+  - `REQ-QLOG-MAIN-S14-0001`
+- Implementation focus:
+  - latest main-schema guidance not captured by the original draft-13 baseline
+  - retained-model preservation behavior that already exists in the serializer and importer
+  - reusable qlog event-schema metadata catalogs for the recorded main-schema and QUIC authored event definitions
+  - QUIC raw-value shapes for length-only, data-only, and truncated raw data
+  - an explicit capture-start gate that prevents qlog writes until the caller opts in
+- Planned verification:
+  - `VER-QLOG-MAIN-0001`
+
 ## Review Items
 
 - The qlog drafts remain draft-state, so event names, section references, and schema URIs may drift.
+- The main-schema parity refresh references the QUICWG latest preview, while the local manifest remains pinned to the draft-13 source snapshot until a deliberate source refresh is performed.
+- The latest main-schema event-importance and capture-control slices now land in reusable qlog event-schema metadata catalogs and an explicit capture-start gate, while the source snapshot refresh remains a separate maintenance task.
 - Import and replay stay separate concerns; the reader package should hydrate retained qlog models without absorbing transport execution logic.
 - The import package now covers contained JSON, sequential JSON Text Sequences, and contained CBOR hydration in the sibling library.
+- The QUIC fixture hydration tests consume the sibling importer from the QUIC test project, while the explicit serializer round-trip proof remains in `tests/Incursa.Qlog.Import.Tests`.

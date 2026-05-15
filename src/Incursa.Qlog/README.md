@@ -13,6 +13,7 @@ dotnet add package Incursa.Qlog
 - contained qlog JSON envelopes
 - sequential qlog JSON Text Sequences envelopes
 - qlog file, trace, event, reference-time, and vantage-point model types
+- qlog event schema metadata catalogs for authored event definitions
 - round-trippable extension data for unknown members
 
 ## When To Use Which Serializer

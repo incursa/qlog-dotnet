@@ -19,6 +19,7 @@ Each canonical artifact is authored in `.json`.
 - [`ARC-QLOG-CAPTURE-0001.json`](ARC-QLOG-CAPTURE-0001.json): internal capture and dispatch architecture boundary
 - [`ARC-QLOG-IMPORT-0001.json`](ARC-QLOG-IMPORT-0001.json): sibling import and rehydration architecture boundary
 - [`ARC-QLOG-IMPORT-0002.json`](ARC-QLOG-IMPORT-0002.json): contained CBOR import architecture boundary
+- [`ARC-QLOG-MAIN-0001.json`](ARC-QLOG-MAIN-0001.json): main-schema parity refresh architecture boundary
 - [`ARC-QLOG-SINKS-0001.json`](ARC-QLOG-SINKS-0001.json): built-in file and stream sink architecture boundary
 
 ## Notes
@@ -27,3 +28,4 @@ Each canonical artifact is authored in `.json`.
 - The architecture stays draft-aware and keeps sequential `JSON Text Sequences` as a bounded serializer slice over the shared qlog model.
 - The CBOR slice stays separate from sink integration even after the sibling package and artifact-metadata policy are explicit.
 - The import slices stay separate from the core writer boundary so parser dependencies do not drift back into `Incursa.Qlog`.
+- The main-schema parity refresh distinguishes already-supported retained-model behavior from planned schema-metadata, file-generation, and capture-policy surfaces.

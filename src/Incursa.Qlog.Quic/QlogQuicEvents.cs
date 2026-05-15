@@ -19,9 +19,9 @@ public static partial class QlogQuicEvents
     {
         ArgumentNullException.ThrowIfNull(trace);
 
-        if (!trace.EventSchemas.Contains(QlogQuicKnownValues.DraftEventSchemaUri))
+        if (!trace.EventSchemas.Contains(QlogQuicKnownEventSchemas.Draft.SchemaUri))
         {
-            trace.EventSchemas.Add(QlogQuicKnownValues.DraftEventSchemaUri);
+            trace.EventSchemas.Add(QlogQuicKnownEventSchemas.Draft.SchemaUri);
         }
     }
 

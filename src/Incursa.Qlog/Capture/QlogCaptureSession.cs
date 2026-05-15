@@ -4,6 +4,7 @@ internal sealed class QlogCaptureSession
 {
     private long nextSequence;
     private bool completed;
+    private bool captureStarted;
 
     public QlogCaptureSession(
         string sessionId,
@@ -26,6 +27,12 @@ internal sealed class QlogCaptureSession
 
     internal QlogCaptureSessionSnapshot Snapshot { get; }
 
+    internal void StartCapture()
+    {
+        ThrowIfCompleted();
+        captureStarted = true;
+    }
+
     internal long NextSequence()
     {
         nextSequence++;
@@ -37,6 +44,15 @@ internal sealed class QlogCaptureSession
         if (completed)
         {
             throw new InvalidOperationException($"Capture session '{SessionId}' has already completed.");
+        }
+    }
+
+    internal void ThrowIfCaptureNotStarted()
+    {
+        if (!captureStarted)
+        {
+            throw new InvalidOperationException(
+                $"Capture session '{SessionId}' has not been explicitly started. Call StartCapture() before writing qlog data.");
         }
     }
 

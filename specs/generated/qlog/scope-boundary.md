@@ -11,6 +11,8 @@ start implementation work without absorbing a QUIC-sized backlog.
 - serialization-neutral core qlog model contracts
 - first-class contained JSON and sequential JSON Text Sequences writer boundaries over the shared model
 - a small writer/sink boundary that can support contained JSON and qlog-compatible output
+- reusable qlog event-schema metadata catalogs for authored event definitions
+- an explicit capture-start gate before qlog data is written
 - the sibling `Incursa.Qlog.Quic` package for the recorded QUIC event vocabulary and mapping layer
 - QUIC event vocabulary registration and mapping for the recorded draft revision
 - extension handling that preserves unknown fields and draft-version drift
@@ -40,5 +42,5 @@ The implementation plan is summarized in
 [`implementation-slices.md`](implementation-slices.md).
 The intended order is core model and envelope first, then QUIC vocabulary
 foundation, then transport activity, then migration/recovery state, then the
-sequential `JSON Text Sequences` slice, then contained CBOR serialization, and
-then the import and rehydration slice.
+sequential `JSON Text Sequences` slice, then contained CBOR serialization, then
+the import and rehydration slices, and then the main-schema parity refresh.

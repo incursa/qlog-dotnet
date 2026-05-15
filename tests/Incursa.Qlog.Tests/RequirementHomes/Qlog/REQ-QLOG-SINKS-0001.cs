@@ -483,12 +483,14 @@ public sealed class REQ_QLOG_SINKS_0001
         };
         trace.EventSchemas.Add(new Uri("urn:ietf:params:qlog:events:example"));
 
-        return new QlogCaptureSession(
+        QlogCaptureSession session = new QlogCaptureSession(
             sessionId,
             trace,
             fileTitle: fileTitle,
             fileDescription: fileDescription,
             fileExtensionData: fileExtensionData);
+        session.StartCapture();
+        return session;
     }
 
     private static QlogEvent CreateEvent(string name, int packetSize)

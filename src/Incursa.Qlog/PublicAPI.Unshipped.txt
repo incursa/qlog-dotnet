@@ -1,2 +1,17 @@
 #nullable enable
 
+Incursa.Qlog.QlogEventImportanceLevel
+Incursa.Qlog.QlogEventImportanceLevel.Core = 0 -> Incursa.Qlog.QlogEventImportanceLevel
+Incursa.Qlog.QlogEventImportanceLevel.Base = 1 -> Incursa.Qlog.QlogEventImportanceLevel
+Incursa.Qlog.QlogEventImportanceLevel.Extra = 2 -> Incursa.Qlog.QlogEventImportanceLevel
+Incursa.Qlog.QlogEventDefinition
+Incursa.Qlog.QlogEventDefinition.QlogEventDefinition(string! name, Incursa.Qlog.QlogEventImportanceLevel importanceLevel) -> void
+Incursa.Qlog.QlogEventDefinition.Name.get -> string!
+Incursa.Qlog.QlogEventDefinition.ImportanceLevel.get -> Incursa.Qlog.QlogEventImportanceLevel
+Incursa.Qlog.QlogEventSchemaDefinition
+Incursa.Qlog.QlogEventSchemaDefinition.QlogEventSchemaDefinition(System.Uri! schemaUri, params Incursa.Qlog.QlogEventDefinition![]! eventDefinitions) -> void
+Incursa.Qlog.QlogEventSchemaDefinition.SchemaUri.get -> System.Uri!
+Incursa.Qlog.QlogEventSchemaDefinition.EventDefinitions.get -> System.Collections.Generic.IReadOnlyList<Incursa.Qlog.QlogEventDefinition!>!
+Incursa.Qlog.QlogKnownEventSchemas
+static Incursa.Qlog.QlogKnownEventSchemas.LogLevel.get -> Incursa.Qlog.QlogEventSchemaDefinition!
+static Incursa.Qlog.QlogKnownEventSchemas.Simulation.get -> Incursa.Qlog.QlogEventSchemaDefinition!

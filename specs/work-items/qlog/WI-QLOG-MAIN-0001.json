@@ -1,0 +1,42 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "WI-QLOG-MAIN-0001",
+  "artifact_type": "work_item",
+  "title": "Qlog Main Schema Parity Refresh",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "ARC-QLOG-MAIN-0001",
+    "VER-QLOG-MAIN-0001"
+  ],
+  "addresses": [
+    "REQ-QLOG-MAIN-S1P2-0001",
+    "REQ-QLOG-MAIN-S3P1-0001",
+    "REQ-QLOG-MAIN-S8P3-0001",
+    "REQ-QLOG-MAIN-S9-0002",
+    "REQ-QLOG-MAIN-S9-0003",
+    "REQ-QLOG-MAIN-S10-0001",
+    "REQ-QLOG-MAIN-S11P1-0002",
+    "REQ-QLOG-MAIN-S11P3-0001",
+    "REQ-QLOG-MAIN-S12P1-0001",
+    "REQ-QLOG-MAIN-S13-0001",
+    "REQ-QLOG-MAIN-S14-0001"
+  ],
+  "design_links": [
+    "ARC-QLOG-MAIN-0001"
+  ],
+  "verification_links": [
+    "VER-QLOG-MAIN-0001"
+  ],
+  "summary": "Bring the local main-schema requirements closer to the official qlog draft guidance without overstating implementation status.",
+  "planned_changes": "Add requirement-home coverage for behavior already present in the retained model, serializers, importer, QUIC raw-info helpers, the reusable qlog event-schema metadata catalogs, and the explicit capture-start gate; implement QLOGDIR-compatible generation in the file sinks for relative file names, with QLOGFILE as a fallback; and refresh provenance when the repository chooses a new pinned draft snapshot.",
+  "out_of_scope": [
+    "Adding HTTP/3 event vocabulary support.",
+    "Adding viewer or analysis UI tooling.",
+    "Reading process environment variables from low-level serializer entry points.",
+    "Claiming operator access-control, retention, or encryption policy as a library-only behavior."
+  ],
+  "verification_plan": "Run SpecTrace validation, run the requirement-home coverage audit, run the existing qlog test projects, and keep skipped requirement-home tests only for requirements whose production surface is intentionally still planned."
+}
