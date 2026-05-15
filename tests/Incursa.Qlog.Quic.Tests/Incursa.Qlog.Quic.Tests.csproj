@@ -18,7 +18,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="Incursa.Qlog.Import" VersionOverride="$(Version)" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio">
       <PrivateAssets>all</PrivateAssets>
@@ -28,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Incursa.Qlog\Incursa.Qlog.csproj" />
+    <ProjectReference Include="..\..\src\Incursa.Qlog.Import\Incursa.Qlog.Import.csproj" />
     <ProjectReference Include="..\..\src\Incursa.Qlog.Quic\Incursa.Qlog.Quic.csproj" />
   </ItemGroup>
 

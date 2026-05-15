@@ -11,7 +11,7 @@ dotnet test tests/Incursa.Qlog.Quic.Tests/Incursa.Qlog.Quic.Tests.csproj
 ## Scope
 
 - Covers the QUIC lifecycle, negotiation, transport activity, and state/recovery slices traced in `specs/verification/qlog`.
-- Covers recorded qlog fixture hydration through the sibling `Incursa.Qlog.Import` package without adding import/parsing dependencies to `Incursa.Qlog.Quic` production code.
+- Covers recorded qlog fixture hydration through the sibling `Incursa.Qlog.Import` project without adding import/parsing dependencies to `Incursa.Qlog.Quic` production code.
 - Leaves core qlog coverage in `tests/Incursa.Qlog.Tests`.
 - Leaves explicit importer round-trip coverage for contained JSON, sequential JSON Text Sequences, and contained CBOR in `tests/Incursa.Qlog.Import.Tests`.
 - Extends only when the linked verification artifacts expand or change.
