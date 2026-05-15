@@ -1,0 +1,231 @@
+{
+  "file_schema": "urn:ietf:params:qlog:file:contained",
+  "serialization_format": "application/qlog+json",
+  "title": "Captured QUIC fixture",
+  "description": "Representative captured QUIC qlog fixture for retained-model hydration tests.",
+  "fixture_file_extension": "kept",
+  "traces": [
+    {
+      "title": "client migration and stream fixture",
+      "description": "Captured client-side QUIC lifecycle, packet, datagram, stream, migration, key, and recovery events.",
+      "common_fields": {
+        "tuple": "tuple-1",
+        "time_format": "relative_to_epoch",
+        "reference_time": {
+          "clock_type": "system",
+          "epoch": "1970-01-01T00:00:00.000Z",
+          "wall_clock_time": "2026-05-14T18:05:09.000Z",
+          "reference_extension": "kept"
+        },
+        "group_id": "connection-1",
+        "common_extension": "kept"
+      },
+      "vantage_point": {
+        "name": "neqo-client",
+        "type": "client",
+        "flow": "downstream",
+        "vantage_extension": "kept"
+      },
+      "event_schemas": [
+        "urn:ietf:params:qlog:events:quic-12"
+      ],
+      "events": [
+        {
+          "time": 0,
+          "name": "quic:connection_started",
+          "data": {
+            "local": {
+              "ip_v6": "fd00:cafe:cafe::100",
+              "port_v6": 41714,
+              "connection_ids": [
+                "2021222324252627"
+              ]
+            },
+            "remote": {
+              "ip_v6": "fd00:cafe:cafe:100::100",
+              "port_v6": 443,
+              "connection_ids": [
+                "1011121314151617"
+              ]
+            },
+            "event_marker": "connection-started"
+          },
+          "tuple": "tuple-1",
+          "time_format": "relative_to_epoch",
+          "group_id": "connection-1",
+          "system_info": {
+            "runner": "interop"
+          },
+          "event_extension": "kept"
+        },
+        {
+          "time": 1,
+          "name": "quic:connection_state_updated",
+          "data": {
+            "old": "handshake_started",
+            "new": "handshake_complete",
+            "state_extension": "kept"
+          }
+        },
+        {
+          "time": 2,
+          "name": "quic:packet_sent",
+          "data": {
+            "header": {
+              "packet_type": "1RTT",
+              "packet_number": 103,
+              "key_phase": 0
+            },
+            "frames": [
+              {
+                "frame_type": "stream",
+                "stream_id": 0,
+                "offset": 0,
+                "length": 37
+              }
+            ],
+            "raw": {
+              "length": 1250,
+              "payload_length": 1200,
+              "data": "aa55"
+            },
+            "datagram_id": 9,
+            "is_mtu_probe_packet": false,
+            "packet_sent_extension": "kept"
+          }
+        },
+        {
+          "time": 3,
+          "name": "quic:udp_datagrams_received",
+          "data": {
+            "count": 1,
+            "raw": [
+              {
+                "length": 1250,
+                "payload_length": 1200
+              }
+            ],
+            "ecn": [
+              "Not-ECT"
+            ],
+            "datagram_ids": [
+              9
+            ],
+            "udp_received_extension": "kept"
+          }
+        },
+        {
+          "time": 4,
+          "name": "quic:stream_state_updated",
+          "data": {
+            "stream_id": 0,
+            "stream_type": "bidirectional",
+            "old": "open",
+            "new": "half_closed_remote",
+            "stream_side": "receiving",
+            "trigger": "remote",
+            "stream_state_extension": "kept"
+          }
+        },
+        {
+          "time": 5,
+          "name": "quic:stream_data_moved",
+          "data": {
+            "stream_id": 0,
+            "offset": 37,
+            "from": "transport",
+            "to": "application",
+            "additional_info": "fin_set",
+            "raw": {
+              "length": 37,
+              "payload_length": 37
+            },
+            "stream_data_extension": "kept"
+          }
+        },
+        {
+          "time": 6,
+          "name": "quic:datagram_data_moved",
+          "data": {
+            "from": "network",
+            "to": "application",
+            "raw": {
+              "length": 37
+            },
+            "datagram_data_extension": "kept"
+          }
+        },
+        {
+          "time": 7,
+          "name": "quic:migration_state_updated",
+          "data": {
+            "old": "probing_started",
+            "new": "probing_successful",
+            "tuple_id": "preferred-v6",
+            "tuple_remote": {
+              "ip_v6": "fd00:cafe:cafe::100",
+              "port_v6": 41714
+            },
+            "tuple_local": {
+              "ip_v6": "fd00:cafe:cafe:100::110",
+              "port_v6": 443
+            },
+            "migration_extension": "kept"
+          }
+        },
+        {
+          "time": 8,
+          "name": "quic:key_updated",
+          "data": {
+            "key_type": "server_1rtt_secret",
+            "old": "00112233",
+            "new": "44556677",
+            "key_phase": 1,
+            "trigger": "local_update",
+            "key_updated_extension": "kept"
+          }
+        },
+        {
+          "time": 9,
+          "name": "quic:recovery_metrics_updated",
+          "data": {
+            "min_rtt": 9.5,
+            "smoothed_rtt": 12.25,
+            "latest_rtt": 14.75,
+            "rtt_variance": 1.5,
+            "pto_count": 2,
+            "congestion_window": 24000,
+            "bytes_in_flight": 12000,
+            "ssthresh": 18000,
+            "packets_in_flight": 10,
+            "pacing_rate": 960000,
+            "recovery_metrics_extension": "kept"
+          }
+        },
+        {
+          "time": 10,
+          "name": "quic:connection_closed",
+          "data": {
+            "initiator": "local",
+            "connection_error": "idle_timeout",
+            "error_code": 0,
+            "reason": "test fixture idle close",
+            "trigger": "idle_timeout",
+            "closed_extension": "kept"
+          }
+        }
+      ],
+      "trace_extension": "kept"
+    },
+    {
+      "error_description": "secondary capture segment omitted key material",
+      "uri": "qlog://fixtures/captured-quic-contained/trace-error",
+      "vantage_point": {
+        "name": "server-sidecar",
+        "type": "server",
+        "flow": "upstream"
+      },
+      "trace_error_extension": "kept"
+    }
+  ]
+}

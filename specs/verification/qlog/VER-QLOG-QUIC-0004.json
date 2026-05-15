@@ -1,0 +1,43 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "VER-QLOG-QUIC-0004",
+  "artifact_type": "verification",
+  "title": "Qlog QUIC Fixture Hydration Verification",
+  "domain": "qlog",
+  "status": "passed",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-QUIC",
+    "SPEC-QLOG-IMPORT",
+    "ARC-QLOG-IMPORT-0001",
+    "ARC-QLOG-IMPORT-0002",
+    "WI-QLOG-QUIC-0004"
+  ],
+  "verifies": [
+    "REQ-QLOG-IMPORT-S1-0002",
+    "REQ-QLOG-IMPORT-S1-0003",
+    "REQ-QLOG-IMPORT-S1-0005",
+    "REQ-QLOG-IMPORT-S1-0006",
+    "REQ-QLOG-QUIC-S4-0001",
+    "REQ-QLOG-QUIC-S5P2-0001",
+    "REQ-QLOG-QUIC-S5P3-0001",
+    "REQ-QLOG-QUIC-S6-0001",
+    "REQ-QLOG-QUIC-S7-0001"
+  ],
+  "scope": "Verify recorded qlog fixture hydration through the sibling import package from the QUIC test project, including contained JSON, sequential JSON Text Sequences, contained CBOR, semantic comparisons of retained-model objects, and rejection of malformed or unsupported input. Explicit round-trip comparisons for the repository-produced serializer outputs remain covered in `tests/Incursa.Qlog.Import.Tests`. The slice does not include replay execution or new runtime import dependencies in `Incursa.Qlog.Quic`.",
+  "verification_method": "Requirement-homed unit tests, fixture-level semantic assertions, negative fixture corpus checks, and linked import-package round-trip tests.",
+  "preconditions": [
+    "The qlog SpecTrace artifacts validate successfully under the repository's JSON validation script.",
+    "The recorded fixtures are present under the QUIC test project fixture corpus.",
+    "The sibling import package exists and exposes the planned import entry points."
+  ],
+  "procedure": [
+    "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
+    "Run the QUIC fixture hydration tests that load contained JSON, sequential JSON Text Sequences, and contained CBOR fixtures.",
+    "Confirm semantic assertions on hydrated retained-model objects and opaque extension data.",
+    "Exercise malformed and unsupported fixture inputs to confirm the importer fails cleanly.",
+    "Run the sibling import package tests to cover the explicit round-trip proof across the supported artifact shapes."
+  ],
+  "expected_result": "The QUIC fixture tests prove the importer can hydrate recorded qlog artifacts without contaminating production code, and malformed or unsupported input fails clearly."
+}

@@ -23,6 +23,7 @@ Each canonical artifact is authored in `.json`.
 - [`WI-QLOG-QUIC-0001.json`](WI-QLOG-QUIC-0001.json): QUIC vocabulary foundation work item
 - [`WI-QLOG-QUIC-0002.json`](WI-QLOG-QUIC-0002.json): QUIC transport activity work item
 - [`WI-QLOG-QUIC-0003.json`](WI-QLOG-QUIC-0003.json): QUIC migration and recovery work item
+- [`WI-QLOG-QUIC-0004.json`](WI-QLOG-QUIC-0004.json): QUIC fixture hydration work item
 - [`WI-QLOG-SEQUENTIAL-0001.json`](WI-QLOG-SEQUENTIAL-0001.json): sequential JSON Text Sequences work item
 - [`WI-QLOG-SINKS-0001.json`](WI-QLOG-SINKS-0001.json): built-in file and stream sink work item
 
@@ -32,3 +33,4 @@ Each canonical artifact is authored in `.json`.
 - The sequential qlog slice uses a bounded serializer and envelope boundary over the contained JSON model.
 - The CBOR work item records the implemented sibling package and contained artifact policy.
 - The import work items record the sibling reader package that hydrates the repository's own serialized output.
+- The QUIC fixture hydration work item records consumer-side qlog import usage in the QUIC test project without moving parser dependencies into the production QUIC package.

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "WI-QLOG-QUIC-0004",
+  "artifact_type": "work_item",
+  "title": "Qlog QUIC Fixture Hydration Work Item",
+  "domain": "qlog",
+  "status": "complete",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "SPEC-QLOG-QUIC",
+    "SPEC-QLOG-IMPORT",
+    "ARC-QLOG-IMPORT-0001",
+    "ARC-QLOG-IMPORT-0002",
+    "VER-QLOG-QUIC-0004"
+  ],
+  "addresses": [
+    "REQ-QLOG-IMPORT-S1-0002",
+    "REQ-QLOG-IMPORT-S1-0003",
+    "REQ-QLOG-IMPORT-S1-0005",
+    "REQ-QLOG-IMPORT-S1-0006",
+    "REQ-QLOG-QUIC-S4-0001",
+    "REQ-QLOG-QUIC-S5P2-0001",
+    "REQ-QLOG-QUIC-S5P3-0001",
+    "REQ-QLOG-QUIC-S6-0001",
+    "REQ-QLOG-QUIC-S7-0001"
+  ],
+  "design_links": [
+    "ARC-QLOG-IMPORT-0001",
+    "ARC-QLOG-IMPORT-0002"
+  ],
+  "verification_links": [
+    "VER-QLOG-QUIC-0004"
+  ],
+  "summary": "Use the sibling qlog import package from the QUIC test project to hydrate recorded qlog fixtures back into the retained model.",
+  "planned_changes": "Add requirement-homed QUIC tests that load recorded contained JSON and sequential JSON Text Sequences fixtures through the sibling importer, exercise the explicit contained CBOR path, and assert against hydrated retained-model objects and extension data. Keep replay execution out of scope and do not move parser dependencies into `Incursa.Qlog.Quic` production code.",
+  "out_of_scope": [
+    "Replay execution or transport simulation.",
+    "Changing the serializer output formats.",
+    "Any new runtime dependency from `Incursa.Qlog.Quic` production code to the importer package.",
+    "Broadening qlog draft scope."
+  ],
+  "verification_plan": "Run the QUIC fixture hydration tests, the sibling import package tests that cover explicit round-trips across the supported artifact shapes, and the repo qlog SpecTrace validation script."
+}

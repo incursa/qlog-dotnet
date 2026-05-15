@@ -125,3 +125,4 @@ slice boundaries are planning guidance rather than frozen protocol truth.
 - The qlog drafts remain draft-state, so event names, section references, and schema URIs may drift.
 - Import and replay stay separate concerns; the reader package should hydrate retained qlog models without absorbing transport execution logic.
 - The import package now covers contained JSON, sequential JSON Text Sequences, and contained CBOR hydration in the sibling library.
+- The QUIC fixture hydration tests consume the sibling importer from the QUIC test project, while the explicit serializer round-trip proof remains in `tests/Incursa.Qlog.Import.Tests`.

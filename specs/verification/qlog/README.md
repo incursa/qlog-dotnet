@@ -23,6 +23,7 @@ Each canonical artifact is authored in `.json`.
 - [`VER-QLOG-QUIC-0001.json`](VER-QLOG-QUIC-0001.json): QUIC vocabulary foundation verification shell
 - [`VER-QLOG-QUIC-0002.json`](VER-QLOG-QUIC-0002.json): QUIC transport activity verification shell
 - [`VER-QLOG-QUIC-0003.json`](VER-QLOG-QUIC-0003.json): QUIC migration and recovery verification shell
+- [`VER-QLOG-QUIC-0004.json`](VER-QLOG-QUIC-0004.json): QUIC fixture hydration verification shell
 - [`VER-QLOG-SEQUENTIAL-0001.json`](VER-QLOG-SEQUENTIAL-0001.json): sequential JSON Text Sequences verification artifact
 - [`VER-QLOG-SINKS-0001.json`](VER-QLOG-SINKS-0001.json): built-in file and stream sink verification shell
 
@@ -33,3 +34,4 @@ Each canonical artifact is authored in `.json`.
 - The sequential verification artifact tracks the serializer boundary for the sequential format.
 - The CBOR verification artifact tracks the implemented sibling serializer boundary and the selected artifact-metadata policy.
 - The import verification artifacts track the sibling reader boundary and hydration behavior for the repository's standard output.
+- The QUIC fixture hydration verification artifact tracks consumer-side import usage in the QUIC test project and points back to the import package tests for the explicit round-trip proof.
