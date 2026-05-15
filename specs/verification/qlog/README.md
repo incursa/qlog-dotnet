@@ -19,6 +19,7 @@ Each canonical artifact is authored in `.json`.
 - [`VER-QLOG-CAPTURE-0001.json`](VER-QLOG-CAPTURE-0001.json): internal capture and dispatch verification shell
 - [`VER-QLOG-IMPORT-0001.json`](VER-QLOG-IMPORT-0001.json): sibling import and rehydration verification shell
 - [`VER-QLOG-IMPORT-0002.json`](VER-QLOG-IMPORT-0002.json): contained CBOR import verification shell
+- [`VER-QLOG-MAIN-0001.json`](VER-QLOG-MAIN-0001.json): main-schema parity refresh verification plan
 - [`VER-QLOG-CORE-0001.json`](VER-QLOG-CORE-0001.json): contained core model verification shell
 - [`VER-QLOG-QUIC-0001.json`](VER-QLOG-QUIC-0001.json): QUIC vocabulary foundation verification shell
 - [`VER-QLOG-QUIC-0002.json`](VER-QLOG-QUIC-0002.json): QUIC transport activity verification shell
@@ -35,3 +36,4 @@ Each canonical artifact is authored in `.json`.
 - The CBOR verification artifact tracks the implemented sibling serializer boundary and the selected artifact-metadata policy.
 - The import verification artifacts track the sibling reader boundary and hydration behavior for the repository's standard output.
 - The QUIC fixture hydration verification artifact tracks consumer-side import usage in the QUIC test project and points back to the import package tests for the explicit round-trip proof.
+- The main-schema parity verification artifact records executable requirement-home proof for implemented guidance and skipped placeholders for intentionally planned surfaces.

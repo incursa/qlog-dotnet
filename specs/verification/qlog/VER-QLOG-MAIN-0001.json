@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../scripts/spec-trace/model.schema.json",
+  "artifact_id": "VER-QLOG-MAIN-0001",
+  "artifact_type": "verification",
+  "title": "Qlog Main Schema Parity Verification",
+  "domain": "qlog",
+  "status": "planned",
+  "owner": "qlog-maintainers",
+  "related_artifacts": [
+    "SPEC-QLOG-MAIN",
+    "ARC-QLOG-MAIN-0001",
+    "WI-QLOG-MAIN-0001"
+  ],
+  "verifies": [
+    "REQ-QLOG-MAIN-S1P2-0001",
+    "REQ-QLOG-MAIN-S3P1-0001",
+    "REQ-QLOG-MAIN-S8P3-0001",
+    "REQ-QLOG-MAIN-S9-0002",
+    "REQ-QLOG-MAIN-S9-0003",
+    "REQ-QLOG-MAIN-S10-0001",
+    "REQ-QLOG-MAIN-S11P1-0002",
+    "REQ-QLOG-MAIN-S11P3-0001",
+    "REQ-QLOG-MAIN-S12P1-0001",
+    "REQ-QLOG-MAIN-S13-0001",
+    "REQ-QLOG-MAIN-S14-0001"
+  ],
+  "scope": "Verify the main-schema guidance added after comparing the repository baseline with the current official qlog main-schema draft page.",
+  "verification_method": "Requirement-homed tests for already-supported retained-model behavior, skipped requirement-home placeholders for planned production surfaces, SpecTrace JSON validation, and the qlog requirement-home coverage audit.",
+  "preconditions": [
+    "The official qlog main-schema source used for the refresh is identified in the requirement upstream references.",
+    "The repository has not yet promoted the QUICWG latest preview into the local source snapshot manifest."
+  ],
+  "procedure": [
+    "Run scripts/Validate-SpecTraceJson.ps1 over the qlog canonical artifacts.",
+    "Run scripts/Test-RequirementHomeCoverage.ps1 for REQ-QLOG.",
+    "Run the core, import, and QUIC qlog test projects.",
+    "Review skipped requirement-home tests before claiming complete main-schema parity.",
+    "Refresh the pinned source snapshot and repeat the comparison when the upstream draft advances."
+  ],
+  "expected_result": "Implemented main-schema guidance has executable requirement-home proof, planned guidance remains visible as skipped requirement-home tests and planned work, and the canonical qlog SpecTrace corpus remains valid."
+}

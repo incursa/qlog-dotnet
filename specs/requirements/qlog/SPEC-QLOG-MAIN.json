@@ -4,10 +4,13 @@
     "SPEC-QLOG-CBOR",
     "SPEC-QLOG-QUIC",
     "ARC-QLOG-BASELINE-0001",
+    "ARC-QLOG-MAIN-0001",
     "ARC-QLOG-CBOR-0001",
     "WI-QLOG-BASELINE-0001",
+    "WI-QLOG-MAIN-0001",
     "WI-QLOG-CBOR-0001",
     "VER-QLOG-BASELINE-0001",
+    "VER-QLOG-MAIN-0001",
     "VER-QLOG-CBOR-0001"
   ],
   "artifact_id": "SPEC-QLOG-MAIN",
@@ -356,6 +359,311 @@
           "https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-13#section-11.2"
         ]
       }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S1P2-0001",
+      "title": "Treat serialized member order as insignificant",
+      "statement": "A qlog implementation MUST treat JSON and JSON Text Sequences member ordering as semantically insignificant.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-MAIN-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-MAIN-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-MAIN-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-latest §1.2",
+          "https://quicwg.org/qlog/draft-ietf-quic-qlog-main-schema.html#section-1.2"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S3P1-0001",
+      "title": "Emit identifying envelope fields first",
+      "statement": "A qlog JSON emitter SHOULD write file_schema and serialization_format before optional envelope fields.",
+      "coverage": {
+        "positive": "required",
+        "negative": "not_applicable",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-MAIN-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-MAIN-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-MAIN-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-latest §3",
+          "https://quicwg.org/qlog/draft-ietf-quic-qlog-main-schema.html#section-3"
+        ]
+      },
+      "notes": [
+        "The draft recommends that these fields and values appear early so parsers can identify qlog inputs without scanning entire artifacts."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S8P3-0001",
+      "title": "Track event importance metadata",
+      "statement": "A qlog event-schema surface SHOULD preserve event importance metadata for authored event definitions.",
+      "coverage": {
+        "positive": "required",
+        "negative": "not_applicable",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-MAIN-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-MAIN-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-MAIN-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-latest §8.3",
+          "https://quicwg.org/qlog/draft-ietf-quic-qlog-main-schema.html#section-8.3"
+        ]
+      },
+      "notes": [
+        "This is schema metadata, not a per-event payload field."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S9-0002",
+      "title": "Preserve generic loglevel events",
+      "statement": "The retained qlog model MUST preserve generic loglevel event schema URIs and loglevel events as ordinary qlog events.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-MAIN-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-MAIN-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-MAIN-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-latest §9.1",
+          "https://quicwg.org/qlog/draft-ietf-quic-qlog-main-schema.html#section-9.1"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S9-0003",
+      "title": "Preserve generic simulation events",
+      "statement": "The retained qlog model MUST preserve generic simulation event schema URIs and simulation events as ordinary qlog events.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-MAIN-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-MAIN-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-MAIN-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-latest §9.2",
+          "https://quicwg.org/qlog/draft-ietf-quic-qlog-main-schema.html#section-9.2"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S10-0001",
+      "title": "Support raw value length and truncation patterns",
+      "statement": "A qlog raw-value surface MUST allow length-only, data-only, and truncated raw-value representations.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-MAIN-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-MAIN-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-MAIN-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-latest §§10, 11.4",
+          "https://quicwg.org/qlog/draft-ietf-quic-qlog-main-schema.html#section-10",
+          "https://quicwg.org/qlog/draft-ietf-quic-qlog-main-schema.html#section-11.4"
+        ]
+      },
+      "notes": [
+        "This requirement covers the generic raw-data guidance; protocol-specific event schemas decide where raw values appear."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S11P1-0002",
+      "title": "Lowercase contained JSON field names",
+      "statement": "A contained JSON qlog file MUST serialize qlog field names in lowercase.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-MAIN-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-MAIN-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-MAIN-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-latest §11.1",
+          "https://quicwg.org/qlog/draft-ietf-quic-qlog-main-schema.html#section-11.1"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S11P3-0001",
+      "title": "Parse 64-bit JSON integers from strings or numbers",
+      "statement": "A qlog parser SHOULD accept uint64 values represented as JSON strings or JSON numbers.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-MAIN-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-MAIN-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-MAIN-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-latest §11.3",
+          "https://quicwg.org/qlog/draft-ietf-quic-qlog-main-schema.html#section-11.3"
+        ]
+      }
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S12P1-0001",
+      "title": "Honor qlog output directory selection",
+      "statement": "A qlog file-output generation surface SHOULD support QLOGDIR-compatible directory selection for generated qlog files.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-MAIN-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-MAIN-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-MAIN-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-latest §12.1",
+          "https://quicwg.org/qlog/draft-ietf-quic-qlog-main-schema.html#section-12.1"
+        ]
+      },
+      "notes": [
+        "The draft also defines QLOGFILE as an optional file-path control; directory selection is the recommended default for multi-connection endpoints."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S13-0001",
+      "title": "Preserve unknown qlog input fields",
+      "statement": "A qlog import or tooling surface MUST preserve unknown qlog fields and unsupported event occurrences without breaking recognized data.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-MAIN-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-MAIN-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-MAIN-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-latest §13",
+          "https://quicwg.org/qlog/draft-ietf-quic-qlog-main-schema.html#section-13"
+        ]
+      },
+      "notes": [
+        "The repository does not ship viewer tooling, so this requirement is verified through the importer and retained model."
+      ]
+    },
+    {
+      "id": "REQ-QLOG-MAIN-S14-0001",
+      "title": "Keep security-sensitive capture controls explicit",
+      "statement": "A qlog capture surface SHOULD require explicit caller action before qlog data is written.",
+      "coverage": {
+        "positive": "required",
+        "negative": "required",
+        "edge": "required",
+        "fuzz": "deferred"
+      },
+      "trace": {
+        "satisfied_by": [
+          "ARC-QLOG-MAIN-0001"
+        ],
+        "implemented_by": [
+          "WI-QLOG-MAIN-0001"
+        ],
+        "verified_by": [
+          "VER-QLOG-MAIN-0001"
+        ],
+        "upstream_refs": [
+          "draft-ietf-quic-qlog-main-schema-latest §14",
+          "https://quicwg.org/qlog/draft-ietf-quic-qlog-main-schema.html#section-14"
+        ]
+      },
+      "notes": [
+        "Access control, retention, and encryption policy remain application/operator responsibilities outside this library boundary."
+      ]
     }
   ]
 }

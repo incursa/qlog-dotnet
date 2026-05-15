@@ -20,6 +20,7 @@ start implementation work without absorbing a QUIC-sized backlog.
 - HTTP/3 event mapping
 - advanced viewer, CLI, or UI tooling
 - broad runtime diagnostics integration or machine-wide tracing control
+- event-schema metadata publication, environment-driven qlog file generation, and operator capture-control policy until the planned main-schema parity surfaces are implemented
 - non-JSON sinks such as CSV, protobuf, or flatbuffers, and any CBOR publication path beyond the implemented contained serializer sibling package
 - parser dependencies or replay-oriented hydration logic inside `Incursa.Qlog` core
 - additional protocol vocabularies beyond the recorded QUIC draft
@@ -40,5 +41,5 @@ The implementation plan is summarized in
 [`implementation-slices.md`](implementation-slices.md).
 The intended order is core model and envelope first, then QUIC vocabulary
 foundation, then transport activity, then migration/recovery state, then the
-sequential `JSON Text Sequences` slice, then contained CBOR serialization, and
-then the import and rehydration slice.
+sequential `JSON Text Sequences` slice, then contained CBOR serialization, then
+the import and rehydration slices, and then the main-schema parity refresh.

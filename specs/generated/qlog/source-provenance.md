@@ -24,6 +24,13 @@ This note records the draft source material used to author the initial qlog base
 - The source snapshots and hashes are tracked in [`source-manifest.json`](source-manifest.json) so later refreshes can confirm the same draft revisions were used.
 - The extraction stayed intentionally narrow so the repository could keep a clean split between the core qlog model and the QUIC event mapping layer.
 
+## Latest Draft Comparison
+
+- On 2026-05-15, the qlog main-schema requirements were compared against the QUICWG latest preview at <https://quicwg.org/qlog/draft-ietf-quic-qlog-main-schema.html>.
+- The comparison added local requirements for member-order insignificance, early file identification fields, event-importance metadata, generic loglevel and simulation events, raw-value shapes, lowercase contained JSON names, uint64 JSON interoperability, file-output generation, tooling tolerance, and explicit capture controls.
+- This comparison did not replace the pinned draft-13 local text snapshot or hashes in [`source-manifest.json`](source-manifest.json).
+- Refresh the local snapshot before claiming that the repository is pinned to the latest main-schema draft revision.
+
 ## Draft Caveats
 
 - Both source documents are work-in-progress Internet-Drafts.
