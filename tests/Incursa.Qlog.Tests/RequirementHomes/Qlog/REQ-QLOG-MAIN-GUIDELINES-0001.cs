@@ -176,11 +176,46 @@ public sealed class REQ_QLOG_MAIN_GUIDELINES_0001
         }
     }
 
-    [Fact(Skip = "Requirement is captured for the next capture-policy surface; operator access control and retention remain outside the serializer boundary.")]
+    [Fact]
+    [Trait("Requirement", "REQ-QLOG-MAIN-S14-0001")]
+    [Trait("CoverageType", "Negative")]
+    public async Task CaptureSurface_RejectsWritingBeforeCaptureIsExplicitlyStarted()
+    {
+        string root = Path.Combine(Path.GetTempPath(), "incursa-qlog-tests", Guid.NewGuid().ToString("N"));
+        string targetPath = Path.Combine(root, "capture-policy.qlog");
+
+        await using QlogCaptureCoordinator coordinator = new();
+        QlogCaptureSession session = CreateInactiveSession("capture-policy-session");
+
+        await using QlogCaptureSubscription subscription = coordinator.RegisterSessionObserver(
+            session,
+            new QlogFileCaptureSink(targetPath));
+
+        Assert.Throws<InvalidOperationException>(() => coordinator.Capture(session, CreateEvent("example:policy", 1)));
+        await Assert.ThrowsAsync<InvalidOperationException>(() => coordinator.CompleteSessionAsync(session).AsTask());
+        Assert.False(File.Exists(targetPath));
+    }
+
+    [Fact]
     [Trait("Requirement", "REQ-QLOG-MAIN-S14-0001")]
     [Trait("CoverageType", "Positive")]
-    public void CaptureSurface_RequiresExplicitCallerActionBeforeWriting()
+    public async Task CaptureSurface_WritesAfterAnExplicitStartAction()
     {
+        string root = Path.Combine(Path.GetTempPath(), "incursa-qlog-tests", Guid.NewGuid().ToString("N"));
+        string targetPath = Path.Combine(root, "capture-policy-started.qlog");
+
+        await using QlogCaptureCoordinator coordinator = new();
+        QlogCaptureSession session = CreateSession("capture-policy-started");
+
+        await using QlogCaptureSubscription subscription = coordinator.RegisterSessionObserver(
+            session,
+            new QlogFileCaptureSink(targetPath));
+
+        coordinator.Capture(session, CreateEvent("example:policy_started", 2));
+        await coordinator.CompleteSessionAsync(session);
+
+        string output = await File.ReadAllTextAsync(targetPath);
+        Assert.Contains("\"name\":\"example:policy_started\"", output, StringComparison.Ordinal);
     }
 
     private static QlogFile CreateFileWithGenericEvents()
@@ -214,6 +249,19 @@ public sealed class REQ_QLOG_MAIN_GUIDELINES_0001
     }
 
     private static QlogCaptureSession CreateSession(string sessionId)
+    {
+        QlogTrace trace = new()
+        {
+            Title = "main-guidelines-trace",
+        };
+        trace.EventSchemas.Add(new Uri("urn:ietf:params:qlog:events:example"));
+
+        QlogCaptureSession session = new(sessionId, trace, fileTitle: "main-guidelines-file");
+        session.StartCapture();
+        return session;
+    }
+
+    private static QlogCaptureSession CreateInactiveSession(string sessionId)
     {
         QlogTrace trace = new()
         {

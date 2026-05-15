@@ -139,7 +139,7 @@ slice boundaries are planning guidance rather than frozen protocol truth.
   - retained-model preservation behavior that already exists in the serializer and importer
   - reusable qlog event-schema metadata catalogs for the recorded main-schema and QUIC authored event definitions
   - QUIC raw-value shapes for length-only, data-only, and truncated raw data
-  - the remaining explicit capture-control surface that must stay visible but not be claimed complete
+  - an explicit capture-start gate that prevents qlog writes until the caller opts in
 - Planned verification:
   - `VER-QLOG-MAIN-0001`
 
@@ -147,7 +147,7 @@ slice boundaries are planning guidance rather than frozen protocol truth.
 
 - The qlog drafts remain draft-state, so event names, section references, and schema URIs may drift.
 - The main-schema parity refresh references the QUICWG latest preview, while the local manifest remains pinned to the draft-13 source snapshot until a deliberate source refresh is performed.
-- The latest main-schema event-importance slice now lands in reusable qlog event-schema metadata catalogs for the recorded main-schema and QUIC authored event definitions, while the explicit capture-control requirement remains intentionally separate.
+- The latest main-schema event-importance and capture-control slices now land in reusable qlog event-schema metadata catalogs and an explicit capture-start gate, while the source snapshot refresh remains a separate maintenance task.
 - Import and replay stay separate concerns; the reader package should hydrate retained qlog models without absorbing transport execution logic.
 - The import package now covers contained JSON, sequential JSON Text Sequences, and contained CBOR hydration in the sibling library.
 - The QUIC fixture hydration tests consume the sibling importer from the QUIC test project, while the explicit serializer round-trip proof remains in `tests/Incursa.Qlog.Import.Tests`.

@@ -25,7 +25,7 @@
     "REQ-QLOG-MAIN-S14-0001"
   ],
   "purpose": "Record how the repository will close the remaining qlog main-schema guidance that was outside the original contained and sequential writer baseline.",
-  "design_summary": "Keep already-supported main-schema behavior in the existing retained model, JSON serializers, importer, QUIC raw-info helpers, and file-output path resolver, while implementing reusable event-schema metadata catalogs for authored event definitions and keeping explicit capture policy as the remaining follow-up requirement.",
+  "design_summary": "Keep already-supported main-schema behavior in the existing retained model, JSON serializers, importer, QUIC raw-info helpers, and file-output path resolver, while implementing reusable event-schema metadata catalogs, an internal explicit capture-start gate, and keeping source snapshot refresh as the remaining maintenance follow-up.",
   "key_components": [
     "Incursa.Qlog retained model and JSON parser",
     "Incursa.Qlog contained and sequential JSON serializers",
@@ -33,21 +33,19 @@
     "Incursa.Qlog.Quic raw information helpers",
     "Incursa.Qlog file-output path resolver and file sinks",
     "Incursa.Qlog and Incursa.Qlog.Quic event-schema metadata catalogs",
-    "future explicit capture-control policy surface"
+    "internal explicit capture-start gate"
   ],
-  "data_and_state_considerations": "The retained model should continue to preserve unknown qlog data without requiring type-specific schema knowledge. Main-schema parity now exposes event importance through reusable schema-definition catalogs rather than per-event payloads, and generation policy should remain explicit instead of silently broadening the serializer contract. Relative file names may be rooted under QLOGDIR, with QLOGFILE as a fallback when the directory override is absent.",
+  "data_and_state_considerations": "The retained model should continue to preserve unknown qlog data without requiring type-specific schema knowledge. Main-schema parity now exposes event importance through reusable schema-definition catalogs, and qlog capture should remain gated behind an explicit start action before any data is written. Relative file names may be rooted under QLOGDIR, with QLOGFILE as a fallback when the directory override is absent.",
   "edge_cases_and_constraints": [
     "The official QUICWG page is a latest draft preview, while the repository still carries a local draft-13 text snapshot for the original baseline.",
     "Event importance is schema metadata and should not be smuggled into individual event payloads.",
+    "Capture writes should be blocked until the caller explicitly starts the capture session.",
     "QLOGDIR and QLOGFILE are generation controls, not serializer parameters, and QLOGDIR takes precedence for relative file names.",
     "Security, privacy, retention, and encryption policies cross into application and operator boundaries."
   ],
   "risks": [
     "Treating planned guidelines as implemented would overstate conformance.",
     "Adding environment-variable behavior directly to low-level serializers would make pure serialization unexpectedly stateful.",
-    "Ignoring explicit capture policy would leave the remaining main-schema guidance unrepresented in the library."
-  ],
-  "open_questions": [
-    "Should explicit capture-control policy remain internal to the capture pipeline or become a public opt-in surface?"
+    "Ignoring explicit capture start would allow qlog data to be written without caller intent."
   ]
 }

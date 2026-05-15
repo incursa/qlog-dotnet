@@ -206,7 +206,9 @@ public sealed class REQ_QLOG_CAPTURE_0001
         };
         trace.EventSchemas.Add(new Uri("urn:ietf:params:qlog:events:example"));
 
-        return new QlogCaptureSession(sessionId, trace, fileTitle: "capture-file");
+        QlogCaptureSession session = new(sessionId, trace, fileTitle: "capture-file");
+        session.StartCapture();
+        return session;
     }
 
     private static QlogEvent CreateEvent(string name, int packetSize)

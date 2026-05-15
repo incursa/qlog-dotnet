@@ -78,6 +78,7 @@ internal sealed class QlogCaptureCoordinator : IAsyncDisposable
         lock (session.Gate)
         {
             session.ThrowIfCompleted();
+            session.ThrowIfCaptureNotStarted();
             capturedEvent = QlogCapturedEvent.Create(session.Snapshot, session.NextSequence(), qlogEvent);
             targets = GetTargets(session.SessionId);
         }
@@ -96,6 +97,7 @@ internal sealed class QlogCaptureCoordinator : IAsyncDisposable
         QlogCaptureSubscription[] targets;
         lock (session.Gate)
         {
+            session.ThrowIfCaptureNotStarted();
             session.MarkCompleted();
             targets = GetTargets(session.SessionId);
         }
