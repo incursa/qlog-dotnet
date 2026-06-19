@@ -1,0 +1,8 @@
+{
+  "slug": "qlog-dotnet",
+  "title": "Incursa.Qlog",
+  "section": "open-source",
+  "sourcePath": "docs",
+  "targetPath": "src/content/docs/open-source/qlog-dotnet",
+  "publish": true
+}

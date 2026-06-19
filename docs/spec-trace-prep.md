@@ -1,3 +1,7 @@
+---
+title: "SpecTrace Prep"
+---
+
 # SpecTrace Prep
 
 This note defines how `Incursa.Qlog` will move from draft text to traceable implementation work.

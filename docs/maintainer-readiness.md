@@ -1,3 +1,7 @@
+---
+title: "Maintainer Readiness"
+---
+
 # Maintainer Readiness
 
 This document is the local maintainer handoff for `Incursa.Qlog`. It records what the repository is for, what is stable enough to rely on, how to validate it locally, and what remains open.

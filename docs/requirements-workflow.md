@@ -1,3 +1,7 @@
+---
+title: "Qlog Requirements Workflow"
+---
+
 # Qlog Requirements Workflow
 
 This note captures the working order for draft-driven qlog work in `Incursa.Qlog`. It is guidance, not protocol design.

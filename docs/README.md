@@ -1,3 +1,7 @@
+---
+title: "Qlog Documentation"
+---
+
 # Qlog Documentation
 
 This directory holds maintainer-facing documentation for `Incursa.Qlog`.
