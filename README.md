@@ -5,6 +5,8 @@
 
 `Incursa.Qlog` is a .NET qlog library set with a requirements-driven repository. It includes the packable core qlog package, the sibling import package, the bounded QUIC companion package, and the SpecTrace corpus that defines the repository scope.
 
+Source documentation lives in `docs/` and is mirrored into `incursa-docs` for publication. Edit the source repository docs only; do not edit the mirrored output.
+
 ## Packages
 
 - [`Incursa.Qlog`](src/Incursa.Qlog/README.md): core qlog models, common fields, value infrastructure, and JSON serializers for contained and sequential artifacts.
@@ -52,6 +54,7 @@ dotnet add package Incursa.Qlog.Import
 dotnet restore Incursa.Qlog.slnx
 dotnet build Incursa.Qlog.slnx --no-restore --configuration Release
 dotnet test Incursa.Qlog.slnx --no-build --configuration Release -v minimal
+git diff --check
 ```
 
 For the full maintainer validation and pack sequence, use [`docs/maintainer-readiness.md`](docs/maintainer-readiness.md).
@@ -106,11 +109,38 @@ pwsh scripts/setup-git-hooks.ps1
 python -m pip install pre-commit
 ```
 
+## Release And Versioning
+
+- Package versioning and shared NuGet metadata live in `Directory.Build.props`.
+- Release helpers live under `scripts/release/`.
+- Public API compatibility is tracked with `PublicAPI.Shipped.txt` and `PublicAPI.Unshipped.txt` files in the package projects.
+- See [`docs/maintainer-readiness.md`](docs/maintainer-readiness.md) for the release validation floor.
+
+## Security And Credentials
+
+- This repository does not currently include a top-level `SECURITY.md`.
+- Do not commit secrets, local auth state, or private transcripts.
+- Treat local qlog draft snapshots, tokens, and environment-specific paths as machine-local data.
+
+If you need a vulnerability-reporting path, use the repository maintainer contact channel the project owner provides until a dedicated security policy is added.
+
 ## Contributing
 
 - Keep names, namespaces, projects, and package metadata aligned to `Incursa.Qlog`.
 - Drive behavior changes from the owning artifacts under `specs/requirements/qlog` before expanding implementation scope.
 - Prefer durable repository documentation over time-sensitive progress notes in committed Markdown.
+
+## Documentation Ownership
+
+- `docs/` is the source-authored documentation tree for this repository.
+- Mirrored content in `incursa-docs` is generated from the source tree and should not be edited directly.
+- Canonical requirements, architecture, work items, verification, and generated provenance notes live under `specs/`.
+
+## Known Gaps
+
+- The repository still depends on draft qlog inputs; refresh the recorded source snapshots when those drafts move.
+- Governance surfaces such as contribution, security, CLA, issue-template, and PR-template files are not part of this repository slice.
+- The open requirement gaps are documented in [`specs/requirements/qlog/REQUIREMENT-GAPS.md`](specs/requirements/qlog/REQUIREMENT-GAPS.md).
 
 ## License
 
