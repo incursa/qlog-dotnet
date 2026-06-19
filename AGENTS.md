@@ -11,11 +11,31 @@ Use `@delivery_director` to triage and delegate. If this is clearly a single-lan
 
 ## Repository Shape
 
-- `src/Incursa.Qlog` is the packable library root.
-- `tests/Incursa.Qlog.Tests` is the companion test project scaffold.
+- `src/Incursa.Qlog` is the packable core qlog model and JSON serializer package.
+- `src/Incursa.Qlog.Cbor` is the packable sibling contained CBOR serializer package.
+- `src/Incursa.Qlog.Import` is the packable sibling import and rehydration package.
+- `src/Incursa.Qlog.Quic` is the packable bounded QUIC vocabulary package.
+- `tests/Incursa.Qlog.Tests` covers core, capture, sink, CBOR writer, and release-versioning behavior.
+- `tests/Incursa.Qlog.Import.Tests` covers import and rehydration behavior.
+- `tests/Incursa.Qlog.Quic.Tests` covers bounded QUIC vocabulary behavior and fixture hydration.
 - `specs/requirements/qlog` is the canonical qlog requirement slice.
 - `specs/architecture/qlog`, `specs/work-items/qlog`, and `specs/verification/qlog` hold the planning artifacts that trace back to those requirements.
 - `specs/generated/qlog` holds provenance and scope notes for the draft sources used to author the baseline corpus.
+
+## Local Validation
+
+Use local validation as the proof surface:
+
+```powershell
+dotnet restore Incursa.Qlog.slnx
+dotnet build Incursa.Qlog.slnx --no-restore --configuration Release
+dotnet test Incursa.Qlog.slnx --no-build --configuration Release -v minimal
+pwsh -NoProfile -File scripts/Validate-SpecTraceJson.ps1
+pwsh -NoProfile -File scripts/Test-RequirementHomeCoverage.ps1
+git diff --check
+```
+
+For release or package-surface changes, also pack all four package projects, including `Incursa.Qlog.Import`.
 
 ## Guardrails
 

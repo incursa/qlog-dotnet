@@ -50,13 +50,11 @@ dotnet add package Incursa.Qlog.Import
 
 ```bash
 dotnet restore Incursa.Qlog.slnx
-dotnet build Incursa.Qlog.slnx -c Release
-dotnet test Incursa.Qlog.slnx -c Release
-dotnet pack src/Incursa.Qlog/Incursa.Qlog.csproj -c Release
-dotnet pack src/Incursa.Qlog.Cbor/Incursa.Qlog.Cbor.csproj -c Release
-dotnet pack src/Incursa.Qlog.Import/Incursa.Qlog.Import.csproj -c Release
-dotnet pack src/Incursa.Qlog.Quic/Incursa.Qlog.Quic.csproj -c Release
+dotnet build Incursa.Qlog.slnx --no-restore --configuration Release
+dotnet test Incursa.Qlog.slnx --no-build --configuration Release -v minimal
 ```
+
+For the full maintainer validation and pack sequence, use [`docs/maintainer-readiness.md`](docs/maintainer-readiness.md).
 
 ## Benchmarks
 
@@ -66,6 +64,8 @@ dotnet run -c Release --project benchmarks/Incursa.Qlog.Benchmarks.csproj -- --j
 
 ## Start Here
 
+- Maintainer readiness: [`docs/maintainer-readiness.md`](docs/maintainer-readiness.md)
+- Documentation index: [`docs/README.md`](docs/README.md)
 - Core package guide: [`src/Incursa.Qlog/README.md`](src/Incursa.Qlog/README.md)
 - CBOR package guide: [`src/Incursa.Qlog.Cbor/README.md`](src/Incursa.Qlog.Cbor/README.md)
 - Import package guide: [`src/Incursa.Qlog.Import/README.md`](src/Incursa.Qlog.Import/README.md)
@@ -97,6 +97,7 @@ dotnet run -c Release --project benchmarks/Incursa.Qlog.Benchmarks.csproj -- --j
 - [`.github/workflows/publish-nuget-packages.yml`](.github/workflows/publish-nuget-packages.yml) validates public API release policy before packing and publishing tagged releases.
 - [`scripts/setup-git-hooks.ps1`](scripts/setup-git-hooks.ps1) configures Git to use the repo-local hook path.
 - [`scripts/Validate-SpecTraceJson.ps1`](scripts/Validate-SpecTraceJson.ps1) validates the canonical qlog SpecTrace corpus.
+- [`scripts/Test-RequirementHomeCoverage.ps1`](scripts/Test-RequirementHomeCoverage.ps1) checks that requirement identifiers have matching requirement-home coverage.
 
 To install the local hook path after cloning:
 
