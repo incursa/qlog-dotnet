@@ -41,3 +41,4 @@ For release or package-surface changes, also pack all four package projects, inc
 
 - Keep the first baseline limited to the draft qlog main-schema and quic-events documents until the repository needs more scope.
 - Prefer the local `.NET` and SpecTrace conventions already used in the Incursa repositories when adding new files.
+- Keep durable documentation free of branch state, test-count snapshots, exact latest-version claims, and drifting work inventories. Put historical release evidence in changelogs or explicitly dated records.

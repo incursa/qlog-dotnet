@@ -4,7 +4,7 @@ title: "Maintainer Readiness"
 
 # Maintainer Readiness
 
-This document is the local maintainer handoff for `Incursa.Qlog`. It records what the repository is for, what is stable enough to rely on, how to validate it locally, and what remains open.
+This document is the local maintainer handoff for `Incursa.Qlog`. It records the repository boundary, validation contract, and release responsibilities.
 
 ## Repository Purpose
 
@@ -38,7 +38,7 @@ Public API compatibility is tracked with `PublicAPI.Shipped.txt` and `PublicAPI.
 - `specs/architecture/qlog/`, `specs/work-items/qlog/`, and `specs/verification/qlog/` trace design, planned work, and proof expectations back to the requirements.
 - `specs/generated/qlog/` records source provenance, source snapshots, implementation-slice notes, and scope-boundary material.
 
-The current design keeps serializer/import families as sibling packages when they would add dependencies or evolution pressure to the core model. Do not fold import, replay, or protocol-specific vocabulary into `Incursa.Qlog` unless the requirements and architecture are updated first.
+The design keeps serializer/import families as sibling packages when they would add dependencies or evolution pressure to the core model. Do not fold import, replay, or protocol-specific vocabulary into `Incursa.Qlog` unless the requirements and architecture are updated first.
 
 ## Local Build And Test
 
@@ -64,7 +64,7 @@ pwsh -NoProfile -File scripts/release/Invoke-ReleaseVersioning.ps1 -CalculateOnl
 pwsh -NoProfile -File scripts/release/validate-public-api-versioning.ps1 -Tag v1.1.4
 ```
 
-Use the target tag that matches the release being prepared. The `v1.1.4` example is only a local policy check target after `v1.1.3`.
+Use the target tag that matches the release being prepared.
 
 ## Pack Validation
 
@@ -82,7 +82,7 @@ Do not commit `artifacts/`, `bin/`, or `obj/` outputs.
 
 ## Release And Versioning
 
-`Directory.Build.props` owns the package version and shared NuGet metadata. The current package version is `1.1.3`.
+`Directory.Build.props` owns the package version and shared NuGet metadata.
 
 Release readiness depends on:
 
@@ -100,7 +100,7 @@ pwsh -NoProfile -File scripts/release/Invoke-ReleaseVersioning.ps1 -CalculateOnl
 
 Do not publish or push release tags as part of routine documentation readiness work.
 
-## Current Readiness Status
+## Readiness Contract
 
 Local maintainer readiness is strong when the local restore, build, test, SpecTrace validation, requirement-home coverage audit, package validation, and `git diff --check` all pass.
 
@@ -113,24 +113,12 @@ Stable enough to rely on:
 - requirement-homed tests and SpecTrace validation over the qlog corpus;
 - public API baseline tracking for package compatibility review.
 
-Still under active maintenance:
+The following boundaries require explicit requirements and evidence when they change:
 
-- qlog draft parity, because the recorded source documents remain draft-state inputs;
-- source snapshot refresh, because the local manifest intentionally points at `draft-ietf-quic-qlog-main-schema-13`;
-- future protocol vocabularies, including HTTP/3 events, which remain outside the current baseline;
-- governance surfaces such as contribution, security, CLA, issue-template, and PR-template files, which are not part of this readiness slice.
+- qlog draft parity and source snapshot provenance;
+- protocol vocabularies outside the implemented requirement families;
+- public API baselines and package compatibility.
 
-## Known Gaps And Future Work
+## Requirement Gaps
 
-The authoritative open requirement gaps live in [`../specs/requirements/qlog/REQUIREMENT-GAPS.md`](../specs/requirements/qlog/REQUIREMENT-GAPS.md). Current standing gaps are:
-
-- `draft-volatility`: revisit requirements and fixtures when the qlog main-schema or QUIC event drafts advance.
-- `source-provenance-refresh`: refresh the local source manifest and text snapshots when updating the recorded draft baseline.
-- `future-h3-events`: keep HTTP/3 event mapping out of the current qlog baseline until it has its own requirement family.
-
-Repo-maintenance gaps from the local Incursa audit:
-
-- `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, CLA surfaces, PR template, and issue templates are absent.
-- `docs/contributor-agreement-automation.md`, `SUPPORT.md`, `CODEOWNERS`, and Dependabot are also absent.
-
-Treat those governance items as owner/maintainer follow-up unless the task explicitly asks for repository governance normalization.
+The authoritative open requirement gaps live in [`../specs/requirements/qlog/REQUIREMENT-GAPS.md`](../specs/requirements/qlog/REQUIREMENT-GAPS.md). Use that artifact, rather than this maintainer guide, for scope and follow-up tracking.

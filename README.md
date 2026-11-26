@@ -118,7 +118,6 @@ python -m pip install pre-commit
 
 ## Security And Credentials
 
-- This repository does not currently include a top-level `SECURITY.md`.
 - Do not commit secrets, local auth state, or private transcripts.
 - Treat local qlog draft snapshots, tokens, and environment-specific paths as machine-local data.
 
@@ -136,11 +135,9 @@ If you need a vulnerability-reporting path, use the repository maintainer contac
 - Mirrored content in `incursa-docs` is generated from the source tree and should not be edited directly.
 - Canonical requirements, architecture, work items, verification, and generated provenance notes live under `specs/`.
 
-## Known Gaps
+## Requirements And Scope
 
-- The repository still depends on draft qlog inputs; refresh the recorded source snapshots when those drafts move.
-- Governance surfaces such as contribution, security, CLA, issue-template, and PR-template files are not part of this repository slice.
-- The open requirement gaps are documented in [`specs/requirements/qlog/REQUIREMENT-GAPS.md`](specs/requirements/qlog/REQUIREMENT-GAPS.md).
+The open requirement gaps and draft-source boundaries are maintained in [`specs/requirements/qlog/REQUIREMENT-GAPS.md`](specs/requirements/qlog/REQUIREMENT-GAPS.md). Refresh recorded source snapshots whenever the adopted draft baseline changes.
 
 ## License
 

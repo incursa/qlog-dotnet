@@ -8,8 +8,8 @@ This directory holds the source-authored documentation for `Incursa.Qlog`. The c
 
 ## Start Here
 
-- [`../README.md`](../README.md): repository purpose, package surface, validation commands, release/versioning, security notes, and known gaps.
-- [`maintainer-readiness.md`](maintainer-readiness.md): repository purpose, package surface, architecture, validation commands, release/versioning expectations, current readiness status, and known gaps.
+- [`../README.md`](../README.md): repository purpose, package surface, validation commands, release/versioning, security notes, and requirements scope.
+- [`maintainer-readiness.md`](maintainer-readiness.md): repository purpose, package surface, architecture, validation contract, and release/versioning expectations.
 - [`requirements-workflow.md`](requirements-workflow.md): working order for requirement-first qlog changes.
 - [`spec-trace-prep.md`](spec-trace-prep.md): notes for preparing the local SpecTrace corpus.
 
